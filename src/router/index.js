@@ -1,7 +1,23 @@
 import React from 'react';
 import Home from '../components/Home';
 import Login from '../components/Login';
+import NoMatch from '../components/NoMatch';
 import { Switch, Route } from 'react-router-dom';
+
+const routes = [
+	{
+		path: '/',
+		exact: true,
+		component: Home
+	},
+	{
+		path: '/login',
+		component: Login
+	},
+	{
+		component: NoMatch
+	}
+];
 
 /*
 We can use the<Switch> component to group <Route>s. 
@@ -11,8 +27,14 @@ only render the first one that matches the current pathname.
 
 const Router = () => (
 	<Switch>
-		<Route path="/login" component={Login} />
-		<Route exact={true} path="/" component={Home} />
+		{routes.map((route, index) => (
+			<Route 
+				key={index}
+				path={route.path}
+				exact={route.exact}
+				component={route.component}
+			/>
+		))}
 	</Switch>
 );
 
