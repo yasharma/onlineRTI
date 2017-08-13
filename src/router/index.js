@@ -11,6 +11,10 @@ const routes = [
 		component: Home
 	},
 	{
+		path: '/onlineRTI', // this route is just for gh-pages
+		component: Home
+	},
+	{
 		path: '/login',
 		component: Login
 	},

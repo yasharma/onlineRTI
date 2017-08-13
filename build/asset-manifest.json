@@ -1,11 +1,16 @@
 {
-  "main.css": "static/css/main.060010ff.css",
-  "main.css.map": "static/css/main.060010ff.css.map",
-  "main.js": "static/js/main.a2dbda7b.js",
-  "main.js.map": "static/js/main.a2dbda7b.js.map",
+  "main.css": "static/css/main.3104def8.css",
+  "main.css.map": "static/css/main.3104def8.css.map",
+  "main.js": "static/js/main.bdab7b1b.js",
+  "main.js.map": "static/js/main.bdab7b1b.js.map",
   "static/media/appsBg.png": "static/media/appsBg.b3745762.png",
   "static/media/banner.png": "static/media/banner.72c3c381.png",
+  "static/media/blog1.png": "static/media/blog1.c0a42fed.png",
+  "static/media/blog2.png": "static/media/blog2.4d187d0c.png",
+  "static/media/blog3.png": "static/media/blog3.497f3145.png",
   "static/media/blogbg.png": "static/media/blogbg.9b70760c.png",
+  "static/media/cus_1.png": "static/media/cus_1.17a3dd0c.png",
+  "static/media/cus_2.png": "static/media/cus_2.b8bae486.png",
   "static/media/fontawesome-webfont.eot": "static/media/fontawesome-webfont.674f50d2.eot",
   "static/media/fontawesome-webfont.svg?v=4.7.0": "static/media/fontawesome-webfont.912ec66d.svg",
   "static/media/fontawesome-webfont.ttf?v=4.7.0": "static/media/fontawesome-webfont.b06871f2.ttf",
@@ -23,5 +28,6 @@
   "static/media/opensans-regular-webfont.svg": "static/media/opensans-regular-webfont.67b6f6ee.svg",
   "static/media/opensans-regular-webfont.ttf": "static/media/opensans-regular-webfont.05e13c25.ttf",
   "static/media/opensans-regular-webfont.woff": "static/media/opensans-regular-webfont.c4d61fc4.woff",
-  "static/media/rti-bg.png": "static/media/rti-bg.eaad8a0f.png"
+  "static/media/rti-bg.png": "static/media/rti-bg.eaad8a0f.png",
+  "static/media/rti-girl.png": "static/media/rti-girl.a561ddba.png"
 }

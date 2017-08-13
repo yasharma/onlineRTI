@@ -5,7 +5,7 @@ import App from './components/App';
 
 // Vendor CSS
 import 'font-awesome/css/font-awesome.min.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 // Application CSS
 import './assets/css/fonts/fonts.css';
