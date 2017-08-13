@@ -1,8 +1,8 @@
 {
-  "main.css": "static/css/main.3104def8.css",
-  "main.css.map": "static/css/main.3104def8.css.map",
-  "main.js": "static/js/main.bdab7b1b.js",
-  "main.js.map": "static/js/main.bdab7b1b.js.map",
+  "main.css": "static/css/main.7d613732.css",
+  "main.css.map": "static/css/main.7d613732.css.map",
+  "main.js": "static/js/main.41e6c1c2.js",
+  "main.js.map": "static/js/main.41e6c1c2.js.map",
   "static/media/appsBg.png": "static/media/appsBg.b3745762.png",
   "static/media/banner.png": "static/media/banner.72c3c381.png",
   "static/media/blog1.png": "static/media/blog1.c0a42fed.png",
@@ -29,5 +29,9 @@
   "static/media/opensans-regular-webfont.ttf": "static/media/opensans-regular-webfont.05e13c25.ttf",
   "static/media/opensans-regular-webfont.woff": "static/media/opensans-regular-webfont.c4d61fc4.woff",
   "static/media/rti-bg.png": "static/media/rti-bg.eaad8a0f.png",
-  "static/media/rti-girl.png": "static/media/rti-girl.a561ddba.png"
+  "static/media/rti-girl.png": "static/media/rti-girl.a561ddba.png",
+  "static/media/slick.eot": "static/media/slick.ced611da.eot",
+  "static/media/slick.svg": "static/media/slick.f97e3bbf.svg",
+  "static/media/slick.ttf": "static/media/slick.d41f55a7.ttf",
+  "static/media/slick.woff": "static/media/slick.b7c9e1e4.woff"
 }
