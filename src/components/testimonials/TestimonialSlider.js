@@ -12,7 +12,6 @@ class TestimonialSlider extends React.Component {
 			speed: 500,
 			slidesToShow: 2,
 			slidesToScroll: 2,
-			prevArrow:'<button type="button" class="slick-prev">Previous</button>',
 			responsive: [
 		    {
 		      breakpoint: 639,
