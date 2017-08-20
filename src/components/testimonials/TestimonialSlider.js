@@ -11,7 +11,17 @@ class TestimonialSlider extends React.Component {
 			infinite: true,
 			speed: 500,
 			slidesToShow: 2,
-			slidesToScroll: 2
+			slidesToScroll: 2,
+			prevArrow:'<button type="button" class="slick-prev">Previous</button>',
+			responsive: [
+		    {
+		      breakpoint: 639,
+		      settings: {
+		        slidesToShow: 1,
+		        slidesToScroll: 1,
+		      }
+		    }]
+
 		};
 		return (
 			<Slider {...settings}>

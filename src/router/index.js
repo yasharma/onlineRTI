@@ -1,6 +1,11 @@
 import React from 'react';
 import Home from '../components/home/Home';
 import Login from '../components/Login';
+import Abouts from '../components/Abouts/Abouts';
+import Contacts from '../components/Contact/Contact';
+import Faqs from '../components/Faq/Faq';
+import Applys from '../components/Apply/Apply';
+import Track from '../components/Track/Track';
 import NoMatch from '../components/NoMatch';
 import { Switch, Route } from 'react-router-dom';
 
@@ -17,6 +22,26 @@ const routes = [
 	{
 		path: '/login',
 		component: Login
+	},
+	{
+		path: '/about-us',
+		component: Abouts
+	},
+	{
+		path: '/contact-us',
+		component: Contacts
+	},
+	{
+		path: '/faq',
+		component: Faqs
+	},
+	{
+		path: '/track-us',
+		component: Track
+	},
+	{
+		path: '/Apply',
+		component: Applys
 	},
 	{
 		component: NoMatch

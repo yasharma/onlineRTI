@@ -14,7 +14,7 @@ const Header = () => (
 			<Navbar.Collapse>
 				<Nav>
 					<NavItem eventKey={1} href="">About</NavItem>
-					<NavItem eventKey={2} href="">My RTi’s</NavItem>
+					<NavItem eventKey={2} href="">My RTis</NavItem>
 					<NavItem eventKey={2} href="">Pricing</NavItem>
 					<NavItem eventKey={2} href="">Teams</NavItem>
 					<NavItem eventKey={2} href="">Contact</NavItem>

@@ -13,7 +13,8 @@ const Testimonials = () => (
 					<TestimonialSlider />
 				</div>
 			</div>
-			<div className="left-arrow"><img src={RightArrowIcon} alt="right-arrow" /></div>
+			<div className="nav"></div>
+			<div className="left-arrow slick-prev"><img src={RightArrowIcon} alt="right-arrow" /></div>
 			<div className="right-arrow"><img src={LeftArrowIcon} alt="left-arrow" /></div>
 		</div>
 	</div>

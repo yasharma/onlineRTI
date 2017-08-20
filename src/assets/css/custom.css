@@ -27,7 +27,7 @@ textarea{resize: none;}
 body{
 	padding-top: 50px;
 }
-header{position: fixed;top:0; z-index: 10; background-color: #004281; width: 100%; height: 50px;}
+header{position: fixed;top:0; z-index:600; background-color: #004281; width: 100%; height: 50px;}
 header .navbar-brand{color: #ffffff !important; font-size:18px;position: relative;}
 header .navbar-brand::after {background-color: #ffffff;content: "";height:30px;position: absolute;right: 0;top:10px;width: 1px;}
 header .navbar-brand span{color: #2ebed4;font-size:23px;}
@@ -100,7 +100,7 @@ header .navbar-default .navbar-nav > li.active > a:focus{background-color: #2ebe
 .frequently-ask-question{position:relative;background:url('../images/rti-bg.png') no-repeat center center; width: 100%; background-size: cover;padding-left:425px; padding-right:60px; min-height: 374px;}
 .rti-girl{left: 0;position: absolute;top: 0;}
 .rti-panel .panel-title{font-size: 14px;}
-.rti-panel .panel-title a{display:block; position: relative;}
+.rti-panel .panel-title a{display:block; position: relative; cursor: pointer;}
 .rti-panel .panel-body{color: #000000;}
 
 .rti-panel .panel-title a.collapsed::after{position:absolute;right: 0;top:0;content:"\f067";font-family: FontAwesome;}
@@ -211,7 +211,7 @@ footer{position:relative;background:url('../images/footerBg.png') no-repeat cent
 	}
 
 .faq .panel-title{font-size: 16px;}
-.faq .panel-title a{display:block; position: relative; width:100%;padding-right: 15px;}
+.faq .panel-title a{display:block; position: relative; width:100%;padding-right: 15px; cursor: pointer;}
 .faq .panel-heading{padding: 14px;}
 .faq .panel-group .panel + .panel{margin-top: 10px;}
 .faq .panel-body{color:#222222; font-size: 15px;padding: 14px;}
@@ -347,3 +347,86 @@ footer{position:relative;background:url('../images/footerBg.png') no-repeat cent
     padding: 50px;
 		box-shadow: 0 0 10px 2px #d5d5d5;
 }
+
+.heading-rti {
+    color: #222222;
+    font-size: 21px;
+    font-weight: 600;
+    margin: 10px 0 15px;
+    text-align: center;
+}
+
+.input-file{position:relative;}
+.input-file > a {
+  background-color: #2ebed4;
+  color: #ffffff;
+  display: table;
+  font-weight: 600;
+  margin: 10px 0;
+  padding: 10px 15px;
+  text-align: center;
+  text-transform: uppercase;
+  z-index: 5;
+}
+.inputfilss {
+    left: 10px;
+    opacity: 0;
+    position: absolute;
+    top: 10px;
+    width: 75px;
+    z-index: 4;
+}
+
+.custom-table {
+    background-color: #ffffff;
+}
+.panel-title a{display:block; cursor: pointer;}
+
+.main-tabs .panel-title a{display:block; position: relative; cursor: pointer;}
+.main-tabs .panel-title a::after {
+    position: absolute;
+    right: 0;
+    top: 0;
+    content: "\f068";
+    font-family: FontAwesome;cursor: pointer;
+}
+.main-tabs .panel-title a.collapsed::after {
+    position: absolute;
+    right: 0;
+    top: 0;
+    content: "\f067";
+    font-family: FontAwesome;
+}
+
+
+/*about-us-rti*/
+.about-us-rti .row{margin-bottom:80px;}
+.about-us-rti img {
+    display: block;
+    margin: auto;
+    max-width: 570px;
+		width: 100%;
+}
+.about-content > h2 {
+    color: #222222;
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.about-content > p {
+  color: #7b7b7b;
+  font-size: 14px;
+  line-height: 24px;
+  margin-bottom: 15px;
+}
+.about-content a {
+    color: #222222;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: underline;
+}
+.about-content a:hover{color: #2ebed4;}
+.contact-us .panel-title a{position: relative;}
+.contact-us .panel-title a.collapsed::after{position:absolute;right: 0;top:0;content:"\f067";font-family: FontAwesome;}
+.contact-us .panel-title a::after{position:absolute;right: 0;top:0;content:"\f068";font-family: FontAwesome;}

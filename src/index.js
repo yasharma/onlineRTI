@@ -5,11 +5,14 @@ import App from './components/App';
 
 // Vendor CSS
 import 'font-awesome/css/font-awesome.min.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 // Application CSS
+
+// customized bootstrap css
+import './assets/bootstrap/css/bootstrap.min.css';
 import './assets/css/fonts/fonts.css';
 import './assets/css/custom.css';
 import './assets/css/responsive.css';

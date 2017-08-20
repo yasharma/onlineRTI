@@ -7,6 +7,10 @@
 .left-arrow,.left-turn{right:15px;}
 .right-arrow,.right-turn{right:65px;}
 .services-links li a{font-size:11px;}
+.about-content a{font-size: 13px;}
+.about-content > p {color: #7b7b7b;font-size:13px;line-height: 19px;margin-bottom: 10px;}
+.about-us-rti .row{margin-bottom:30px;}
+.about-content > h2{font-size: 19px;margin-bottom: 8px;}
 }
 
 @media (max-width:1023px) {
@@ -79,6 +83,9 @@ header .navbar-default .navbar-nav > li > a:hover, header .navbar-default .navba
 .contact-us.padding-40{padding: 10px 0;}
 .step-forms{padding: 15px;}
 .bootstrapWizard li .title {text-transform: capitalize;}
+.about-content > h2{margin-top:8px; font-size:17px;}
+.about-us-rti.padding-40{padding: 20px 0 0 0;}
+.heading-rti{font-size: 15px;}
 }
 
 @media (max-width:639px) {
