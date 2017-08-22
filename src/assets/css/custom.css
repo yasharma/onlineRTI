@@ -430,3 +430,60 @@ footer{position:relative;background:url('../images/footerBg.png') no-repeat cent
 .contact-us .panel-title a{position: relative;}
 .contact-us .panel-title a.collapsed::after{position:absolute;right: 0;top:0;content:"\f067";font-family: FontAwesome;}
 .contact-us .panel-title a::after{position:absolute;right: 0;top:0;content:"\f068";font-family: FontAwesome;}
+
+.our-recent-blog .customer_slider .slick-next {
+  border: 1px solid #ff0000;
+  height: 35px;
+  opacity: 0;
+  position: absolute;
+  right: -15px;
+  top: -45px;
+  width: 40px;
+  z-index: 5;
+}
+.our-recent-blog .customer_slider .slick-prev{
+    border: 1px solid #ff0000;
+    height: 35px;
+    left: auto;
+    position: absolute;
+    right: 35px;
+    top: -45px;
+    width: 40px;
+    z-index: 5;
+    opacity: 0;
+}
+.our-recent-blog .slick-slide img{
+    width: 100%;
+}
+
+.our-recent-blog .slick-list{
+    margin-left: -15px;
+    margin-right: -15px;
+}
+.our-recent-blog .slick-slide {
+    display: block;
+    padding: 0 10px;
+}
+
+.our-happy-customer .customer_slider .slick-next {
+  border: 1px solid #ff0000;
+  height: 35px;
+  opacity: 0;
+  position: absolute;
+  right: -15px;
+  top: -45px;
+  width: 40px;
+  z-index: 5;
+}
+
+.our-happy-customer .customer_slider .slick-prev{
+    border: 1px solid #ff0000;
+    height: 35px;
+    left: auto;
+    position: absolute;
+    right: 35px;
+    top: -45px;
+    width: 40px;
+    z-index: 5;
+    opacity: 0;
+}
