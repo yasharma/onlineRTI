@@ -40,7 +40,7 @@ const routes = [
 		component: Track
 	},
 	{
-		path: '/Apply',
+		path: '/apply-now',
 		component: Applys
 	},
 	{
