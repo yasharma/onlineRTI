@@ -1,4 +1,5 @@
 import React from 'react';
+import {Form} from "react-bootstrap";
 
 const ApplyTabs = () => (
 <div className="apply padding-40 clearfix">
@@ -11,7 +12,7 @@ const ApplyTabs = () => (
               <div className="widget-body">
 
                   <div className="row">
-                      <form id="wizard-1" novalidate="novalidate">
+                      <Form >
                           <div id="bootstrap-wizard-1" className="col-sm-12">
                               <div className="form-bootstrapWizard">
                                   <ul className="bootstrapWizard form-wizard">
@@ -37,7 +38,7 @@ const ApplyTabs = () => (
                                           <div className="row">
                                               <div className="col-sm-12">
                                                 <div className="step-forms padding-top50">
-                                                <form className="rti-application-form clearfix">
+                                                <Form className="rti-application-form clearfix">
                                                     <div className="main-head-black-mid">PERSONAL DETAILS</div>
 
                                                     <div className="row padding-top50">
@@ -87,7 +88,7 @@ const ApplyTabs = () => (
                                                         </div>
                                                     </div>
                                                     <button type="button" className="btn btn-info btn-block italic-font">Submit</button>
-                                                  </form>
+                                                  </Form>
                                               </div>
                                               </div>
                                               <div className="col-sm-12">
@@ -109,7 +110,7 @@ const ApplyTabs = () => (
                                           <div className="row">
                                               <div className="col-sm-12">
                                                 <div className="step-forms padding-top50">
-                                                <form className=" clearfix">
+                                                <Form className=" clearfix">
                                                     <div className="main-head-black-mid">RTI DETAILS</div>
 
                                                     <div className="row padding-top50">
@@ -199,7 +200,7 @@ const ApplyTabs = () => (
                                                         </div>
                                                     </div>
                                                     <button type="button" className="btn btn-info btn-block italic-font">Submit</button>
-                                                  </form>
+                                                  </Form>
                                               </div>
                                               </div>
                                               <div className="col-sm-12">
@@ -224,7 +225,7 @@ const ApplyTabs = () => (
                                         <div className="row">
                                             <div className="col-sm-12">
                                               <div className="step-forms padding-top50">
-                                              <form className=" clearfix">
+                                              <Form className=" clearfix">
                                                   <div className="main-head-black-mid">SUMMARY & DETAILS</div>
 
                                                   <div className="row padding-top50">
@@ -314,7 +315,7 @@ const ApplyTabs = () => (
                                                       </div>
                                                   </div>
                                                   <button type="button" className="btn btn-info btn-block italic-font">Submit</button>
-                                                </form>
+                                                </Form>
                                             </div>
                                             </div>
                                             <div className="col-sm-12">
@@ -361,7 +362,7 @@ const ApplyTabs = () => (
 
                               </div>
                           </div>
-                      </form>
+                      </Form>
                   </div>
 
               </div>
