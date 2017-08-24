@@ -51,7 +51,7 @@ class Header extends React.Component {
 					<NavItem onClick={() => this.open()} eventKey={1}>Login</NavItem>
 				</Nav>
 				{/*Login Modal*/}
-				<Modal show={this.state.showModal} onHide={() => this.close()}>
+				<Modal className="login-popup" show={this.state.showModal} onHide={() => this.close()}>
 			    	<Modal.Header closeButton>
 			        	<Modal.Title>Login</Modal.Title>
 			        </Modal.Header>
@@ -71,8 +71,7 @@ class Header extends React.Component {
 							/>
 				        </Modal.Body>
 				        <Modal.Footer>
-				        	<Button bsStyle="primary" type="submit" className="pull-left" onClick={() => this.close()}>Login</Button>
-				        	<Button onClick={() => this.close()}>Close</Button>
+				        	<Button bsStyle="primary" type="submit" className="btn-info btn-block" onClick={() => this.close()}>Login</Button>
 				        </Modal.Footer>
 				    </Form>    
 			    </Modal>

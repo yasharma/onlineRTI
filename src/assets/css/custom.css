@@ -15,7 +15,7 @@ textarea{resize: none;}
 .padding-top50{padding-top:50px;}
 .padding-top20{padding-top:20px;}
 .padding-20{padding: 0 20px;}
-.main-head {color: #ffffff;font-size: 24px;font-weight: 600;text-align: center; position: relative;}
+.main-head {color:#ffffff;font-size: 24px;font-weight: 600;text-align: center; position: relative;}
 .main-head::after {background-color: #ffffff;border: 0 none;bottom: -12px;content: "";height: 5px;left: 0;margin: auto;position: absolute;right: 0;top: auto;width: 80px;}
 .main-head-black{color: #222222;font-size: 26px;font-weight: 600;position: relative; text-transform: uppercase;}
 .main-head-black::after {background-color: #2ebed4;border: 0 none;bottom: -12px;content: "";height: 5px;left: 0;margin: auto;position: absolute;right:auto;top: auto;width: 80px;}
@@ -47,6 +47,9 @@ header .navbar-default .navbar-nav > li.active > a:focus{background-color: #2ebe
 .header-right-menu li.active a{background-color: #2ebed4; color: #ffffff;}
 .header-right-menu li.active a:hover{color: #ffffff;}
 .header-right-menu li a:hover{color: #2ebed4;}
+.header-right-menu li a:focus{background-color: transparent ; color:#ffffff;}
+.header-right-menu li.active a{background-color: #2ebed4;color: #ffffff;}
+.nav > li > a:hover, .nav > li > a:focus{background-color: #2ebed4;color: #ffffff;text-decoration: none;}
 
 /*home-banner*/
 .home-banner{background:url('../images/banner.png') no-repeat center center; width:100%; height: 450px;position: relative; background-size: cover;}
@@ -76,25 +79,20 @@ header .navbar-default .navbar-nav > li.active > a:focus{background-color: #2ebe
 /*RTI-policy*/
 .RTI-policy > ul > li{display: table-cell;width: 1%;    vertical-align: top; border:1px solid #959595;border-right:none;}
 .RTI-policy > ul > li:last-child{border-right:1px solid #959595;}
-.RTI-policy > ul > li > a{    height: 80px; cursor: pointer;display: block;padding: 10px;text-align: center; font-size:12px; color: #000000; font-weight: 600;}
+.RTI-policy > ul > li > a{height: 80px; cursor: pointer;display: block;padding: 10px;text-align: center; font-size:12px; color: #000000; font-weight: 600;}
 .RTI-policy > ul > li > a > img{display: block; margin: auto; }
-.RTI-policy > ul > li > a:hover{
-	background-color: #004281;
-	color: white;
-}
-.RTI-policy > ul > li > a > span{    display: block;
-    height: 35px;
-    overflow: hidden;}
+.RTI-policy > ul > li > a:hover{background-color: #004281;color: white;}
+.RTI-policy > ul > li > a > span{display: block;height: 35px;overflow: hidden;}
 
 /*online-RTI*/
 .online-RTI{background:url('../images/online-rti-bg.png') no-repeat center center; width: 100%; background-size: cover;}
 .online-rti-icon {display: block;margin: 0 auto 15px;}
 .online-rti-heading {color: #ffffff;font-size: 18px;font-weight: 800;margin: 0 0 10px;text-align: center;display:block;}
 .online-rti-heading:hover{color: #ffffff;}
-.online-rti-para {color: #ffffff;font-size: 14px;text-align: center; line-height: 23px;}
+.online-rti-para{color: #ffffff;font-size: 14px;text-align: center; line-height: 23px;}
 .online-RTI-section{padding: 0 22px; position:relative;}
 .online-RTI-section:last-child::after{width:0;}
-.online-RTI-section::after {background-color: #ffffff;content: "";height: 100%;position: absolute;right: 0;top: 0;width: 1px;}
+.online-RTI-section::after{background-color: #ffffff;content: "";height: 100%;position: absolute;right: 0;top: 0;width: 1px;}
 
 /*frequently-ask-question*/
 .frequently-ask-question{position:relative;background:url('../images/rti-bg.png') no-repeat center center; width: 100%; background-size: cover;padding-left:425px; padding-right:60px; min-height: 374px;}
@@ -109,9 +107,9 @@ header .navbar-default .navbar-nav > li.active > a:focus{background-color: #2ebe
 /*customerbox*/
 .our-happy-customer .container{position: relative;}
 .customerbox{position: relative;width:100%;}
-.customer-sm {margin-bottom: 15px;}
-.customer-sm > span {color: #0c3153;font-size: 14px;font-weight: 600;padding-left: 5px;}
-.customerbox > p {color: #777777;font-size: 14px;line-height: 22px;}
+.customer-sm{margin-bottom: 15px;}
+.customer-sm > span{color: #0c3153;font-size: 14px;font-weight: 600;padding-left: 5px;}
+.customerbox > p{color: #777777;font-size: 14px;line-height: 22px;}
 .aps_icon{position: absolute;right: 0;top: 0;}
 .customer_slider .owl-carousel .owl-item img{display: inline-block !important;width: auto !important;}
 .customer_slider .owl-nav{display: none;}
@@ -121,8 +119,8 @@ header .navbar-default .navbar-nav > li.active > a:focus{background-color: #2ebe
 
 /*senRequest*/
 .senRequest{position:relative;background:url('../images/appsBg.png') no-repeat center center; width: 100%; background-size: cover;}
-.request-head {color: #ffffff;font-size: 26px;font-weight: 600;margin-bottom: 15px;}
-.request-tag {color: #2ebed4;font-size: 14px;font-weight: 600;}
+.request-head{color: #ffffff;font-size: 26px;font-weight: 600;margin-bottom: 15px;}
+.request-tag{color: #2ebed4;font-size: 14px;font-weight: 600;}
 .app-btn {display: block;margin: 25px 0 0; cursor: pointer;}
 .requestBox{position:relative;}
 .requestBox::after {background-color: #ffffff;content: "";height: 100%;position: absolute;right: 0;top: 0;width: 1px;}
@@ -486,4 +484,30 @@ footer{position:relative;background:url('../images/footerBg.png') no-repeat cent
     width: 40px;
     z-index: 5;
     opacity: 0;
+}
+
+.login-popup .modal-header{background-color: #003160; border-bottom:none;}
+.login-popup .modal-title {
+  color: #ffffff;
+  font-size:17px;
+  font-weight: 600;
+  line-height: 1.42857;
+  margin: 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+.login-popup .close{opacity: 1;}
+.login-popup .close > span {color: #ffffff;}
+.login-popup .form-control {
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid #b5b5b5;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+.login-popup .form-group label{color: #5c5c5c; font-style: italic;}
+.login-popup .modal-body{padding: 10px 10px 0;}
+.login-popup .modal-dialog{margin: 30px auto;width: 415px;}
+.login-popup .modal-footer{text-align: center;    border-top: medium none;padding:10px 10px;}
+.login-popup .modal-content > form {
+    border: 3px solid #003160;
 }
