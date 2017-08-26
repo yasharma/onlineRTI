@@ -9,11 +9,21 @@ class Header extends React.Component {
 	constructor () { 
 		super();
 		this.state = {
-			showModal: false 
+			showModal: false,
+			user: {
+				email: '',
+				password: ''
+			}
 		};	
 	}
 
 	close () {this.setState({ showModal: false })}
+
+	submit(event) {
+		event.preventDefault();
+		console.log(this.state.user);
+		console.log(event.target.value);
+	}
 
 	open () {
 		this.setState({ showModal: true })
@@ -55,23 +65,27 @@ class Header extends React.Component {
 			    	<Modal.Header closeButton>
 			        	<Modal.Title>Login</Modal.Title>
 			        </Modal.Header>
-			        <Form>
+			        <Form onClick={(e) => this.submit(e)}>
 				        <Modal.Body>
 				            <FieldGroup
 								id="Email"
 								type="email"
 								label="Email address"
+								name="email"
+								value={this.state.user.email}
 								placeholder="Enter email"
 							/>
 							<FieldGroup
 								id="Password"
 								type="password"
 								label="Password"
+								name="password"
+								value={this.state.user.password}
 								placeholder="Enter password"
 							/>
 				        </Modal.Body>
 				        <Modal.Footer>
-				        	<Button bsStyle="primary" type="submit" className="pull-left" onClick={() => this.close()}>Login</Button>
+				        	<Button bsStyle="primary" type="submit" className="pull-left" >Login</Button>
 				        	<Button onClick={() => this.close()}>Close</Button>
 				        </Modal.Footer>
 				    </Form>    
