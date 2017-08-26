@@ -38,7 +38,7 @@ const ApplyTabs = () => (
                                           <div className="row">
                                               <div className="col-sm-12">
                                                 <div className="step-forms padding-top50">
-                                                <Form className="rti-application-form clearfix">
+                                                <Form>
                                                     <div className="main-head-black-mid">PERSONAL DETAILS</div>
 
                                                     <div className="row padding-top50">

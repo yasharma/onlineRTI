@@ -9,7 +9,8 @@ class Header extends React.Component {
 	constructor () { 
 		super();
 		this.state = {
-			showModal: false,
+			showLoginModal: false,
+			showSignupModal: false,
 			user: {
 				email: '',
 				password: ''
@@ -17,20 +18,37 @@ class Header extends React.Component {
 		};	
 	}
 
-	close () {this.setState({ showModal: false })}
+	close (modal) {
+		if( modal === 'login' ) {
+			this.setState({ showLoginModal: false });
+		} else {
+			this.setState({ showSignupModal: false });
+		}
+	}
 
-	submit(event) {
+	login(event) {
 		event.preventDefault();
 		console.log(this.state.user);
 		console.log(event.target.value);
 	}
 
-	open () {
-		this.setState({ showModal: true })
+	signup(event) {
+		event.preventDefault();
+		console.log(this.state.user);
+		console.log(event.target.value);
+	}
+
+	open (modal) {
+		if( modal === 'login' ) {
+			this.close('signup');
+			this.setState({ showLoginModal: true });
+		} else {
+			this.close('login');
+			this.setState({ showSignupModal: true });
+		}
 	}
 	render() {
 		return (
-
 			<header>
 				<Navbar fluid collapseOnSelect>
 					<Navbar.Header>
@@ -58,14 +76,16 @@ class Header extends React.Component {
 					<LinkContainer to="/apply-now">
 						<NavItem eventKey={1}>Apply Now</NavItem>
 					</LinkContainer>
-					<NavItem onClick={() => this.open()} eventKey={1}>Login</NavItem>
+					<NavItem onClick={() => this.open('login')} eventKey={1}>Login</NavItem>
 				</Nav>
-				{/*Login Modal*/}
-				<Modal show={this.state.showModal} onHide={() => this.close()}>
+				{/* ================================================================================ */}
+				{/* ================================LOGIN=========================================== */}
+				{/* ================================================================================ */}
+				<Modal className="login-popup" show={this.state.showLoginModal} onHide={() => this.close('login')}>
 			    	<Modal.Header closeButton>
 			        	<Modal.Title>Login</Modal.Title>
 			        </Modal.Header>
-			        <Form onClick={(e) => this.submit(e)}>
+			        <Form onClick={(e) => this.login(e)}>
 				        <Modal.Body>
 				            <FieldGroup
 								id="Email"
@@ -85,8 +105,49 @@ class Header extends React.Component {
 							/>
 				        </Modal.Body>
 				        <Modal.Footer>
-				        	<Button bsStyle="primary" type="submit" className="pull-left" >Login</Button>
-				        	<Button onClick={() => this.close()}>Close</Button>
+				        	<Button bsStyle="primary" type="submit" className="btn-info btn-block" onClick={() => this.close()}>Login</Button>
+				        	<p><a href onClick={() => this.open('signup')}>Don't have an account?</a></p>
+				        </Modal.Footer>
+				    </Form>    
+			    </Modal>
+
+			    {/* ================================================================================ */}
+				{/* ================================SIGNUP========================================== */}
+				{/* ================================================================================ */}
+				<Modal className="login-popup" show={this.state.showSignupModal} onHide={() => this.close('signup')}>
+			    	<Modal.Header closeButton>
+			        	<Modal.Title>SignUp</Modal.Title>
+			        </Modal.Header>
+			        <Form onClick={(e) => this.signup(e)}>
+				        <Modal.Body>
+				            <FieldGroup
+								id="Email"
+								type="email"
+								label="Email address"
+								name="email"
+								value={this.state.user.email}
+								placeholder="Enter email"
+							/>
+							<FieldGroup
+								id="Password"
+								type="password"
+								label="Password"
+								name="password"
+								value={this.state.user.password}
+								placeholder="Enter password"
+							/>
+							<FieldGroup
+								id="Password"
+								type="password"
+								label="Confirm Password"
+								name="password"
+								value={this.state.user.password}
+								placeholder="Enter password"
+							/>
+				        </Modal.Body>
+				        <Modal.Footer>
+				        	<Button bsStyle="primary" type="submit" className="btn-info btn-block" onClick={() => this.close()}>SignUp</Button>
+				        	<p><a href onClick={() => this.open('login')}>Already have an account?</a></p>
 				        </Modal.Footer>
 				    </Form>    
 			    </Modal>

@@ -1,6 +1,5 @@
 import React from 'react';
 import Home from '../components/home/Home';
-import Login from '../components/Login';
 import Abouts from '../components/Abouts/Abouts';
 import Contacts from '../components/Contact/Contact';
 import Faqs from '../components/Faq/Faq';
@@ -18,10 +17,6 @@ const routes = [
 	{
 		path: '/onlineRTI', // this route is just for gh-pages
 		component: Home
-	},
-	{
-		path: '/login',
-		component: Login
 	},
 	{
 		path: '/about-us',
