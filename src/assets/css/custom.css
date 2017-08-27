@@ -511,3 +511,14 @@ footer{position:relative;background:url('../images/footerBg.png') no-repeat cent
 .login-popup .modal-content > form {
     border: 3px solid #003160;
 }
+.loginLink{display: block; cursor: pointer; margin-top:15px; text-decoration: underline;}
+.forgotLink {
+  color: #003160;
+  cursor: pointer;
+  display: block;
+  font-size: 12px;
+  font-style: italic;
+  margin: 5px 0;
+  text-align: left;
+  text-decoration: underline;
+}
