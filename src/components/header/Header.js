@@ -211,6 +211,7 @@ class Header extends React.Component {
 								onChange={(e) => this.handleUserInput(e)}
 								placeholder="Enter password"
 							/>
+							<a className="forgotLink">Forgot Password</a>
 				        </Modal.Body>
 				        <Modal.Footer>
 				        	<Button bsStyle="primary" type="submit" className="btn-info btn-block" disabled={!this.state.formValid || this.state.isProcessing}>{this.state.isProcessing ? 'Processing...' : 'Login'}</Button>
@@ -263,7 +264,7 @@ class Header extends React.Component {
 				        </Modal.Body>
 				        <Modal.Footer>
 				        	<Button bsStyle="primary" type="submit" className="btn-info btn-block" disabled={!this.state.formValid || this.state.isProcessing}>{this.state.isProcessing ? 'Processing...' : 'SignUp'}</Button>
-				        	<p><a onClick={() => this.open('login')}>Already have an account?</a></p>
+				        	<p><a className="loginLink" onClick={() => this.open('login')}>Already have an account?</a></p>
 				        </Modal.Footer>
 				    </Form>    
 			    </Modal>
