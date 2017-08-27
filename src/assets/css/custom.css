@@ -522,3 +522,10 @@ footer{position:relative;background:url('../images/footerBg.png') no-repeat cent
   text-align: left;
   text-decoration: underline;
 }
+.loginLink:hover{text-decoration: underline;}
+.has-error{color: #ff0000;}
+.alert {
+    border-radius: 0;
+    margin-bottom: 10px;
+    padding: 4px;
+}
