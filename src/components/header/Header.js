@@ -203,7 +203,7 @@ class Header extends React.Component {
 								onChange={(e) => this.handleUserInput(e)}
 								placeholder="Enter password"
 							/>
-							<a className="forgotLink">Forgot Password</a>
+							
 				        </Modal.Body>
 				        <Modal.Footer>
 				        	<Button bsStyle="primary" type="submit" className="btn-info btn-block" disabled={!this.state.formValid}>Login</Button>
