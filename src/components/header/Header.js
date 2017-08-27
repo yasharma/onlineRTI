@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import FieldGroup from '../FieldGroup';
 import {FormErrors} from '../FormErrors';
+import Http from '../../lib/Http';
+import Message from '../Message';
 
 class Header extends React.Component {
 	constructor () { 
@@ -12,6 +14,8 @@ class Header extends React.Component {
 			showLoginModal: false,
 			showSignupModal: false,
 			showSuccessModal: false,
+			serverValidationErrorMessage: '',
+			isProcessing: false,
 			email: '',
 			password: '',
 			confirm_password: '',
@@ -28,6 +32,7 @@ class Header extends React.Component {
 			email: '',
 			password: '',
 			confirm_password: '',
+			isProcessing: false,
 			formErrors: { email:'', password: '', confirm_password: ''}
 		});
 		if( modal === 'login' ) {
@@ -41,6 +46,10 @@ class Header extends React.Component {
 
 	login(event) {
 		event.preventDefault();
+		// let user = {
+		// 	email: this.state.email,
+		// 	password: this.state.password
+		// };
 		console.log(this.state.email);
 		console.log(this.state.password);
 		this.open('success');
@@ -48,9 +57,19 @@ class Header extends React.Component {
 
 	signup(event) {
 		event.preventDefault();
-		console.log(this.state.email);
-		console.log(this.state.password);
-		console.log(this.state.confirm_password);
+		let user = {
+			email: this.state.email,
+			password: this.state.password
+		};
+		this.setState({isProcessing: true});
+		Http.post('register', user)
+		.then(response => this.open('success'))
+		.catch(error => {
+			if( error.errors ){
+				this.setState({serverValidationErrorMessage: error.errors.message || error.errors.email.message || 'Internal server error'});
+			}
+		})
+		.then(() => this.setState({isProcessing: false}));
 	}
 
 	open (modal) {
@@ -92,6 +111,9 @@ class Header extends React.Component {
     		case 'password':
       		passwordValid = value.length >= 6;
       		fieldValidationErrors.password = passwordValid ? '': 'Password must be atleast 6 characters long';
+      		if( this.state.confirm_password ){
+      			fieldValidationErrors.confirm_password = value === this.state.confirm_password ? '': 'Confirm password and password does not match';	
+      		}
       		break;
 
       		case 'confirm_password':
@@ -199,6 +221,7 @@ class Header extends React.Component {
 			        <Form onSubmit={(e) => this.signup(e)}>
 				        <Modal.Body>
 				        	<FormErrors formErrors={this.state.formErrors} />
+				        	<Message className="danger" text={this.state.serverValidationErrorMessage} />
 				            <FieldGroup
 								id="Email"
 								type="email"
@@ -231,14 +254,14 @@ class Header extends React.Component {
 							/>
 				        </Modal.Body>
 				        <Modal.Footer>
-				        	<Button bsStyle="primary" type="submit" className="btn-info btn-block" disabled={!this.state.formValid}>SignUp</Button>
+				        	<Button bsStyle="primary" type="submit" className="btn-info btn-block" disabled={!this.state.formValid || this.state.isProcessing}>{this.state.isProcessing ? 'Processing...' : 'SignUp'}</Button>
 				        	<p><a onClick={() => this.open('login')}>Already have an account?</a></p>
 				        </Modal.Footer>
 				    </Form>    
 			    </Modal>
 
 				{/* ================================================================================ */}
-				{/* ================================SIGNUP========================================== */}
+				{/* ================================SUCCESSFULL SIGNUP============================== */}
 				{/* ================================================================================ */}
 				<Modal show={this.state.showSuccessModal} onHide={() => this.close('success')}>
 					<Modal.Header closeButton>

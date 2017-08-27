@@ -7,9 +7,8 @@ import FooterLinks from '../footer/Footer-links';
 // between routes.
 const Footer = () => (
 	<div>
-	<FooterLinks/>
-
-	<Copyright/>
+		<FooterLinks/>
+		<Copyright/>
 	</div>
 );
 
