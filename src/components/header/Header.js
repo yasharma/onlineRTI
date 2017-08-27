@@ -57,7 +57,7 @@ class Header extends React.Component {
 		if( modal === 'login' ) {
 			this.close('signup');
 			this.setState({ showLoginModal: true });
-		} else if (modal === 'login') {
+		} else if (modal === 'signup') {
 			this.close('login');
 			this.setState({ showSignupModal: true });
 		} else if (modal === 'success') {
