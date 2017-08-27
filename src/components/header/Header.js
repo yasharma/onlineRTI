@@ -33,6 +33,7 @@ class Header extends React.Component {
 			password: '',
 			confirm_password: '',
 			isProcessing: false,
+			serverValidationErrorMessage: '',
 			formErrors: { email:'', password: '', confirm_password: ''}
 		});
 		if( modal === 'login' ) {
@@ -46,13 +47,22 @@ class Header extends React.Component {
 
 	login(event) {
 		event.preventDefault();
-		// let user = {
-		// 	email: this.state.email,
-		// 	password: this.state.password
-		// };
-		console.log(this.state.email);
-		console.log(this.state.password);
-		this.open('success');
+		let user = {
+			email: this.state.email,
+			password: this.state.password
+		};
+		this.setState({isProcessing: true});
+		Http.post('login', user)
+		.then(response => {
+			this.setState({serverValidationErrorMessage: ''});
+			console.log(response);
+		})
+		.catch(error => {
+			if( error.errors ){
+				this.setState({serverValidationErrorMessage: error.errors.message || error.errors.email.message || 'Internal server error'});
+			}
+		})
+		.then(() => this.setState({isProcessing: false}));
 	}
 
 	signup(event) {
@@ -182,13 +192,12 @@ class Header extends React.Component {
 			        </Modal.Header>
 			        <Form onSubmit={(e) => this.login(e)}>
 				        <Modal.Body>
-				        	<FormErrors formErrors={this.state.formErrors} />
+				        	<Message className="danger" text={this.state.serverValidationErrorMessage} />
 				            <FieldGroup
 								id="Email"
 								type="email"
 								label="Email address"
 								name="email"
-								validationState={this.errorClass(this.state.formErrors.email)}
 								value={this.state.email}
 								onChange={(e) => this.handleUserInput(e)}
 								placeholder="Enter email"
@@ -198,14 +207,13 @@ class Header extends React.Component {
 								type="password"
 								label="Password"
 								name="password"
-								validationState={this.errorClass(this.state.formErrors.password)}
 								value={this.state.password}
 								onChange={(e) => this.handleUserInput(e)}
 								placeholder="Enter password"
 							/>
 				        </Modal.Body>
 				        <Modal.Footer>
-				        	<Button bsStyle="primary" type="submit" className="btn-info btn-block" disabled={!this.state.formValid}>Login</Button>
+				        	<Button bsStyle="primary" type="submit" className="btn-info btn-block" disabled={!this.state.formValid || this.state.isProcessing}>{this.state.isProcessing ? 'Processing...' : 'Login'}</Button>
 				        	<p><a onClick={() => this.open('signup')}>Don't have an account?</a></p>
 				        </Modal.Footer>
 				    </Form>    
