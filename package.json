@@ -2,7 +2,6 @@
   "name": "onlinerti",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://yasharma.github.io/onlineRTI",
   "dependencies": {
     "axios": "^0.16.2",
     "body-parser": "^1.17.2",
