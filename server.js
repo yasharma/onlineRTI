@@ -49,8 +49,12 @@ app.use(compress({
 * Serving static files in Express using express static middleware
 * these files will be access publicly
 */
-app.use(express.static(path.resolve('./build')));
-app.use(express.static(path.resolve('./public')));
+
+if( process.env.NODE_ENV === 'development' ){
+	app.use(express.static(path.resolve('./public')));
+} else {
+	app.use(express.static(path.resolve('./build')));	
+}
 // app.set('views', path.join(__dirname, '/dist'));
 // app.set('view engine', 'ejs');
 
