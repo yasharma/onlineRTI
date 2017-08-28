@@ -214,7 +214,7 @@ class Header extends React.Component {
 							<a className="forgotLink">Forgot Password</a>
 				        </Modal.Body>
 				        <Modal.Footer>
-				        	<Button bsStyle="primary" type="submit" className="btn-info btn-block" disabled={!this.state.formValid || this.state.isProcessing}>{this.state.isProcessing ? 'Processing...' : 'Login'}</Button>
+				        	<Button bsStyle="primary" type="submit" className="btn-info btn-block" disabled={this.state.isProcessing}>{this.state.isProcessing ? 'Processing...' : 'Login'}</Button>
 				        	<p><a onClick={() => this.open('signup')}>Don't have an account?</a></p>
 				        </Modal.Footer>
 				    </Form>    

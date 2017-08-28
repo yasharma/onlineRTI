@@ -3,6 +3,7 @@ import axios from 'axios';
 window.axios = axios;
 
 window.axios.defaults.headers.common = {'X-Requested-With': 'XMLHttpRequest'};
+console.log(process.env.NODE_ENV);
 window.axios.defaults.baseURL = (process.env.NODE_ENV !== 'production') ? 'http://localhost:9000/api/' : '/api/';
 
 // Add a request interceptor
