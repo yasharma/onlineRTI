@@ -20,6 +20,7 @@ router.use(expressJWT({
 		/^\/admin\/.*/,
 		'/favicon.ico',
 		'/api/register',
+		'/api/login',
 		/^\/api\/verify_email\/.*/,
 		/^\/reset\/.*/
 	]
