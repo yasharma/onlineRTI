@@ -79,7 +79,7 @@ const FooterLinks = () => (
             </div>
             <div className="col-sm-6 col-md-3 top-mobile-40">
               <div className="footer-head">Get in Touch</div>
-                <form className="contact-form clearfix">
+                /*<form className="contact-form clearfix">
                   <div className="form-group">
                     <input type="text" className="form-control" placeholder="Enter your name"/>
                   </div>
@@ -90,7 +90,7 @@ const FooterLinks = () => (
                     <textarea className="form-control" rows="3" placeholder="Enter your Message"></textarea>
                   </div>
                   <button type="button" className="btn btn-info btn-block italic-font">Submit</button>
-                </form>
+                </form>*/
             </div>
             
           </div> 
