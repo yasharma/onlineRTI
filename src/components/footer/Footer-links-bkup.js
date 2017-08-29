@@ -7,13 +7,20 @@ const FooterLinks = () => (
 	<footer className="padding-40 clearfix">
       <div className="container">
           <div className="row">
-            <div className="col-sm-4 col-md-4">
+            <div className="col-sm-6 col-md-3">
                 <div className="footer-head">About Us</div>
                 <p className="footer-para">
                   The Right to Information Act, simply known as RTI, is a revolutionary Act that aims to promote transparency in government institutions in India. The Act came
                 </p>
+                <div className="newletter clearfix">
+                  <span className="italic-font">Subscribe Our Newsletter</span>
+                  <div className="new-search">
+                    <input className="form-control" placeholder="Newsletter" type="text"/>
+                    <button type="button" className="btn btn-info newletter-btn"><i className="fa fa-paper-plane" aria-hidden="true"></i></button>
+                  </div>
+                </div>
             </div>
-            <div className="col-sm-4 col-md-4 top-xs-mobile-40">
+            <div className="col-sm-6 col-md-3 top-xs-mobile-40">
                 <div className="footer-head">Provide Services</div>
                 <ul className="services-links">
                   <li><a>Passport Delay</a></li>
@@ -30,7 +37,7 @@ const FooterLinks = () => (
                   <li><a>Exma Answer Copy</a></li>
                 </ul>
             </div>
-            <div className="col-sm-4 col-md-4 top-mobile-40">
+            <div className="col-sm-6 col-md-3 top-mobile-40">
                 <ul className="address-list clearfix">
                   <li>
                     <div className="address-icon">
@@ -70,6 +77,22 @@ const FooterLinks = () => (
                   </ul>
                 </div>
             </div>
+            <div className="col-sm-6 col-md-3 top-mobile-40">
+              <div className="footer-head">Get in Touch</div>
+                <form className="contact-form clearfix">
+                  <div className="form-group">
+                    <input type="text" className="form-control" placeholder="Enter your name"/>
+                  </div>
+                  <div className="form-group">
+                    <input type="text" className="form-control" placeholder="Enter your Email"/>
+                  </div>
+                  <div className="form-group">
+                    <textarea className="form-control" rows="3" placeholder="Enter your Message"></textarea>
+                  </div>
+                  <button type="button" className="btn btn-info btn-block italic-font">Submit</button>
+                </form>
+            </div>
+            
           </div> 
       </div>
     </footer>

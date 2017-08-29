@@ -98,6 +98,7 @@ header .navbar-default .navbar-nav > li > a:hover, header .navbar-default .navba
 .search-btn{position: static;width: 100%;margin-top: 10px;}
 .search-form .form-control {padding-right: 5px;}
 .home-banner{height: 250px;}
+.login-popup .modal-dialog{margin:10px;width: auto;}
 }
 
 @media (max-width:479px) {
