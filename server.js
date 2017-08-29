@@ -12,6 +12,7 @@ const express 	= require('express'),
 	helmet 		= require('helmet'),
 	compress 	= require('compression'),
 	routes 		= require(path.resolve('./core/routes')),
+	Admin 		= require(path.resolve('./controllers/Admin/adminCtrl')),
 	config 		= require(require(path.resolve('./core/env')).getEnv),
 	http 		= require('http').Server(app);
 
@@ -27,7 +28,7 @@ enable cors in development mode
 if( process.env.NODE_ENV === 'development' ){
 	var cors = require('cors');
 	var corsOptions = {
-	  origin: 'http://localhost:8080',
+	  origin: 'http://localhost:9000',
 	  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 	};
 	app.use(cors());	
@@ -51,12 +52,13 @@ app.use(compress({
 */
 
 if( process.env.NODE_ENV === 'development' ){
-	app.use(express.static(path.resolve('./public')));
+	app.use(express.static(path.resolve('./build')));
 } else {
 	app.use(express.static(path.resolve('./build')));	
 }
-// app.set('views', path.join(__dirname, '/dist'));
-// app.set('view engine', 'ejs');
+app.use(express.static(path.resolve('./admin')));
+app.use(express.static(path.resolve('./assets')));
+
 
 /*
 * uncomment the following when the favicon is available
@@ -75,9 +77,12 @@ app.use(morgan('dev'));
 app.use(helmet());
 /* Register all your routes */
 app.use('/api', routes.router);
-app.use('/admin', routes.admin);
-app.get(/^((?!\/(api)).)*$/, function (req, res) {
+app.use('/adminapi', routes.admin);
+app.get(/^((?!\/(api|adminapi|admin)).)*$/, function (req, res) {
 	res.sendFile(path.resolve('./build/index.html'));
+});
+app.get(/^((?!\/(adminapi)).)*$/, function (req, res) {
+	res.sendFile(path.resolve('./admin/index.html'));
 });
 
 // Global Error Handler
@@ -100,6 +105,7 @@ app.use((err, req, res, next) => {
 */
 conn.once('open', function() {
 	http.listen(config.server.PORT, () => {
+		Admin.register();
 	    console.log(`Listening on server port:${config.server.PORT}`);
 	});
 });	

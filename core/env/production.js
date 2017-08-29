@@ -6,21 +6,21 @@ const config = {
     autoIndex: false
   },
   server: {
-    host: 'http://rtiguru.com',
+    host: 'http://rtiguru.com:8080',
     PORT: process.env.PORT || 9000
   },
   mail:{
     poolConfig : {
       pool: true,
         host: 'smtp.gmail.com', // Gmail as mail client
-        port: 587,
-        secure: false, // use SSL
+        port: 465,
+        secure: true, // use SSL
         auth: {
           user: process.env.USERNAME,
           pass: process.env.PASSWORD
         }
     },
-    from: ` <${process.env.USERNAME}>`
+    from: `RtiGuru ${process.env.USERNAME}`
   },
     mailTransporter: 'gmail',
     salt: '51ca5acbce3e6a5b2dd9772b36cff34c',

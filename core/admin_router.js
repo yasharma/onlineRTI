@@ -14,7 +14,7 @@ fs.readdirSync(path.resolve('./controllers/Admin')).forEach(file => {
 
 module.exports = {
   	routes: [
-  		// { url: '/login', method: ctrls.adminCtrl.login, type: 'POST' },
+  		{ url: '/login', method: ctrls.adminCtrl.login, type: 'POST' },
   		// { url: '/profile/:id', method: ctrls.profileCtrl.updateAccount, type: 'PUT' },
   		// { url: '/change_password/:id', method: ctrls.profileCtrl.changePassword, type: 'PUT' }
 	]

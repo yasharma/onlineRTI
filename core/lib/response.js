@@ -20,7 +20,7 @@ function error (obj) {
 
 function success (obj) {
 	return {
-		data: obj
+		records: obj
 	}
 }
 

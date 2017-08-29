@@ -58,7 +58,7 @@ admin.use(expressJWT({
 	// Define your path/routes that does not need any authentication
 	path:[
 		'/admin/register',
-		'/admin/login',
+		'/adminapi/login',
 		'/admin/forgot',
 		/^\/admin\/reset\/.*/,
 		/^\/admin\/generate-password\/.*/
