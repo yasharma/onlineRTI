@@ -105,9 +105,10 @@ mimicTrading.factory('RestSvr', ['$http', '$window', '$httpParamSerializerJQLike
 ]);
 
 function baseUrl(apiUrl) {
-	var protocol = window.location.protocol;
-	var baseUrl = (window.location.hostname === 'localhost') ? protocol + '//' + 'localhost:9000' : protocol + '//' + '130.211.224.61:8010';
-	return 	baseUrl + '/adminapi/' + apiUrl;
+	//var protocol = window.location.protocol;
+	//var baseUrl = (window.location.hostname === 'localhost') ? protocol + '//' + 'localhost:9000' : protocol + '//' + '130.211.224.61:8010';
+	
+	return 	'/adminapi/' + apiUrl;
 }
 
 function prefix(item) {
