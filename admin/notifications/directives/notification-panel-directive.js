@@ -13,7 +13,7 @@ mimicTrading.directive('notificationPanel', ['notificationSvr', '$location','$ro
 				.then($rootScope.manageCount)
 				.catch(errors => console.log(errors));
 			},
-			templateUrl: '/admin/notifications/directives/notification-panel.html'
+			templateUrl: 'notifications/directives/notification-panel.html'
 		};
 	}
 ]);	

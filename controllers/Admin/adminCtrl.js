@@ -8,10 +8,11 @@ const
   	config 		= require(path.resolve(`./core/env/${process.env.NODE_ENV}`));
 
 exports.register = (req, res, next) => {
-	User.count(config.defaultAdmin, (err, count) => {
+	User.count({email: config.defaultAdmin.email}, (err, count) => {
 		if(err){
 			return console.log(err);
 		}
+		
 		if(count === 0){
 			let user = new User(config.defaultAdmin);
 			user.save()

@@ -65,7 +65,3 @@ var ComponentsBootstrapMultiselect = function () {
     };
 
 }();
-
-jQuery(document).ready(function() {    
-   ComponentsBootstrapMultiselect.init(); 
-});
