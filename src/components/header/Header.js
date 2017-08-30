@@ -177,12 +177,12 @@ class Header extends React.Component {
 						
 					</Navbar.Collapse>
 				</Navbar>
-				<Nav className="header-right-menu">
+				<div className="header-right-menu">
 					<LinkContainer to="/apply-now">
 						<NavItem eventKey={1}>Apply Now</NavItem>
 					</LinkContainer>
 					<NavItem onClick={() => this.open('login')} eventKey={1}>Login</NavItem>
-				</Nav>
+				</div>
 				{/* ================================================================================ */}
 				{/* ================================LOGIN=========================================== */}
 				{/* ================================================================================ */}
@@ -215,7 +215,7 @@ class Header extends React.Component {
 				        </Modal.Body>
 				        <Modal.Footer>
 				        	<Button bsStyle="primary" type="submit" className="btn-info btn-block" disabled={this.state.isProcessing}>{this.state.isProcessing ? 'Processing...' : 'Login'}</Button>
-				        	<p><a onClick={() => this.open('signup')}>Don't have an account?</a></p>
+				        	<p><a className="loginLink" onClick={() => this.open('signup')}>Don't have an account?</a></p>
 				        </Modal.Footer>
 				    </Form>    
 			    </Modal>
