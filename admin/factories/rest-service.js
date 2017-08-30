@@ -21,7 +21,7 @@ mimicTrading.factory('RestSvr', ['$http', '$window', '$httpParamSerializerJQLike
 					.catch(response => {
 						reject({
 							errors: true,
-							message: response.data.message || response.data.detail || 'Internal Server Error',
+							message: response.data.errors.message || 'Internal Server Error',
 						});
 					});
 				});
@@ -43,7 +43,7 @@ mimicTrading.factory('RestSvr', ['$http', '$window', '$httpParamSerializerJQLike
 					.catch(response => {
 						reject({
 							errors: true,
-							message: response.data.message || 'Internal Server Error',
+							message: response.data.errors.message || 'Internal Server Error',
 						});
 					});	
 				});
@@ -68,7 +68,7 @@ mimicTrading.factory('RestSvr', ['$http', '$window', '$httpParamSerializerJQLike
 							message = '404 Route not found';
 						}
 						reject({
-							message: response.data.message || response.data.detail || message,
+							message: response.errors.message || message,
 							status: response.status
 						});
 					});	
@@ -116,7 +116,7 @@ function prefix(item) {
     var prefix;
     switch(hostname){
         case 'localhost': 
-        case 'local.mimic.com':
+        case 'local.rtiguru.com':
         prefix = 'localAdmin';
         break;
 
