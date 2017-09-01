@@ -1,9 +1,9 @@
 'use strict';
 const path 	 	= require('path'),
 	async 	 	= require('async'),
-	lo 			= require('lodash'),
+	_ 			= require('lodash'),
 	mongoose 	= require('mongoose'),
-	Blog 	 	= require(path.resolve('./models/Blog')),
+	CMS 	 	= require(path.resolve('./models/Cms')),
 	datatable 	= require(path.resolve('./core/lib/datatable')),
   	config 		= require(path.resolve(`./core/env/${process.env.NODE_ENV}`)),
   	paginate    = require(path.resolve('./core/lib/paginate'));
@@ -19,7 +19,7 @@ exports.add = (req, res, next) => {
 		return;
 	}	 
     
-    let cms = new Blog(req.body);
+    let cms = new CMS(req.body);
     cms.save()
     .then(result => res.json({success: true}))
     .catch(error => res.json({errors: error}));
@@ -37,7 +37,7 @@ exports.edit = (req, res, next) => {
 	}	 
     
     
-    Blog.update({_id: req.body._id},{$set: { title: req.body.title, type: req.body.type, description: req.body.description }}, 
+    CMS.update({_id: req.body._id},{$set: { title: req.body.title, type: req.body.type, description: req.body.description }}, 
     	function (error, result) {
     		if(error){
     			res.json({errors: error});
@@ -59,7 +59,7 @@ exports.view = (req, res, next) => {
 	}	 
     
     
-    Blog.findOne({type: req.params.type}, 
+    CMS.findOne({type: req.params.type}, 
     	function (error, result) {
     		if(error){
     			res.json({errors: error});
@@ -70,7 +70,7 @@ exports.view = (req, res, next) => {
 };
 
 exports.list = (req, res, next) => {
-	console.log(req.body);
+	
 	let operation = {};
 	if( req.body.title ){
 		operation.title = {$regex: new RegExp(`${req.body.title}`), $options:"im"};
@@ -78,15 +78,16 @@ exports.list = (req, res, next) => {
 	if( req.body.type ){
 		operation.type = {$regex: new RegExp(`${req.body.type}`), $options:"im"};
 	}
-	if( req.body.status ){
-		operation.status = req.body.status;
+	if( req.body.status === "true" || req.body.status === "false" ){
+		operation.status = req.body.status == "true" ? true : false;
 	}
+	console.log(operation);
 	async.parallel({
 		count: (done) => {
-			Blog.count(done);
+			CMS.count(done);
 		},
 		records: (done) => {
-			Blog.find(operation,done);	
+			CMS.find(operation,done);	
 		}
 	}, (err, result) => {
 		if(err){

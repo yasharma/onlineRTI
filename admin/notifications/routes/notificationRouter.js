@@ -15,7 +15,7 @@ mimicTrading.config(['$stateProvider',($stateProvider) => {
 		            name: 'mimicTrading',
 		            insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
 		            files: [
-		                '/apps/css/inbox.css', 
+		                '/assets/apps/css/inbox.css', 
 		            ] 
 		        });
 		    }],

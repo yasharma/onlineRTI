@@ -15,7 +15,9 @@ fs.readdirSync(path.resolve('./controllers/Admin')).forEach(file => {
 module.exports = {
   	routes: [
   		{ url: '/login', method: ctrls.adminCtrl.login, type: 'POST' },
-  		// { url: '/profile/:id', method: ctrls.profileCtrl.updateAccount, type: 'PUT' },
-  		// { url: '/change_password/:id', method: ctrls.profileCtrl.changePassword, type: 'PUT' }
+  		{ url: '/cms/add', method: ctrls.cmsCtrl.add, type: 'POST' },
+  		{ url: '/cms/list', method: ctrls.cmsCtrl.list, type: 'POST' },
+  		{ url: '/cms/edit', method: ctrls.cmsCtrl.edit, type: 'PUT' },
+  		{ url: '/cms/view/:type', method: ctrls.cmsCtrl.view, type: 'GET' }
 	]
 };

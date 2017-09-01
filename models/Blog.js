@@ -33,7 +33,11 @@ BlogSchema 	= new Schema({
 		lowercase: true,
     	trim: true,
     	unque: true
-	}
+	},
+	status: {
+        type: Boolean,
+        default: true
+    }
 },{
     timestamps: {
         createdAt: 'created',

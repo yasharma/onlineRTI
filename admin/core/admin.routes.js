@@ -26,7 +26,7 @@ mimicTrading.config(['$stateProvider', '$urlRouterProvider',function($stateProvi
 		            name: 'mimicTrading',
 		            insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
 		            files: [
-		                '/css/admin-login-style.css'
+		                '/assets/css/admin-login-style.css'
 		            ] 
 		        });
 		    }]
@@ -43,12 +43,12 @@ mimicTrading.config(['$stateProvider', '$urlRouterProvider',function($stateProvi
 		            name: 'mimicTrading',
 		            insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
 		            files: [
-		                '/global/plugins/morris/morris.css',                            
-		                '/global/plugins/morris/morris.min.js',
-		                '/global/plugins/morris/raphael-min.js',                            
-		                '/global/plugins/jquery.sparkline.min.js',
+		                '/assets/global/plugins/morris/morris.css',                            
+		                '/assets/global/plugins/morris/morris.min.js',
+		                '/assets/global/plugins/morris/raphael-min.js',                            
+		                '/assets/global/plugins/jquery.sparkline.min.js',
 
-		                '/pages/scripts/dashboard.min.js',
+		                '/assets/pages/scripts/dashboard.min.js',
 		            ] 
 		        });
 		    }]
@@ -65,7 +65,7 @@ mimicTrading.config(['$stateProvider', '$urlRouterProvider',function($stateProvi
 		            name: 'mimicTrading',
 		            insertBefore: '#ng_load_plugins_before',
 		            files: [
-		                '/pages/css/error.min.css',
+		                '/assets/pages/css/error.min.css',
 		            ] 
 		        });
 		    }]
@@ -81,7 +81,7 @@ mimicTrading.config(['$stateProvider', '$urlRouterProvider',function($stateProvi
 		            name: 'mimicTrading',
 		            insertBefore: '#ng_load_plugins_before',
 		            files: [
-		                '/pages/css/error.min.css',
+		                '/assets/pages/css/error.min.css',
 		            ] 
 		        });
 		    }]

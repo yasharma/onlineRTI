@@ -28,7 +28,6 @@ enable cors in development mode
 if( process.env.NODE_ENV === 'development' ){
 	var cors = require('cors');
 	var corsOptions = {
-	  origin: 'http://localhost:9000',
 	  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 	};
 	app.use(cors());	
@@ -52,12 +51,12 @@ app.use(compress({
 */
 
 if( process.env.NODE_ENV === 'development' ){
-	app.use(express.static(path.resolve('./build')));
+	app.use(express.static(path.resolve('./public')));
 } else {
 	app.use(express.static(path.resolve('./build')));	
 }
 app.use(express.static(path.resolve('./admin')));
-app.use(express.static(path.resolve('./assets')));
+app.use('/assets', express.static(path.resolve('./assets')));
 
 
 /*

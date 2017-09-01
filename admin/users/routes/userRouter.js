@@ -25,13 +25,13 @@ mimicTrading.config(['$stateProvider',function($stateProvider){
 		            insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
 		            files: [
 		                
-		                '/global/plugins/datatables/datatables.min.css', 
-                        '/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css',
-                        '/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css',
+		                '/assets/global/plugins/datatables/datatables.min.css', 
+                        '/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css',
+                        '/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css',
 
-                        '/global/plugins/datatables/datatables.all.min.js',
-                        '/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js',
-                        '/global/scripts/datatable.min.js',
+                        '/assets/global/plugins/datatables/datatables.all.min.js',
+                        '/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js',
+                        '/assets/global/scripts/datatable.min.js',
 		            ] 
 		        });
 		    }]
