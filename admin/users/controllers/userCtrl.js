@@ -1,25 +1,12 @@
 'use strict';
-mimicTrading.controller('userCtrl', ['$scope', '$state', 'RestSvr', 'loginSrv', '$rootScope', '$log','$timeout', 'Upload', 'marketTradedSvr','appSvr',
-	function($scope, $state, RestSvr, loginSrv, $rootScope, $log, $timeout, Upload, marketTradedSvr, appSvr){
+mimicTrading.controller('userCtrl', ['$scope', '$state', '$rootScope', 'Upload','appSvr',
+	function($scope, $state, $rootScope, Upload, appSvr){
 		
 		$scope.$on('$viewContentLoaded', function() {
 			/**
 			 * Initialize the jquery components when view contents loaded properly
 			 */
 			appSvr.init();
-		    
-		    /*
-		    	Market Traded values from service
-		    	only if state is new ie when we are on page for new trader info
-		     */
-		    // if($state.current.name === 'new'){
-		    // 	marketTradedSvr.getValue().then(function (response) {
-		    // 		$scope.marketTraded = response.records;
-		    // 	})
-		    // 	.catch(function (errors) {
-		    // 		App.alert({type: ('danger'), icon: ( 'warning'), message: errors.message, container: $rootScope.settings.tableContainer, place: 'prepend'});
-		    // 	});
-		    // }
 
 		    /**
 		     * only Intialize datatable if current state is users
@@ -28,14 +15,14 @@ mimicTrading.controller('userCtrl', ['$scope', '$state', 'RestSvr', 'loginSrv', 
 		    if($state.current.name === 'users'){
 			    // Intialize datatable
 			    TableAjax.init({
-			    	url: 'user/listing/2',
+			    	url: 'user/list',
 			    	columns: [
 		                { "data": "id", "orderable": false },
-		                { "data": "first_name" },
-		                { "data": "last_name" },
+		                { "data": "firstname" },
+		                { "data": "lastname" },
 		                { "data": "email" },
 		                { "data": "status" },
-		                { "data": "date_joined" },
+		                { "data": "created_date" },
 		                { "data": "action", "orderable": false }
 		            ]
 			    });

@@ -9,15 +9,15 @@ mimicTrading.config(['$stateProvider',function($stateProvider){
 	 * JUST Following D.R.Y (don't repeat yourself)
 	 * @type {Object}
 	 */
-	let traderResolver = {
-		trader: ['traderSvr', '$stateParams', (traderSvr, $stateParams) => traderSvr.getTraderById($stateParams.id)]
+	let userResolver = {
+		user: ['userSvr', '$stateParams', (userSvr, $stateParams) => userSvr.getUserById($stateParams.id)]
 	};
 	$stateProvider
 	.state('users',{
 		url: '/users',
 		controller: 'userCtrl',
 		templateUrl: 'users/views/userListing.html',
-		data: {pageTitle: 'Trader Management'},
+		data: {pageTitle: 'User Management'},
 		resolve: {
 		    deps: ['$ocLazyLoad', function($ocLazyLoad) {
 		        return $ocLazyLoad.load({
@@ -38,27 +38,27 @@ mimicTrading.config(['$stateProvider',function($stateProvider){
 		},
 		authenticate: true
 	})
-	.state('new',{
-		url: '/new',
+	.state('newUser',{
+		url: '/new-user',
 		controller: 'userCtrl',
 		templateUrl: 'users/views/new_user.html',
-		data: {pageTitle: 'Add New Trader'},
+		data: {pageTitle: 'Add New User'},
 		authenticate: true
 	})
-	.state('viewuser',{
-		url: '/view/:id',
+	.state('viewUser',{
+		url: '/view-user/:id',
 		controller: 'userViewCtrl',
 		templateUrl: 'users/views/view_user.html',
-		data: {pageTitle: 'Trader Detail'},
+		data: {pageTitle: 'User Detail'},
 		authenticate: true,
-		resolve: traderResolver
+		resolve: userResolver
 	})
-	.state('edituser',{
-		url: '/edit/:id',
+	.state('editUser',{
+		url: '/edit-user/:id',
 		controller: 'userEditCtrl',
 		templateUrl: 'users/views/edit_user.html',
-		data: {pageTitle: 'Update Trader Detail'},
+		data: {pageTitle: 'Update User Detail'},
 		authenticate: true,
-		resolve: traderResolver
+		resolve: userResolver
 	});
 }]);

@@ -1,6 +1,6 @@
 'use strict';
-mimicTrading.controller('userEditCtrl', ['$scope', '$state', 'RestSvr', 'loginSrv', '$rootScope', '$log','trader', 'Upload', 'marketTradedSvr','appSvr',
-	function($scope, $state, RestSvr, loginSrv, $rootScope, $log, trader, Upload, marketTradedSvr, appSvr){
+mimicTrading.controller('userEditCtrl', ['$scope', '$state','user', 'Upload','appSvr',
+	function($scope, $state, user, Upload, appSvr){
 		$scope.$on('$viewContentLoaded', function() {
 			/**
 			 * Initialize the jquery components when view contents loaded properly
@@ -8,20 +8,7 @@ mimicTrading.controller('userEditCtrl', ['$scope', '$state', 'RestSvr', 'loginSr
 			appSvr.init();
 		});
 
-		$scope.user = trader.user;
-
-		/**
-		* Market Traded values from service
-		* only if state is new ie when we are on page for new trader info
-		*/
-		
-		// marketTradedSvr.getValue()
-		// .then(function (response) {
-		// 	$scope.marketTraded = response.records;
-		// })
-		// .catch(function (errors) {
-		// 	App.alert({type: ('danger'), icon: ( 'warning'), message: errors.message, container: $rootScope.settings.tableContainer, place: 'prepend'});
-		// });
+		$scope.user = user.record;
 
 		/**
 		 * Check if form is valid and send the data to server
@@ -34,9 +21,6 @@ mimicTrading.controller('userEditCtrl', ['$scope', '$state', 'RestSvr', 'loginSr
 				App.scrollTop();
 				return;
 			}
-			// We need to manaually assign user type to user's scope
-			// for trader the value is 2 (trader -> 2)
-			_.assign($scope.user, {user_type: 2});
 
 			var user = {};
 			if( !angular.isObject($scope.user.profile_img) ){

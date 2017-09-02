@@ -42,6 +42,8 @@ module.exports = {
   		{ url: '/cms/view/:type', method: ctrls.cmsCtrl.view, type: 'GET' },
   		{ url: '/blog/add', mwear: uploadImage.any(), method: ctrls.blogCtrl.add, type: 'SPECIALPOST' },
   		{ url: '/blog/list', method: ctrls.blogCtrl.list, type: 'POST' },
-  		{ url: '/blog/view/:slug', method: ctrls.blogCtrl.view, type: 'GET' }
+  		{ url: '/blog/view/:slug', method: ctrls.blogCtrl.view, type: 'GET' },
+      	{ url: '/user/list', method: ctrls.userCtrl.list, type: 'POST' },
+      	{ url: '/user/view/:id', method: ctrls.userCtrl.view, type: 'GET' }
 	]
 };
