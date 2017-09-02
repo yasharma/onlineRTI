@@ -69,8 +69,8 @@ UserSchema 	= new Schema({
 	salt: { type: String }
 },{
     timestamps: {
-        createdAt: 'created',
-        updatedAt: 'updated'
+        createdAt: 'created_at',
+        updatedAt: 'updated_at'
     }
 });
 

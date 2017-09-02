@@ -11,7 +11,6 @@ exports.adminVendorList = [
 	"./assets/global/plugins/js.cookie.min.js",
 	"./assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js",
 	"./bower_components/angular/angular.min.js",
-	"./assets/global/plugins/angularjs/angular-sanitize.min.js",
 	"./assets/global/plugins/angularjs/angular-touch.min.js",
 	"./bower_components/angular-animate/angular-animate.min.js",
 	"./bower_components/angular-aria/angular-aria.min.js",
@@ -32,6 +31,9 @@ exports.adminVendorList = [
 	"./assets/layouts/layout3/scripts/demo.min.js",
 	"./assets/global/scripts/lodash.min.js",
 	"./bower_components/angular-ui-mask/dist/mask.min.js",
+	"./bower_components/textAngular/dist/textAngular-rangy.min.js",
+	"./bower_components/textAngular/dist/textAngular-sanitize.min.js",
+	"./bower_components/textAngular/dist/textAngular.min.js"
 ];
 
 /*
@@ -60,7 +62,8 @@ exports.adminVendorCSSListFirst = [
 	"./assets/global/plugins/simple-line-icons/simple-line-icons.min.css",
 	"./assets/global/plugins/bootstrap/css/bootstrap.min.css",
 	"./assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css",
-	"./bower_components/ladda/dist/ladda-themeless.min.css"
+	"./bower_components/ladda/dist/ladda-themeless.min.css",
+	"./bower_components/textAngular/dist/textAngular.css"
 	
 ];
 exports.adminVendorCSSListTwo = [

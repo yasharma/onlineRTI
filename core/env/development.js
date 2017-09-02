@@ -33,7 +33,7 @@ const config = {
    		'image/gif' : 'gif',
    		'image/bmp' : 'bmp',
    	},
-   	/*In case no property image found or upload */
+    blog_image_destination: 'assets/blog',
    	image_path: 'images/',
    	image_name: 'noimage.jpg',
    	fileLimits: {

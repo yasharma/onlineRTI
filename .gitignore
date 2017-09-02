@@ -11,6 +11,9 @@
 /build
 .env
 
+# images
+assets/blog/
+
 # misc
 .DS_Store
 .env.local

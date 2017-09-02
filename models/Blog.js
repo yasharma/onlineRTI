@@ -21,6 +21,9 @@ BlogSchema 	= new Schema({
 	title: {
 		type: String
 	},
+	type: {
+		type: String
+	},
 	description: {
 		type: String
 	},
@@ -29,7 +32,6 @@ BlogSchema 	= new Schema({
 	},
 	slug: {
 		type: String,
-		required: true,
 		lowercase: true,
     	trim: true,
     	unque: true
@@ -40,17 +42,18 @@ BlogSchema 	= new Schema({
     }
 },{
     timestamps: {
-        createdAt: 'created',
-        updatedAt: 'updated'
+        createdAt: 'created_at',
+        updatedAt: 'updated_at'
     }
 });
 
 /* Mongoose beforeSave Hook : To hash a password */
 BlogSchema.pre('save', function(next) {
     let blog = this;
-    if (this.isModified('slug') || this.isNew) {
+    
+    if (this.isModified('title') || this.isNew) {
     	//https://gist.github.com/bentruyman/1211400
-        blog.slug = blog.slug.toLowerCase().replace(/-+/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+        blog.slug = blog.title.toLowerCase().replace(/-+/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
         next();
     } else {
         return next();

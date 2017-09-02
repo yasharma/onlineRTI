@@ -39,7 +39,7 @@
                         <div class="form-group form-md-line-input" ng-class="{ 'has-error': updateCmsForm.description.$touched && updateCmsForm.description.$invalid || updateCmsForm.description.$invalid && updateCmsForm.$submitted }">
                             <label class="col-md-2 control-label" for="description">Description <span class="required">*</span></label>
                             <div class="col-md-10">
-                                <!-- <textarea rows="3" name="description" ng-model="user.description" class="form-control" id="description" placeholder="Enter your markets traded" ng-maxlength="255" required></textarea> -->
+                                
                                 <text-angular ng-required="true" ng-model="cms.description"></text-angular>
                                 <div ng-messages="updateCmsForm.description.$error"
                                     ng-show="updateCmsForm.description.$touched || updateCmsForm.$submitted">

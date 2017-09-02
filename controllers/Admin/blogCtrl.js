@@ -1,7 +1,7 @@
 'use strict';
 const path 	 	= require('path'),
 	async 	 	= require('async'),
-	lo 			= require('lodash'),
+	_ 			= require('lodash'),
 	mongoose 	= require('mongoose'),
 	Blog 	 	= require(path.resolve('./models/Blog')),
 	datatable 	= require(path.resolve('./core/lib/datatable')),
@@ -9,35 +9,46 @@ const path 	 	= require('path'),
   	paginate    = require(path.resolve('./core/lib/paginate'));
 
 exports.add = (req, res, next) => {
-	if(!req.body.title || !req.body.type) {
+	if(!req.body.title || !req.body.type ) {
 		res.status(422).json({
 			errors: {
-				message: 'Title and type is required', 
+				message: 'Title, type is required', 
 				success: false,
 			}	
 		});
 		return;
-	}	 
+	}
+	let reqData = req.body;
+	if(req.files.length > 0){
+		let image = {};
+		req.files.forEach((file) => {
+			image.name = file.filename;
+			image.original_name = file.originalname;
+			image.path = file.path;
+		});
+		
+		reqData.image = image;	
+	} else {
+		delete reqData.image
+	}
+	
+	
+	if( reqData._id ){
+		edit(reqData, res, next);
+	} else {
+		let blog = new Blog(reqData);
+		blog.save()
+		.then(result => res.json({success: true}))
+		.catch(error => res.json({errors: error}));	
+	}
     
-    let cms = new Blog(req.body);
-    cms.save()
-    .then(result => res.json({success: true}))
-    .catch(error => res.json({errors: error}));
 };
 
-exports.edit = (req, res, next) => {
-	if(!req.body._id) {
-		res.status(422).json({
-			errors: {
-				message: 'Title and type is required', 
-				success: false,
-			}	
-		});
-		return;
-	}	 
-    
-    
-    Blog.update({_id: req.body._id},{$set: { title: req.body.title, type: req.body.type, description: req.body.description }}, 
+function edit  (reqData, res, next)  {
+
+    Blog.update(
+    	{_id: reqData._id},
+    	{$set: reqData }, 
     	function (error, result) {
     		if(error){
     			res.json({errors: error});
@@ -48,47 +59,83 @@ exports.edit = (req, res, next) => {
 };
 
 exports.view = (req, res, next) => {
-	if(!req.params.type) {
+	if(!req.params.slug) {
 		res.status(422).json({
 			errors: {
-				message: 'Type is required', 
+				message: 'Slug is required', 
 				success: false,
 			}	
 		});
 		return;
 	}	 
     
-    
-    Blog.findOne({type: req.params.type}, 
-    	function (error, result) {
-    		if(error){
-    			res.json({errors: error});
+    Blog.aggregate([
+    	{
+    		$match: { slug: req.params.slug }
+    	},
+    	{
+    		$project: {
+    			short_description: 1,
+    			description: 1,
+    			title: 1,
+    			slug: 1,
+    			image: "$image.path",
+    			created_at: 1,
+    			status: 1,
+    			type: 1
     		}
-    		res.json({success: true, result: result});
     	}
-    );
+    ], 
+	function (error, result) {
+		if(error){
+			res.json({errors: error});
+		}
+		res.json({success: true, result: result[0]});
+	});
 };
 
 exports.list = (req, res, next) => {
-	console.log(req.body);
-	let operation = {};
-	if( req.body.title ){
-		operation.title = {$regex: new RegExp(`${req.body.title}`), $options:"im"};
+	
+	let operation = {}, reqData = req.body;
+	if( reqData.title ){
+		operation.title = {$regex: new RegExp(`${reqData.title}`), $options:"im"};
 	}
-	if( req.body.type ){
-		operation.type = {$regex: new RegExp(`${req.body.type}`), $options:"im"};
+	if( reqData.type ){
+		operation.type = {$regex: new RegExp(`${reqData.type}`), $options:"im"};
 	}
-	if( req.body.status ){
-		operation.status = req.body.status;
+	if( reqData.slug ){
+		operation.slug = {$regex: new RegExp(`${reqData.slug}`), $options:"im"};
 	}
-	async.parallel({
-		count: (done) => {
-			Blog.count(done);
+	if( reqData.status === "true" || reqData.status === "false" ){
+		operation.status = reqData.status == "true" ? true : false;
+	}
+	
+	async.waterfall([
+		function (done) {
+			if( reqData.customActionType === 'group_action' ) {
+				let _ids = _.map(reqData.id, mongoose.Types.ObjectId);
+				if( reqData.customActionName === 'inactive' || reqData.customActionName === 'active' ){
+					let _status =  ( reqData.customActionName === 'inactive' ) ? false : true;
+					Blog.update({_id: {$in:_ids}},{$set:{status: _status}}, done);	
+				} else if(reqData.customActionName === 'delete') {
+					Blog.remove({_id: {$in:_ids}}, done);	
+				}	
+				
+			} else {
+				done(null, null);
+			}
 		},
-		records: (done) => {
-			Blog.find(operation,done);	
+		function (data, done) {
+			async.parallel({
+				count: (done) => {
+					Blog.count(done);
+				},
+				records: (done) => {
+					Blog.find(operation,done);	
+				}
+			}, done);	
 		}
-	}, (err, result) => {
+	], (err, result) => {
 		if(err){
 			return res.json({errors: err});
 		}
@@ -103,7 +150,7 @@ exports.list = (req, res, next) => {
 			}
 		};
 		
-		let dataTableObj = datatable.table(status_list, result.count, result.records, req.body.draw);
+		let dataTableObj = datatable.blogTable(status_list, result.count, result.records, reqData.draw);
 		res.json(dataTableObj);
 	});
 };

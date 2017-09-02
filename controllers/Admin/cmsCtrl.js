@@ -71,25 +71,38 @@ exports.view = (req, res, next) => {
 
 exports.list = (req, res, next) => {
 	
-	let operation = {};
-	if( req.body.title ){
-		operation.title = {$regex: new RegExp(`${req.body.title}`), $options:"im"};
+	let operation = {}, reqData = req.body;
+	if( reqData.title ){
+		operation.title = {$regex: new RegExp(`${reqData.title}`), $options:"im"};
 	}
-	if( req.body.type ){
-		operation.type = {$regex: new RegExp(`${req.body.type}`), $options:"im"};
+	if( reqData.type ){
+		operation.type = {$regex: new RegExp(`${reqData.type}`), $options:"im"};
 	}
-	if( req.body.status === "true" || req.body.status === "false" ){
-		operation.status = req.body.status == "true" ? true : false;
+	if( reqData.status === "true" || reqData.status === "false" ){
+		operation.status = reqData.status == "true" ? true : false;
 	}
-	console.log(operation);
-	async.parallel({
-		count: (done) => {
-			CMS.count(done);
+	
+	async.waterfall([
+		function (done) {
+			if( reqData.customActionType === 'group_action' ) {
+				let _ids = _.map(reqData.id, mongoose.Types.ObjectId);
+				let _status =  ( reqData.customActionName === 'inactive' ) ? false : true;
+				CMS.update({_id: {$in:_ids}},{$set:{status: _status}}, done);
+			} else {
+				done(null, null);
+			}
 		},
-		records: (done) => {
-			CMS.find(operation,done);	
+		function (data, done) {
+			async.parallel({
+				count: (done) => {
+					CMS.count(done);
+				},
+				records: (done) => {
+					CMS.find(operation,done);	
+				}
+			}, done);	
 		}
-	}, (err, result) => {
+	], (err, result) => {
 		if(err){
 			return res.json({errors: err});
 		}
@@ -104,7 +117,7 @@ exports.list = (req, res, next) => {
 			}
 		};
 		
-		let dataTableObj = datatable.table(status_list, result.count, result.records, req.body.draw);
+		let dataTableObj = datatable.cmsTable(status_list, result.count, result.records, reqData.draw);
 		res.json(dataTableObj);
 	});
 };
