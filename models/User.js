@@ -66,7 +66,9 @@ UserSchema 	= new Schema({
 		type: Boolean,
 		default: false
 	},
-	salt: { type: String }
+	salt: { type: String },
+	lastLoggedIn: { type: Date },
+	ip: { type: String }
 },{
     timestamps: {
         createdAt: 'created_at',

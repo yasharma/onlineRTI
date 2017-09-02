@@ -6,7 +6,10 @@ import FieldGroup from '../FieldGroup';
 import {FormErrors} from '../FormErrors';
 import Http from '../../lib/Http';
 import Message from '../Message';
-
+// import LogoutButton from '../Login/logout';
+// const LogoutButton = withRouter(({ history }) => (
+//   <button onClick={() =>  history.push('/') }>Sign out</button>
+// );
 class Header extends React.Component {
 	constructor () { 
 		super();
@@ -23,10 +26,17 @@ class Header extends React.Component {
 			emailValid: false,
 			passwordValid: false,
 			formValid: false,
-			passwordMatch: false
-		};	
-	}
+			passwordMatch: false,
+			isLoggedIn: false
+		};
 
+		
+	}
+	componentWillMount() {
+		if( localStorage.getItem('prod.token') ) {
+			this.setState({ isLoggedIn: true});
+		}
+	}
 	close (modal) {
 		this.setState({
 			email: '',
@@ -44,6 +54,13 @@ class Header extends React.Component {
 			this.setState({ showSuccessModal: false });
 		}
 	}
+	logout () {
+		this.setState({isLoggedIn: false});
+		localStorage.removeItem('prod.user');
+		localStorage.removeItem('prod.token');
+		//history.push('/');
+		// this.props.router.push('/');
+	}
 
 	login(event) {
 		event.preventDefault();
@@ -54,8 +71,10 @@ class Header extends React.Component {
 		this.setState({isProcessing: true});
 		Http.post('login', user)
 		.then(response => {
-			this.setState({serverValidationErrorMessage: ''});
-			console.log(response);
+			this.setState({serverValidationErrorMessage: '', isLoggedIn: true});
+			localStorage.setItem('prod.user', response.records.user);
+			localStorage.setItem('prod.token', response.records.token);
+			this.close('login');	
 		})
 		.catch(error => {
 			if( error.errors ){
@@ -153,6 +172,13 @@ class Header extends React.Component {
 	}
 
 	render() {
+		let button = null;
+	    if (this.state.isLoggedIn) {
+	      button = <NavItem onClick={() => this.logout()} eventKey={1}>Logout</NavItem>;
+	      // button = <LogoutButton />;
+	    } else {
+	      button = <NavItem onClick={() => this.open('login')} eventKey={1}>Login</NavItem>;
+	    }
 		return (
 			<header>
 				<Navbar fluid collapseOnSelect>
@@ -181,7 +207,9 @@ class Header extends React.Component {
 					<LinkContainer to="/apply-now">
 						<NavItem eventKey={1}>Apply Now</NavItem>
 					</LinkContainer>
-					<NavItem onClick={() => this.open('login')} eventKey={1}>Login</NavItem>
+					
+					{button}
+
 				</div>
 				{/* ================================================================================ */}
 				{/* ================================LOGIN=========================================== */}

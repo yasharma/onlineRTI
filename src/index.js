@@ -19,7 +19,7 @@ import './assets/css/fonts/fonts.css';
 import './assets/css/custom.css';
 import './assets/css/responsive.css';
 
-import registerServiceWorker from './registerServiceWorker';
+//import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
 	<Router>
