@@ -3,7 +3,10 @@ const config = {
   db: {
     URL: 'mongodb://localhost/rtiguru',
     DEBUG: false,
-    autoIndex: false
+    autoIndex: false,
+    options: {
+      useMongoClient: true
+    }
   },
   server: {
     host: 'http://rtiguru.com:8080',

@@ -44,8 +44,8 @@ exports.add = (req, res, next) => {
     
 };
 
-function edit  (reqData, res, next)  {
-
+function edit (reqData, res, next)  {
+	reqData.slug = Blog.generateSlug(reqData);
     Blog.update(
     	{_id: reqData._id},
     	{$set: reqData }, 

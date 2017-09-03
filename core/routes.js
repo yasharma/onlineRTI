@@ -21,6 +21,7 @@ router.use(expressJWT({
 		'/favicon.ico',
 		'/api/register',
 		'/api/login',
+		/^\/api\/blog\/.*/,
 		/^\/api\/verify_email\/.*/,
 		/^\/reset\/.*/
 	]
@@ -30,20 +31,26 @@ router.use(expressJWT({
 * eg. /login
 */
 userRoutes.routes.forEach(x => {
-	router[x.type](x.url, x.method);	
-	// switch(x.type){
+	
+	switch(x.type){
+		case 'get':
+		case 'put':
+		case 'post':
+		case 'delete':
+		router[x.type](x.url, x.method);	
+		break;
 
-	// 	case 'SPECIALPUT': // Special Type of Routes which hold files
-	// 	router.put(x.url, x.mwear, x.method);
-	// 	break;
+		case 'SPECIALPUT': // Special Type of Routes which hold files
+		router.put(x.url, x.mwear, x.method);
+		break;
 
-	// 	case 'SPECIALPOST': // Special Type of Routes which hold files
-	// 	router.post(x.url, x.mwear, x.method);
-	// 	break;
+		case 'SPECIALPOST': // Special Type of Routes which hold files
+		router.post(x.url, x.mwear, x.method);
+		break;
 
-	// 	default:
-	// 	throw new Error('Invalid method type');
-	// }
+		default:
+		throw new Error('Invalid method type');
+	}
 	
 });
 
@@ -67,28 +74,15 @@ admin.use(expressJWT({
 /*Admin Routes*/
 adminRoutes.routes.forEach(function (x) {
 	switch(x.type){
-		case 'GET':
-		admin.get(x.url, x.method);	
-		break;
-
-		case 'POST':
-		admin.post(x.url, x.method);	
-		break;
-
-		case 'PUT':
-		admin.put(x.url, x.method);	
-		break;
-
-		case 'DELETE':
-		admin.delete(x.url, x.method);	
-		break;
-
-		case 'SPECIALPUT': // Special Type of Routes which hold files
-		admin.put(x.url, x.mwear, x.method);
-		break;
-
-		case 'SPECIALPOST': // Special Type of Routes which hold files
-		admin.post(x.url, x.mwear, x.method);
+		case 'get':
+		case 'put':
+		case 'post':
+		case 'delete':
+			if(x.hasOwnProperty('mwear')){
+				admin[x.type](x.url, x.mwear, x.method);	
+			} else {
+				admin[x.type](x.url, x.method);
+			}
 		break;
 
 		default:

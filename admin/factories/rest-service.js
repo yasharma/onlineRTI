@@ -11,7 +11,6 @@ mimicTrading.factory('RestSvr', ['$http', '$window', '$httpParamSerializerJQLike
 				};
 				return $q((resolve, reject) => {
 					$http(req).then(response => {
-						console.log(response);
 						resolve({
 							result: response.data.message, 
 							user: response.data.user,

@@ -19,7 +19,7 @@ var TableAjax = function () {
                 // execute some code after table records loaded
                 setTimeout(function() { $('.tooltips').tooltip(); }, 1000);
             },
-            onError: function (grid) {
+            onError: function (grid, err) {
                 // execute some code on network or other general error  
             },
             loadingMessage: 'Loading...',
@@ -42,6 +42,29 @@ var TableAjax = function () {
                     "url": baseUrl(options.url), // ajax source
                     "headers": {
                         "Authorization": "Bearer " + JSON.parse(prefix('token'))
+                    },
+                    "error": function (err) {
+                        
+                        var message = "Could not complete request. Please check your internet connection";
+                        App.unblockUI(grid.gettableContainer());
+                        if( err.status === 401  ) {
+                            if( err.responseJSON.errors.code === "invalid_token" ) {
+                                var $body = angular.element(document.body);            
+                                var $rootScope = $body.injector().get('$rootScope');
+                                message = "Your Session has been expired, please login again to continue.";
+                                setTimeout(function () {
+                                    $rootScope.clearToken();    
+                                }, 1500);
+                            }
+                        }
+
+                        App.alert({
+                            type: 'danger',
+                            icon: 'warning',
+                            message: message,
+                            container: grid.getTableWrapper(),
+                            place: 'prepend'
+                        });
                     }
                 },
                 "columns": options.columns

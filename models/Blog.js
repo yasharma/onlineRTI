@@ -52,13 +52,17 @@ BlogSchema.pre('save', function(next) {
     let blog = this;
     
     if (this.isModified('title') || this.isNew) {
-    	//https://gist.github.com/bentruyman/1211400
-        blog.slug = blog.title.toLowerCase().replace(/-+/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+        blog.slug = this.constructor.generateSlug(blog);
         next();
     } else {
         return next();
     }
 });
+
+BlogSchema.statics.generateSlug = function (blog) {
+	//https://gist.github.com/bentruyman/1211400
+	return blog.title.toLowerCase().replace(/-+/g, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+}
 
 BlogSchema.set('autoIndex', config.db.autoIndex);
 BlogSchema.plugin(uniqueValidator, {

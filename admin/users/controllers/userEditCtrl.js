@@ -23,17 +23,18 @@ mimicTrading.controller('userEditCtrl', ['$scope', '$state','user', 'Upload','ap
 			}
 
 			var user = {};
-			if( !angular.isObject($scope.user.profile_img) ){
+			if( !angular.isObject($scope.user.profile_image) ){
 				angular.copy($scope.user, user);
-				delete user.profile_img;
+				delete user.profile_image;
 			} else {
 				user = $scope.user;
 			}
 			
 			$scope.isLoading = true;
 			Upload.upload({
-				url: baseUrl('user/edit/' + user.id),
-				data: user
+				url: baseUrl(`user/edit/${user._id}`),
+				data: user,
+				method: 'PUT'
 			})
 			.then(function (response) {
 				$state.go('users');

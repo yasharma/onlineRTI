@@ -17,7 +17,16 @@ exports.add = (req, res, next) => {
 };
 
 exports.edit = (req, res, next) => {
-    User.update({_id: req.body._id},{$set: req.body}, 
+	if(!req.params.id) {
+		res.status(422).json({
+			errors: {
+				message: 'id is required', 
+				success: false,
+			}	
+		});
+		return;
+	}
+    User.update({_id: req.params.id},{$set: req.body}, 
     	function (error, result) {
     		if(error){
     			res.json({errors: error});
@@ -51,7 +60,7 @@ exports.view = (req, res, next) => {
 
 exports.list = (req, res, next) => {
 	
-	let operation = {}, reqData = req.body;
+	let operation = { role: "user" }, reqData = req.body;
 	if( reqData.email ){
 		operation.email = {$regex: new RegExp(`${reqData.email}`), $options:"im"};
 	}
@@ -61,10 +70,9 @@ exports.list = (req, res, next) => {
 	if( reqData.lastname ){
 		operation.lastname = {$regex: new RegExp(`${reqData.lastname}`), $options:"im"};
 	}
-	if( reqData.status === "true" || reqData.status === "false" ){
-		operation.status = reqData.status == "true" ? true : false;
+	if( reqData.status === "active" || reqData.status === "inactive" ){
+		operation.status = reqData.status == "active" ? true : false;
 	}
-	
 	async.waterfall([
 		function (done) {
 			if( reqData.customActionType === 'group_action' ) {

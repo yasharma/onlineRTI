@@ -3,7 +3,10 @@ const config = {
 	db: {
 		URL: 'mongodb://localhost/onlinerti',
 		DEBUG: true,
-		autoIndex: true
+		autoIndex: true,
+    options: {
+      useMongoClient: true
+    }
 	},
 	server: {
     host: 'http://localhost',

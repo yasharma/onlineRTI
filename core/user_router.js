@@ -7,7 +7,7 @@ fs 			= require('fs');
 /* Require All the controllers */
 let ctrls = {};
 fs.readdirSync(path.resolve('./controllers/User')).forEach(file => {
-	let name = file.substr(0,file.indexOf('.'));
+	let name = file.substr(0,file.indexOf('.js'));
 	ctrls[name] = require(path.resolve(`./controllers/User/${name}`));
 });
 
@@ -17,5 +17,6 @@ module.exports = {
   		{ url: '/register', method: ctrls.userCtrl.register, type: 'post' },
   		{ url: '/login', method: ctrls.userCtrl.login, type: 'post' },
   		{ url: '/verify_email/:salt', method: ctrls.userCtrl.verifyEmail, type: 'get' },
+  		{ url: '/blog/list/:type', method: ctrls.blogCtrl.list, type: 'get' },
 	]
 };

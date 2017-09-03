@@ -27,14 +27,17 @@ mimicTrading.config(['$httpProvider', function($httpProvider){
 
             // Revoke client authentication if 400 is received
             responseError: function (rejection) {
+                
                 if( 'onLine' in navigator ){
                     if( !navigator.onLine ){
                         $rootScope.$broadcast('server_error',{message:'ERR_INTERNET_DISCONNECTED'});
                         return;    
                     }
                 }
+                
+
                 if(rejection.status === 401) {
-                    if(rejection.data.detail === 'Invalid token.') {
+                    if(rejection.data.errors.code === "invalid_token") {
                         $rootScope.$broadcast('server_error',{message:'Your Session has been expired, please login again to continue.', status_code: 401});
                         return;
                     }
@@ -86,6 +89,7 @@ mimicTrading.config(['$httpProvider', function($httpProvider){
 
 		$rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
             $rootScope.isPageLoading = true; 
+            $rootScope.server_error_message = '';
             if (toState.authenticate && !loginSrv.isLogged && !localStorageService.get('admin')){
                 loginSrv.isLogged = false;
                 $state.go("login");
@@ -129,7 +133,6 @@ mimicTrading.config(['$httpProvider', function($httpProvider){
 
         // If any global error occured
         $rootScope.$on('server_error', function (event, res) {
-            
             if(res.status_code){
                 if(res.status_code === 401){
                     $rootScope.clearToken();

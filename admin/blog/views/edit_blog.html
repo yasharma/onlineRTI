@@ -38,7 +38,7 @@
                         <div class="form-group form-md-line-input" ng-class="{ 'has-error': editBlogForm.short_description.$touched && editBlogForm.short_description.$invalid || editBlogForm.short_description.$invalid && editBlogForm.$submitted }">
                             <label class="col-md-2 control-label" for="short_description">Short Description <span class="required">*</span></label>
                             <div class="col-md-10">
-                                <textarea rows="3" name="short_description" ng-model="blog.short_description" class="form-control" id="short_description" placeholder="Enter your short description" ng-maxlength="255" required></textarea>
+                                <textarea rows="4" name="short_description" ng-model="blog.short_description" class="form-control" id="short_description" placeholder="Enter your short description" required></textarea>
                                 <div ng-messages="editBlogForm.short_description.$error"
                                     ng-show="editBlogForm.short_description.$touched || editBlogForm.$submitted">
                                     <span class="help-block" ng-message="required">Short Description is required.</span>
