@@ -86,7 +86,7 @@ exports.list = (req, res, next) => {
 		function (data, done) {
 			async.parallel({
 				count: (done) => {
-					User.count(done);
+					User.count(operation,done);
 				},
 				records: (done) => {
 					User.find(operation,done);	

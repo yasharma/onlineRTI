@@ -18,23 +18,10 @@ class BlogListSlider extends React.Component {
 		.catch(error => console.log(error));
 	}
 	render () {
-		let slides = this.state.blogs;
-		
-		const blog_content = slides.map((blogValue, index) => {
-			return (
-				<div className="item" key={index}>
-					<div className="blogbox">
-						<img src={process.env.PUBLIC_URL + blogValue.image.path} alt={blogValue.title} />
-						<p className="italic-font">
-							{blogValue.short_description}
-						</p>
-					</div>
-				</div>
-			);
-		});
-		var settings = {
+		let slides = this.state.blogs,
+		settings = {
 			dots: false,
-			infinite: true,
+			infinite: false,
 			speed: 500,
 			slidesToShow: 3,
 			slidesToScroll: 3,
@@ -49,7 +36,23 @@ class BlogListSlider extends React.Component {
 		};
 		return (
 			<Slider {...settings}>
-				<div>{blog_content}</div>
+				{slides ?
+					slides.map((blogValue, index) => {
+						return (
+							<div className="item" key={index}>
+								<div className="blogbox">
+									<img src={process.env.PUBLIC_URL + blogValue.image.path} alt={blogValue.title} />
+									<p className="italic-font">
+										{blogValue.short_description}
+									</p>
+								</div>
+							</div>
+						);
+					})
+					: (
+						<div>Loading ...</div>
+					)
+				}
 			</Slider>
 		);
 	}

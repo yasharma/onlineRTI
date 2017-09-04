@@ -8,9 +8,9 @@ const BlogList = () => (
 		<div className="container">
 			<div className="main-head-black-mid">Our Recent Blog</div>
 			<div className="customer_slider customer_slider-second padding-top50">
-				<div className="our-recent-slider owl-theme">
+				
 					<BlogListSlider />
-				</div>
+				
 			</div>
 			<div className="left-turn"><img src={RightArrowIcon} alt="RightArrowIcon" /></div>
 			<div className="right-turn"><img src={LeftArrowIcon} alt="RightArrowIcon" /></div>

@@ -95,7 +95,7 @@ exports.list = (req, res, next) => {
 		function (data, done) {
 			async.parallel({
 				count: (done) => {
-					CMS.count(done);
+					CMS.count(operation,done);
 				},
 				records: (done) => {
 					CMS.find(operation,done);	
