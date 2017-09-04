@@ -6,40 +6,49 @@ import Faqs from '../components/Faq/Faq';
 import Applys from '../components/Apply/Apply';
 import Track from '../components/Track/Track';
 import NoMatch from '../components/NoMatch';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
+import UnauthenticatedRoute from "../components/UnauthenticatedRoute";
 
 const routes = [
 	{
 		path: '/',
 		exact: true,
-		component: Home
+		component: Home,
+		requiredLogin: false
 	},
 	{
 		path: '/onlineRTI', // this route is just for gh-pages
-		component: Home
+		component: Home,
+		requiredLogin: false
 	},
 	{
 		path: '/about-us',
-		component: Abouts
+		component: Abouts,
+		requiredLogin: false
 	},
 	{
 		path: '/contact-us',
-		component: Contacts
+		component: Contacts,
+		requiredLogin: false
 	},
 	{
 		path: '/faq',
-		component: Faqs
+		component: Faqs,
+		requiredLogin: false
 	},
 	{
 		path: '/track-us',
-		component: Track
+		component: Track,
+		requiredLogin: false
 	},
 	{
 		path: '/apply-now',
-		component: Applys
+		component: Applys,
+		requiredLogin: false
 	},
 	{
-		component: NoMatch
+		component: NoMatch,
+		requiredLogin: false
 	}
 ];
 
@@ -49,14 +58,16 @@ The <Switch> will iterate over its children elements (the routes) and
 only render the first one that matches the current pathname.
 */
 
-const Router = () => (
+const Router = ({childProps}) => (
 	<Switch>
 		{routes.map((route, index) => (
-			<Route 
+			<UnauthenticatedRoute 
 				key={index}
 				path={route.path}
-				exact={route.exact}
+				exact
+				requiredLogin={route.requiredLogin}
 				component={route.component}
+				props={childProps}
 			/>
 		))}
 	</Switch>

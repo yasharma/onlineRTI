@@ -1,15 +1,14 @@
 import React from 'react';
 import {Navbar, Nav, NavItem, Modal, Button, Form} from "react-bootstrap";
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import FieldGroup from '../FieldGroup';
 import {FormErrors} from '../FormErrors';
 import Http from '../../lib/Http';
 import Message from '../Message';
-// import LogoutButton from '../Login/logout';
-// const LogoutButton = withRouter(({ history }) => (
-//   <button onClick={() =>  history.push('/') }>Sign out</button>
-// );
+import Router from '../../router';
+import Auth from '../../lib/Auth';
+
 class Header extends React.Component {
 	constructor () { 
 		super();
@@ -27,15 +26,19 @@ class Header extends React.Component {
 			passwordValid: false,
 			formValid: false,
 			passwordMatch: false,
-			isLoggedIn: false
+			isLoggedIn: false,
+			isAuthenticated: false,
+      		isAuthenticating: true
 		};
 
 		
 	}
 	componentWillMount() {
-		if( localStorage.getItem('prod.token') ) {
-			this.setState({ isLoggedIn: true});
+		if(Auth.isUserLogged()){
+		  this.userHasAuthenticated(true);
+		  this.setState({ isLoggedIn: true});
 		}
+		this.setState({ isAuthenticating: false });
 	}
 	close (modal) {
 		this.setState({
@@ -56,10 +59,9 @@ class Header extends React.Component {
 	}
 	logout () {
 		this.setState({isLoggedIn: false});
-		localStorage.removeItem('prod.user');
-		localStorage.removeItem('prod.token');
-		//history.push('/');
-		// this.props.router.push('/');
+		Auth.signOutUser();
+		this.userHasAuthenticated(false);
+    	this.props.history.push("/");
 	}
 
 	login(event) {
@@ -72,8 +74,9 @@ class Header extends React.Component {
 		Http.post('login', user)
 		.then(response => {
 			this.setState({serverValidationErrorMessage: '', isLoggedIn: true});
-			localStorage.setItem('prod.user', response.records.user);
-			localStorage.setItem('prod.token', response.records.token);
+			this.userHasAuthenticated(true);
+			Auth.saveUserSession(response.records);
+			this.props.history.push("/");
 			this.close('login');	
 		})
 		.catch(error => {
@@ -171,146 +174,159 @@ class Header extends React.Component {
 		}
 	}
 
+	userHasAuthenticated = authenticated => {
+    	this.setState({ isAuthenticated: authenticated });
+  	}
+
 	render() {
 		let button = null;
-	    if (this.state.isLoggedIn) {
+	    if (this.state.isAuthenticated) {
 	      button = <NavItem onClick={() => this.logout()} eventKey={1}>Logout</NavItem>;
 	      // button = <LogoutButton />;
 	    } else {
 	      button = <NavItem onClick={() => this.open('login')} eventKey={1}>Login</NavItem>;
 	    }
+	    const childProps = {
+	      isAuthenticated: this.state.isAuthenticated,
+	      userHasAuthenticated: this.userHasAuthenticated
+	    };
 		return (
-			<header>
-				<Navbar fluid collapseOnSelect>
-					<Navbar.Header>
-						<Navbar.Brand>
-							<Link to="/">online <span>RTI</span></Link>
-						</Navbar.Brand>
-					  	<Navbar.Toggle />
-					</Navbar.Header>
-					<Navbar.Collapse>
-						<Nav>
-							<LinkContainer to="/about-us">
-								<NavItem eventKey={1}>About</NavItem>
-							</LinkContainer>
-							<NavItem eventKey={2}>My RTis</NavItem>
-							<NavItem eventKey={2}>Pricing</NavItem>
-							<NavItem eventKey={2}>Teams</NavItem>
-							<LinkContainer to="/contact-us">
-								<NavItem eventKey={2}>Contact</NavItem>
-							</LinkContainer>	
-						</Nav>
-						
-					</Navbar.Collapse>
-				</Navbar>
-				<div className="header-right-menu">
-					<LinkContainer to="/apply-now">
-						<NavItem eventKey={1}>Apply Now</NavItem>
-					</LinkContainer>
+			!this.state.isAuthenticating &&
+			<div>
+				<header>
+					<Navbar fluid collapseOnSelect>
+						<Navbar.Header>
+							<Navbar.Brand>
+								<Link to="/">online <span>RTI</span></Link>
+							</Navbar.Brand>
+						  	<Navbar.Toggle />
+						</Navbar.Header>
+						<Navbar.Collapse>
+							<Nav>
+								<LinkContainer to="/about-us">
+									<NavItem eventKey={1}>About</NavItem>
+								</LinkContainer>
+								<NavItem eventKey={2}>My RTis</NavItem>
+								<NavItem eventKey={2}>Pricing</NavItem>
+								<NavItem eventKey={2}>Teams</NavItem>
+								<LinkContainer to="/contact-us">
+									<NavItem eventKey={2}>Contact</NavItem>
+								</LinkContainer>	
+							</Nav>
+							
+						</Navbar.Collapse>
+					</Navbar>
 					
-					{button}
+					<div className="header-right-menu">
+						<LinkContainer to="/apply-now">
+							<NavItem eventKey={1}>Apply Now</NavItem>
+						</LinkContainer>
+						
+						{button}
 
-				</div>
-				{/* ================================================================================ */}
-				{/* ================================LOGIN=========================================== */}
-				{/* ================================================================================ */}
-				<Modal className="login-popup" show={this.state.showLoginModal} onHide={() => this.close('login')}>
-			    	<Modal.Header closeButton>
-			        	<Modal.Title>Login</Modal.Title>
-			        </Modal.Header>
-			        <Form onSubmit={(e) => this.login(e)}>
+					</div>
+					{/* ================================================================================ */}
+					{/* ================================LOGIN=========================================== */}
+					{/* ================================================================================ */}
+					<Modal className="login-popup" show={this.state.showLoginModal} onHide={() => this.close('login')}>
+				    	<Modal.Header closeButton>
+				        	<Modal.Title>Login</Modal.Title>
+				        </Modal.Header>
+				        <Form onSubmit={(e) => this.login(e)}>
+					        <Modal.Body>
+					        	<Message className="danger" text={this.state.serverValidationErrorMessage} />
+					            <FieldGroup
+									id="Email"
+									type="email"
+									label="Email address"
+									name="email"
+									value={this.state.email}
+									onChange={(e) => this.handleUserInput(e)}
+									placeholder="Enter email"
+								/>
+								<FieldGroup
+									id="Password"
+									type="password"
+									label="Password"
+									name="password"
+									value={this.state.password}
+									onChange={(e) => this.handleUserInput(e)}
+									placeholder="Enter password"
+								/>
+								<a className="forgotLink">Forgot Password</a>
+					        </Modal.Body>
+					        <Modal.Footer>
+					        	<Button bsStyle="primary" type="submit" className="btn-info btn-block" disabled={this.state.isProcessing}>{this.state.isProcessing ? 'Processing...' : 'Login'}</Button>
+					        	<p><a className="loginLink" onClick={() => this.open('signup')}>Don't have an account?</a></p>
+					        </Modal.Footer>
+					    </Form>    
+				    </Modal>
+				    
+				    {/* ================================================================================ */}
+					{/* ================================SIGNUP========================================== */}
+					{/* ================================================================================ */}
+					<Modal className="login-popup" show={this.state.showSignupModal} onHide={() => this.close('signup')}>
+				    	<Modal.Header closeButton>
+				        	<Modal.Title>SignUp</Modal.Title>
+				        </Modal.Header>
+				        <Form onSubmit={(e) => this.signup(e)}>
+					        <Modal.Body>
+					        	<FormErrors formErrors={this.state.formErrors} />
+					        	<Message className="danger" text={this.state.serverValidationErrorMessage} />
+					            <FieldGroup
+									id="Email"
+									type="email"
+									label="Email address"
+									name="email"
+									validationState={this.errorClass(this.state.formErrors.email)}
+									value={this.state.email}
+									onChange={(e) => this.handleUserInput(e)}
+									placeholder="Enter email"
+								/>
+								<FieldGroup
+									id="Password"
+									type="password"
+									label="Password"
+									name="password"
+									validationState={this.errorClass(this.state.formErrors.password)}
+									value={this.state.password}
+									onChange={(e) => this.handleUserInput(e)}
+									placeholder="Enter password"
+								/>
+								<FieldGroup
+									id="ConfirmPassword"
+									type="password"
+									label="Confirm Password"
+									name="confirm_password"
+									validationState={this.errorClass(this.state.formErrors.confirm_password)}
+									value={this.state.confirm_password}
+									onChange={(e) => this.handleUserInput(e)}
+									placeholder="Enter password again"
+								/>
+					        </Modal.Body>
+					        <Modal.Footer>
+					        	<Button bsStyle="primary" type="submit" className="btn-info btn-block" disabled={!this.state.formValid || this.state.isProcessing}>{this.state.isProcessing ? 'Processing...' : 'SignUp'}</Button>
+					        	<p><a className="loginLink" onClick={() => this.open('login')}>Already have an account?</a></p>
+					        </Modal.Footer>
+					    </Form>    
+				    </Modal>
+
+					{/* ================================================================================ */}
+					{/* ================================SUCCESSFULL SIGNUP============================== */}
+					{/* ================================================================================ */}
+					<Modal show={this.state.showSuccessModal} onHide={() => this.close('success')}>
+						<Modal.Header closeButton>
+					    	<Modal.Title>Confirm</Modal.Title>
+					    </Modal.Header>
 				        <Modal.Body>
-				        	<Message className="danger" text={this.state.serverValidationErrorMessage} />
-				            <FieldGroup
-								id="Email"
-								type="email"
-								label="Email address"
-								name="email"
-								value={this.state.email}
-								onChange={(e) => this.handleUserInput(e)}
-								placeholder="Enter email"
-							/>
-							<FieldGroup
-								id="Password"
-								type="password"
-								label="Password"
-								name="password"
-								value={this.state.password}
-								onChange={(e) => this.handleUserInput(e)}
-								placeholder="Enter password"
-							/>
-							<a className="forgotLink">Forgot Password</a>
+				        	<p>Your account has been registered successfully!!</p><br />
+				        	<p>Kindly check your inbox/spam and verify your email address.</p>
 				        </Modal.Body>
-				        <Modal.Footer>
-				        	<Button bsStyle="primary" type="submit" className="btn-info btn-block" disabled={this.state.isProcessing}>{this.state.isProcessing ? 'Processing...' : 'Login'}</Button>
-				        	<p><a className="loginLink" onClick={() => this.open('signup')}>Don't have an account?</a></p>
-				        </Modal.Footer>
-				    </Form>    
-			    </Modal>
-
-			    {/* ================================================================================ */}
-				{/* ================================SIGNUP========================================== */}
-				{/* ================================================================================ */}
-				<Modal className="login-popup" show={this.state.showSignupModal} onHide={() => this.close('signup')}>
-			    	<Modal.Header closeButton>
-			        	<Modal.Title>SignUp</Modal.Title>
-			        </Modal.Header>
-			        <Form onSubmit={(e) => this.signup(e)}>
-				        <Modal.Body>
-				        	<FormErrors formErrors={this.state.formErrors} />
-				        	<Message className="danger" text={this.state.serverValidationErrorMessage} />
-				            <FieldGroup
-								id="Email"
-								type="email"
-								label="Email address"
-								name="email"
-								validationState={this.errorClass(this.state.formErrors.email)}
-								value={this.state.email}
-								onChange={(e) => this.handleUserInput(e)}
-								placeholder="Enter email"
-							/>
-							<FieldGroup
-								id="Password"
-								type="password"
-								label="Password"
-								name="password"
-								validationState={this.errorClass(this.state.formErrors.password)}
-								value={this.state.password}
-								onChange={(e) => this.handleUserInput(e)}
-								placeholder="Enter password"
-							/>
-							<FieldGroup
-								id="ConfirmPassword"
-								type="password"
-								label="Confirm Password"
-								name="confirm_password"
-								validationState={this.errorClass(this.state.formErrors.confirm_password)}
-								value={this.state.confirm_password}
-								onChange={(e) => this.handleUserInput(e)}
-								placeholder="Enter password again"
-							/>
-				        </Modal.Body>
-				        <Modal.Footer>
-				        	<Button bsStyle="primary" type="submit" className="btn-info btn-block" disabled={!this.state.formValid || this.state.isProcessing}>{this.state.isProcessing ? 'Processing...' : 'SignUp'}</Button>
-				        	<p><a className="loginLink" onClick={() => this.open('login')}>Already have an account?</a></p>
-				        </Modal.Footer>
-				    </Form>    
-			    </Modal>
-
-				{/* ================================================================================ */}
-				{/* ================================SUCCESSFULL SIGNUP============================== */}
-				{/* ================================================================================ */}
-				<Modal show={this.state.showSuccessModal} onHide={() => this.close('success')}>
-					<Modal.Header closeButton>
-				    	<Modal.Title>Confirm</Modal.Title>
-				    </Modal.Header>
-			        <Modal.Body>
-			        	<p>Your account has been registered successfully!!</p><br />
-			        	<p>Kindly check your inbox/spam and verify your email address.</p>
-			        </Modal.Body>
-			    </Modal>
-			</header>    
+				    </Modal>
+				</header>
+				<Router childProps={childProps} />
+			</div>    
 		);
 	}	
 }	
-export default Header;
+export default withRouter(Header);
