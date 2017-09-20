@@ -4,11 +4,11 @@
         <div class="portlet light portlet-fit portlet-datatable bordered">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-database"></i> Manage Contents </div>
+                    <i class="fa fa-database"></i> Manage Testimonial </div>
                 <div class="actions">
-                    <a href ui-sref="newCms" class="btn btn-outline green hidden">
+                    <a href ui-sref="newTestimonial" class="btn btn-outline green">
                         <i class="fa fa-plus"></i>
-                        <span class="hidden-480"> Add New CMS Sections</span>
+                        <span class="hidden-480"> Add New Testimonial Sections</span>
                     </a>
                 </div>
             </div>
@@ -21,6 +21,7 @@
                             <option value="">Select...</option>
                             <option value="active">Active</option>
                             <option value="inactive">Inactive</option>
+                            <option value="delete">Delete</option>
                         </select>
                         <button class="btn btn-sm btn-outline green table-group-action-submit">
                             <i class="fa fa-check"></i> Submit</button>
@@ -34,8 +35,7 @@
                                         <span></span>
                                     </label>
                                 </th>
-                                <th width="10%"> Title </th>
-                                <th width="10%"> Type </th>
+                                <th width="10%"> Name </th>
                                 <th width="10%"> Status </th>
                                 <th width="15%"> Date </th>
                                 <th width="15%"> Actions </th>
@@ -43,11 +43,7 @@
                             <tr role="row" class="filter">
                                 <td> </td>
                                 <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="title"> 
-                                </td>
-                                
-                                <td>
-                                    <input type="text" class="form-control form-filter input-sm" name="type"> 
+                                    <input type="text" class="form-control form-filter input-sm" name="name"> 
                                 </td>
                                 <td>
                                     <!-- <input type="text" class="form-control form-filter input-sm" name="status">  -->

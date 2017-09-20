@@ -3,16 +3,16 @@ const path 	 	= require('path'),
 	async 	 	= require('async'),
 	_ 			= require('lodash'),
 	mongoose 	= require('mongoose'),
-	Blog 	 	= require(path.resolve('./models/Blog')),
+	Testimonial	= require(path.resolve('./models/Testimonial')),
 	datatable 	= require(path.resolve('./core/lib/datatable')),
   	config 		= require(path.resolve(`./core/env/${process.env.NODE_ENV}`)),
   	paginate    = require(path.resolve('./core/lib/paginate'));
 
 exports.add = (req, res, next) => {
-	if(!req.body.title || !req.body.type ) {
+	if(!req.body.name ) {
 		res.status(422).json({
 			errors: {
-				message: 'Title, type is required', 
+				message: 'Name is required', 
 				success: false,
 			}	
 		});
@@ -36,8 +36,8 @@ exports.add = (req, res, next) => {
 	if( reqData._id ){
 		edit(reqData, res, next);
 	} else {
-		let blog = new Blog(reqData);
-		blog.save()
+		let testimonial = new Testimonial(reqData);
+		testimonial.save()
 		.then(result => res.json({success: true}))
 		.catch(error => res.json({errors: error}));	
 	}
@@ -45,8 +45,8 @@ exports.add = (req, res, next) => {
 };
 
 function edit (reqData, res, next)  {
-	reqData.slug = Blog.generateSlug(reqData);
-    Blog.update(
+	
+    Testimonial.update(
     	{_id: reqData._id},
     	{$set: reqData }, 
     	function (error, result) {
@@ -59,31 +59,28 @@ function edit (reqData, res, next)  {
 };
 
 exports.view = (req, res, next) => {
-	if(!req.params.slug) {
+	if(!req.params.id) {
 		res.status(422).json({
 			errors: {
-				message: 'Slug is required', 
+				message: 'id is required', 
 				success: false,
 			}	
 		});
 		return;
 	}	 
     
-    Blog.aggregate([
+    Testimonial.aggregate([
     	{
-    		$match: { slug: req.params.slug }
+    		$match: { _id: mongoose.Types.ObjectId( req.params.id ) }
     	},
     	{
     		$project: {
-    			short_description: 1,
     			description: 1,
-    			title: 1,
-    			slug: 1,
+    			name: 1,
     			image: "$image.path",
     			created_at: 1,
     			updated_at: 1,
-    			status: 1,
-    			type: 1
+    			status: 1
     		}
     	}
     ], 
@@ -98,14 +95,8 @@ exports.view = (req, res, next) => {
 exports.list = (req, res, next) => {
 	
 	let operation = {}, reqData = req.body;
-	if( reqData.title ){
-		operation.title = {$regex: new RegExp(`${reqData.title}`), $options:"im"};
-	}
-	if( reqData.type ){
-		operation.type = {$regex: new RegExp(`${reqData.type}`), $options:"im"};
-	}
-	if( reqData.slug ){
-		operation.slug = {$regex: new RegExp(`${reqData.slug}`), $options:"im"};
+	if( reqData.name ){
+		operation.name = {$regex: new RegExp(`${reqData.name}`), $options:"im"};
 	}
 	if( reqData.status === "true" || reqData.status === "false" ){
 		operation.status = reqData.status == "true" ? true : false;
@@ -122,9 +113,9 @@ exports.list = (req, res, next) => {
 				
 				if( reqData.customActionName === 'inactive' || reqData.customActionName === 'active' ){
 					let _status =  ( reqData.customActionName === 'inactive' ) ? false : true;
-					Blog.update({_id: {$in:_ids}},{$set:{status: _status}},{multi:true}, done);	
+					Testimonial.update({_id: {$in:_ids}},{$set:{status: _status}},{multi:true}, done);	
 				} else if(reqData.customActionName === 'delete') {
-					Blog.remove({_id: {$in:_ids}}, done);	
+					Testimonial.remove({_id: {$in:_ids}}, done);	
 				}	
 				
 			} else {
@@ -134,10 +125,10 @@ exports.list = (req, res, next) => {
 		function (data, done) {
 			async.parallel({
 				count: (done) => {
-					Blog.count(operation,done);
+					Testimonial.count(operation,done);
 				},
 				records: (done) => {
-					Blog.find(operation,done);	
+					Testimonial.find(operation,done);	
 				}
 			}, done);	
 		}
@@ -156,7 +147,7 @@ exports.list = (req, res, next) => {
 			}
 		};
 		
-		let dataTableObj = datatable.blogTable(status_list, result.count, result.records, reqData.draw);
+		let dataTableObj = datatable.testimonialTable(status_list, result.count, result.records, reqData.draw);
 		res.json(dataTableObj);
 	});
 };

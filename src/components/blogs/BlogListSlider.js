@@ -1,8 +1,5 @@
 import React from 'react';
 import Slider from 'react-slick';
-// import Blog_1_Icon from '../../assets/images/blog1.png';
-// import Blog_2_Icon from '../../assets/images/blog2.png';
-// import Blog_3_Icon from '../../assets/images/blog3.png';
 import Http from '../../lib/Http';
 
 class BlogListSlider extends React.Component {

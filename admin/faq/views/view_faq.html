@@ -4,11 +4,11 @@
 		    <div class="portlet-title">
 		        <div class="caption">
 		            <i class="icon-equalizer font-green-haze"></i>
-		            <span class="caption-subject font-green-haze bold uppercase">View CMS Info - {{cms.title}}</span>
-		            <span class="caption-helper"><i>(last update on {{cms.updated_at | date: format : 'dd/m/y'}})</i></span>
+		            <span class="caption-subject font-green-haze bold uppercase">View FQA Info</span>
+		            <span class="caption-helper"><i>(last update on {{faq.updated_at | date: format : 'dd/m/y'}})</i></span>
 		        </div>
 		        <div class="tools">
-		            <button ui-sref="cms" class="btn default">Back</button>
+		            <button ui-sref="faq" class="btn default">Back</button>
 		        </div>
 		    </div>
 		    <div class="portlet-body form">
@@ -16,13 +16,13 @@
 		        <form class="form-horizontal" role="form">
 		            <div class="form-body">
 		                <!-- <h2 class="margin-bottom-20"> View User Info - Bob Nilson </h2> -->
-		                <h3 class="form-section">CMS Section Info</h3>
+		                <h3 class="form-section">FAQ Section Info</h3>
 		                <div class="row">
 		                    <div class="col-md-6">
 		                        <div class="form-group">
-		                            <label class="control-label col-md-3">Title:</label>
+		                            <label class="control-label col-md-3">Question:</label>
 		                            <div class="col-md-9">
-		                                <p class="form-control-static"> {{cms.title}} </p>
+		                                <p class="form-control-static"> {{faq.question}} </p>
 		                            </div>
 		                        </div>
 		                    </div>
@@ -31,7 +31,7 @@
 		                        <div class="form-group">
 		                            <label class="control-label col-md-3">Date:</label>
 		                            <div class="col-md-9">
-		                                <p class="form-control-static"> {{cms.created_at | date: format : 'dd/m/y'}}  </p>
+		                                <p class="form-control-static"> {{faq.created_at | date: format : 'dd/m/y'}}  </p>
 		                            </div>
 		                        </div>
 		                    </div>
@@ -41,9 +41,9 @@
 		                <div class="row">
 		                    <div class="col-md-6">
 		                        <div class="form-group">
-		                            <label class="control-label col-md-3">Description:</label>
+		                            <label class="control-label col-md-3">Answer:</label>
 		                            <div class="col-md-9">
-		                                <p class="form-control-static" ng-bind-html="cms.description">  </p>
+		                                <p class="form-control-static" >{{faq.answer}} </p>
 		                            </div>
 		                        </div>
 		                    </div>
@@ -53,7 +53,7 @@
 		                            <label class="control-label col-md-3">Status:</label>
 		                            <div class="col-md-9">
 		                                <p class="form-control-static"> 
-		                                	<status-label status="cms.status"></status-label>
+		                                	<status-label status="faq.status"></status-label>
 		                                </p>
 		                            </div>
 		                        </div>
@@ -68,7 +68,7 @@
 		                            <div class="col-md-offset-3 col-md-9">
 		                                <button type="button" ng-click="goToEdit()" class="btn green">
 		                                    <i class="fa fa-pencil"></i> Edit</button>
-		                                <a href ui-sref="cms" class="btn default">Back</a>
+		                                <a href ui-sref="faq" class="btn default">Back</a>
 		                            </div>
 		                        </div>
 		                    </div>

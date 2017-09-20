@@ -6,15 +6,15 @@ const
     config          = require(path.resolve(`./core/env/${process.env.NODE_ENV}`)),
     Schema          = mongoose.Schema,
 
-CMSSchema   = new Schema({
-    title: {
+FAQSchema   = new Schema({
+    question: {
         type: String,
     },
-    type: {
+    answer: {
         type: String,
     },
-    description: {
-        type: String
+    order: {
+        type: Number
     },
     status: {
         type: Boolean,
@@ -28,4 +28,4 @@ CMSSchema   = new Schema({
 });
 
 
-module.exports = mongoose.model('CMS', CMSSchema, 'cms');
+module.exports = mongoose.model('FAQ', FAQSchema, 'faq');

@@ -3,30 +3,41 @@ const path 	 	= require('path'),
 	async 	 	= require('async'),
 	_ 			= require('lodash'),
 	mongoose 	= require('mongoose'),
-	User 	 	= require(path.resolve('./models/User')),
+	FAQ 	 	= require(path.resolve('./models/FAQ')),
 	datatable 	= require(path.resolve('./core/lib/datatable')),
   	config 		= require(path.resolve(`./core/env/${process.env.NODE_ENV}`)),
   	paginate    = require(path.resolve('./core/lib/paginate'));
 
-exports.add = (req, res, next) => { 
+exports.add = (req, res, next) => {
+	if(!req.body.question && !req.body.answer) {
+		res.status(422).json({
+			errors: {
+				message: 'Question and Answer is required', 
+				success: false,
+			}	
+		});
+		return;
+	}	 
     
-    let user = new User(req.body);
-    user.save()
+    let faq = new FAQ(req.body);
+    faq.save()
     .then(result => res.json({success: true}))
     .catch(error => res.json({errors: error}));
 };
 
 exports.edit = (req, res, next) => {
-	if(!req.params.id) {
+	if(!req.body._id) {
 		res.status(422).json({
 			errors: {
-				message: 'id is required', 
+				message: 'Title and type is required', 
 				success: false,
 			}	
 		});
 		return;
-	}
-    User.update({_id: req.params.id},{$set: req.body}, 
+	}	 
+    
+    
+    FAQ.update({_id: req.body._id},{$set: req.body}, 
     	function (error, result) {
     		if(error){
     			res.json({errors: error});
@@ -48,7 +59,7 @@ exports.view = (req, res, next) => {
 	}	 
     
     
-    User.findOne({_id: req.params.id}, 
+    FAQ.findOne({_id: req.params.id}, 
     	function (error, result) {
     		if(error){
     			res.json({errors: error});
@@ -60,18 +71,15 @@ exports.view = (req, res, next) => {
 
 exports.list = (req, res, next) => {
 	
-	let operation = { role: "user" }, reqData = req.body;
-	if( reqData.email ){
-		operation.email = {$regex: new RegExp(`${reqData.email}`), $options:"im"};
+	let operation = {}, reqData = req.body;
+	if( reqData.title ){
+		operation.title = {$regex: new RegExp(`${reqData.title}`), $options:"im"};
 	}
-	if( reqData.firstname ){
-		operation.firstname = {$regex: new RegExp(`${reqData.firstname}`), $options:"im"};
+	if( reqData.order_no ){
+		operation.order = {$regex: new RegExp(`${reqData.order_no}`), $options:"im"};
 	}
-	if( reqData.lastname ){
-		operation.lastname = {$regex: new RegExp(`${reqData.lastname}`), $options:"im"};
-	}
-	if( reqData.status === "active" || reqData.status === "inactive" ){
-		operation.status = reqData.status == "active" ? true : false;
+	if( reqData.status === "true" || reqData.status === "false" ){
+		operation.status = reqData.status == "true" ? true : false;
 	}
 	if( reqData.from_date || reqData.to_date ) {
 		operation.created_at = {$gte: reqData.from_date, $lte: reqData.to_date };
@@ -81,7 +89,7 @@ exports.list = (req, res, next) => {
 			if( reqData.customActionType === 'group_action' ) {
 				let _ids = _.map(reqData.id, mongoose.Types.ObjectId);
 				let _status =  ( reqData.customActionName === 'inactive' ) ? false : true;
-				User.update({_id: {$in:_ids}},{$set:{status: _status}}, {multi: true},done);
+				FAQ.update({_id: {$in:_ids}},{$set:{status: _status}},{multi:true}, done);
 			} else {
 				done(null, null);
 			}
@@ -89,10 +97,10 @@ exports.list = (req, res, next) => {
 		function (data, done) {
 			async.parallel({
 				count: (done) => {
-					User.count(operation,done);
+					FAQ.count(operation,done);
 				},
 				records: (done) => {
-					User.find(operation,done);	
+					FAQ.find(operation,done);	
 				}
 			}, done);	
 		}
@@ -111,7 +119,7 @@ exports.list = (req, res, next) => {
 			}
 		};
 		
-		let dataTableObj = datatable.userTable(status_list, result.count, result.records, reqData.draw);
+		let dataTableObj = datatable.faqTable(status_list, result.count, result.records, reqData.draw);
 		res.json(dataTableObj);
 	});
 };

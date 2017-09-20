@@ -81,13 +81,15 @@ exports.list = (req, res, next) => {
 	if( reqData.status === "true" || reqData.status === "false" ){
 		operation.status = reqData.status == "true" ? true : false;
 	}
-	
+	if( reqData.from_date || reqData.to_date ) {
+		operation.created_at = {$gte: reqData.from_date, $lte: reqData.to_date };
+	}
 	async.waterfall([
 		function (done) {
 			if( reqData.customActionType === 'group_action' ) {
 				let _ids = _.map(reqData.id, mongoose.Types.ObjectId);
 				let _status =  ( reqData.customActionName === 'inactive' ) ? false : true;
-				CMS.update({_id: {$in:_ids}},{$set:{status: _status}}, done);
+				CMS.update({_id: {$in:_ids}},{$set:{status: _status}},{multi:true}, done);
 			} else {
 				done(null, null);
 			}

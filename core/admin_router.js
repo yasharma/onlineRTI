@@ -24,6 +24,18 @@ let uploadImage = multer({
     
 });
 
+let uploadTestimonialImage = multer({
+    limits: config.fileLimits,
+    storage: multer.diskStorage({
+    	destination: 'assets/testimonial/',
+    	filename: function (req, file, cb) {
+    		cb(null, Date.now() + '.' + config.file_extensions[file.mimetype]);
+  		}
+    }),
+    fileFilter: fileFilter
+    
+});
+
 let uploadProfileImage = multer({
     limits: config.fileLimits,
     storage: multer.diskStorage({
@@ -57,6 +69,13 @@ module.exports = {
   		{ url: '/blog/view/:slug', method: ctrls.blogCtrl.view, type: 'get' },
       	{ url: '/user/list', method: ctrls.userCtrl.list, type: 'post' },
       	{ url: '/user/view/:id', method: ctrls.userCtrl.view, type: 'get' },
-      	{ url: '/user/edit/:id', mwear: uploadProfileImage.any(), method: ctrls.userCtrl.edit, type: 'put' }
+      	{ url: '/user/edit/:id', mwear: uploadProfileImage.any(), method: ctrls.userCtrl.edit, type: 'put' },
+      	{ url: '/faq/add', method: ctrls.faqCtrl.add, type: 'post' },
+  		{ url: '/faq/list', method: ctrls.faqCtrl.list, type: 'post' },
+  		{ url: '/faq/edit', method: ctrls.faqCtrl.edit, type: 'put' },
+  		{ url: '/faq/view/:id', method: ctrls.faqCtrl.view, type: 'get' },
+  		{ url: '/testimonial/add', mwear: uploadTestimonialImage.any(), method: ctrls.testimonialCtrl.add, type: 'post' },
+  		{ url: '/testimonial/list', method: ctrls.testimonialCtrl.list, type: 'post' },
+  		{ url: '/testimonial/view/:id', method: ctrls.testimonialCtrl.view, type: 'get' },
 	]
 };

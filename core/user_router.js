@@ -18,5 +18,7 @@ module.exports = {
   		{ url: '/login', method: ctrls.userCtrl.login, type: 'post' },
   		{ url: '/verify_email/:salt', method: ctrls.userCtrl.verifyEmail, type: 'get' },
   		{ url: '/blog/list/:type', method: ctrls.blogCtrl.list, type: 'get' },
+  		{ url: '/faq/list', method: ctrls.faqCtrl.list, type: 'get' },
+  		{ url: '/testimonial/list', method: ctrls.testimonialCtrl.list, type: 'get' },
 	]
 };
