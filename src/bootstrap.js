@@ -3,7 +3,7 @@ import axios from 'axios';
 window.axios = axios;
 
 window.axios.defaults.headers.common = {'X-Requested-With': 'XMLHttpRequest'};
-window.axios.defaults.baseURL = (process.env.NODE_ENV !== 'production') ? 'http://www.rtiguru.com:9000/api/' : '/api/';
+window.axios.defaults.baseURL = 'http://www.rtiguru.com:9000/api/';
 
 // Global images url
 window.IMAGE_PATH = 'http://www.rtiguru.com:9000';
