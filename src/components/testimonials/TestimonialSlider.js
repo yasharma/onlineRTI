@@ -13,8 +13,8 @@ class TestimonialSlider extends React.Component {
 		}
 	}
 	componentDidMount() {
-		Http.get('testimonial/list')
-		.then(({records}) => this.setState({testimonials: records.result}))
+		Http.get('list-testimonials')
+		.then(({data}) => this.setState({testimonials: data}))
 		.catch(error => console.log(error));
 	}
 	render () {

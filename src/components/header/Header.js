@@ -206,6 +206,9 @@ class Header extends React.Component {
 								<LinkContainer to="/about-us">
 									<NavItem eventKey={1}>About</NavItem>
 								</LinkContainer>
+								<LinkContainer to="/blog">
+									<NavItem eventKey={1}>Blog</NavItem>
+								</LinkContainer>
 								<NavItem eventKey={2}>My RTis</NavItem>
 								<NavItem eventKey={2}>Pricing</NavItem>
 								<NavItem eventKey={2}>Teams</NavItem>

@@ -9,7 +9,7 @@ const config = {
     }
   },
   server: {
-    host: 'http://onlinerti.com:8080',
+    host: 'http://www.onlinerti.com',
     PORT: process.env.PORT || 9000
   },
   mail:{

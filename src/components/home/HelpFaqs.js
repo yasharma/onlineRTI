@@ -11,8 +11,8 @@ class HelpFaqs extends React.Component {
 	  }
 	}
 	componentDidMount() {
-	  Http.get('faq/list')
-	  .then(({records}) => this.setState({faqs: records.result}))
+	  Http.get('list-faqs')
+	  .then(({data}) => this.setState({faqs: data}))
 	  .catch(error => console.log(error));
 	}
 	render() {

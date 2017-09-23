@@ -10,8 +10,8 @@ class BlogListSlider extends React.Component {
 		}
 	}
 	componentDidMount() {
-		Http.get('blog/list/blog')
-		.then(({records}) => this.setState({blogs: records.result}))
+		Http.get('get-posts?type=blog')
+		.then(({data}) => this.setState({blogs: data}))
 		.catch(error => console.log(error));
 	}
 	render () {
