@@ -51,11 +51,11 @@ app.use(compress({
 */
 
 if( process.env.NODE_ENV === 'development' ){
-	app.use(express.static(path.resolve('./public')));
+	//app.use(express.static(path.resolve('./public')));
 } else {
 	app.use(express.static(path.resolve('./build')));	
 }
-app.use(express.static(path.resolve('./admin')));
+//app.use(express.static(path.resolve('./admin')));
 app.use('/assets', express.static(path.resolve('./assets')));
 
 
@@ -76,13 +76,13 @@ app.use(morgan('dev'));
 app.use(helmet());
 /* Register all your routes */
 app.use('/api', routes.router);
-app.use('/adminapi', routes.admin);
+//app.use('/adminapi', routes.admin);
 app.get(/^((?!\/(api|adminapi|admin)).)*$/, function (req, res) {
 	res.sendFile(path.resolve('./build/index.html'));
 });
-app.get(/^((?!\/(adminapi)).)*$/, function (req, res) {
+/*app.get(/^((?!\/(adminapi)).)*$/, function (req, res) {
 	res.sendFile(path.resolve('./admin/index.html'));
-});
+});*/
 
 // Global Error Handler
 app.use((err, req, res, next) => {
