@@ -1,7 +1,7 @@
 "use strict";
 const config = {
   db: {
-    URL: 'mongodb://localhost/rtiguru',
+    URL: 'mongodb://localhost/onlinerti',
     DEBUG: false,
     autoIndex: false,
     options: {
@@ -9,7 +9,7 @@ const config = {
     }
   },
   server: {
-    host: 'http://rtiguru.com:8080',
+    host: 'http://onlinerti.com:8080',
     PORT: process.env.PORT || 9000
   },
   mail:{
