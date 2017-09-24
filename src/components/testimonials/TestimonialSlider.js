@@ -1,3 +1,4 @@
+/* global IMAGE_PATH */
 import React from 'react';
 import Slider from 'react-slick';
 import Http from '../../lib/Http';
@@ -42,10 +43,10 @@ class TestimonialSlider extends React.Component {
 							<div className="item" key={index}>
 								<div className="customerbox">
 									<div className="customer-sm">
-										<img src={process.env.PUBLIC_URL + value.image.path} alt={value.name} />
-										<span>{value.name}</span>
+										<img src={IMAGE_PATH + value.image} alt={value.title} />
+										<span>{value.title}</span>
 									</div>
-									<p>{value.description}</p>
+									<p>{value.content}</p>
 									<div className="aps_icon">
 										<img src={ApostrophyIcon} alt="ApostrophyIcon" />
 									</div>

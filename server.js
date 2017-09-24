@@ -6,21 +6,21 @@ require('dotenv').config({silent: true});
 const express 	= require('express'),
 	app 		= express(),
 	path 		= require('path'),
-	bodyParser 	= require('body-parser'),
+	//bodyParser 	= require('body-parser'),
 	morgan 		= require('morgan'),
-	mongoose 	= require('mongoose'),
+	//mongoose 	= require('mongoose'),
 	helmet 		= require('helmet'),
 	compress 	= require('compression'),
-	routes 		= require(path.resolve('./core/routes')),
-	Admin 		= require(path.resolve('./controllers/Admin/adminCtrl')),
+	//routes 		= require(path.resolve('./core/routes')),
+	//Admin 		= require(path.resolve('./controllers/Admin/adminCtrl')),
 	config 		= require(require(path.resolve('./core/env')).getEnv),
 	http 		= require('http').Server(app);
 
-mongoose.Promise = global.Promise;
-mongoose.set('debug', config.db.DEBUG);
-mongoose.connect(config.db.URL, config.db.options);
-let conn = mongoose.connection; 
-conn.on('error', console.error.bind(console, 'connection error:'));
+//mongoose.Promise = global.Promise;
+//mongoose.set('debug', config.db.DEBUG);
+//mongoose.connect(config.db.URL, config.db.options);
+//let conn = mongoose.connection; 
+//conn.on('error', console.error.bind(console, 'connection error:'));
 
 /**
 enable cors in development mode
@@ -56,7 +56,7 @@ if( process.env.NODE_ENV === 'development' ){
 	app.use(express.static(path.resolve('./build')));	
 }
 //app.use(express.static(path.resolve('./admin')));
-app.use('/assets', express.static(path.resolve('./assets')));
+//app.use('/assets', express.static(path.resolve('./assets')));
 
 
 /*
@@ -64,8 +64,8 @@ app.use('/assets', express.static(path.resolve('./assets')));
 * Initialize favicon middleware
 */
 // app.use(favicon(`${__dirname}/public/images/favicon.ico`));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(bodyParser.json());
 
 app.use(morgan('dev'));
 
@@ -75,7 +75,7 @@ app.use(morgan('dev'));
 */
 app.use(helmet());
 /* Register all your routes */
-app.use('/api', routes.router);
+//app.use('/api', routes.router);
 //app.use('/adminapi', routes.admin);
 app.get(/^((?!\/(api|adminapi|admin)).)*$/, function (req, res) {
 	res.sendFile(path.resolve('./build/index.html'));
@@ -102,12 +102,12 @@ app.use((err, req, res, next) => {
 /*
 * Start the node server using node 'http' package
 */
-conn.once('open', function() {
+//conn.once('open', function() {
 	http.listen(config.server.PORT, () => {
-		Admin.register();
+		//Admin.register();
 	    console.log(`Listening on server port:${config.server.PORT}`);
 	});
-});	
+//});	
 
 
 // Todos

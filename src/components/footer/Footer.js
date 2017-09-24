@@ -5,10 +5,10 @@ import FooterLinks from '../footer/Footer-links';
 
 // The Header creates links that can be used to navigate
 // between routes.
-const Footer = () => (
+const Footer = (props) => (
 	<div>
-		<FooterLinks/>
-		<Copyright/>
+		<FooterLinks categories={props.categories} data={props.settings.site}/>
+		<Copyright data={props.settings.site}/>
 	</div>
 );
 

@@ -29,8 +29,8 @@ class HelpFaqs extends React.Component {
 	    		        {faqData ? (
 	    		        		faqData.map((value, index) => {
 	            					return (
-	            						<Panel key={index} bsStyle="primary" header={value.question} eventKey={index}>
-									    	<span className="italic-font">{value.answer}</span>
+	            						<Panel key={index} bsStyle="primary" header={value.title} eventKey={index}>
+									    	<span className="italic-font">{value.content}</span>
 									    </Panel>
 	            					);
 	            				})

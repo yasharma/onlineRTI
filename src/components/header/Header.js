@@ -10,8 +10,8 @@ import Router from '../../router';
 import Auth from '../../lib/Auth';
 
 class Header extends React.Component {
-	constructor () { 
-		super();
+	constructor (props) { 
+		super(props);
 		this.state = {
 			showLoginModal: false,
 			showSignupModal: false,
@@ -188,7 +188,9 @@ class Header extends React.Component {
 	    }
 	    const childProps = {
 	      isAuthenticated: this.state.isAuthenticated,
-	      userHasAuthenticated: this.userHasAuthenticated
+	      userHasAuthenticated: this.userHasAuthenticated,
+	      settings: this.props.settings,
+	      categories: this.props.categories
 	    };
 		return (
 			!this.state.isAuthenticating &&

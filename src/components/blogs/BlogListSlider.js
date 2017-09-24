@@ -1,3 +1,4 @@
+/* global IMAGE_PATH */
 import React from 'react';
 import Slider from 'react-slick';
 import Http from '../../lib/Http';
@@ -38,9 +39,9 @@ class BlogListSlider extends React.Component {
 						return (
 							<div className="item" key={index}>
 								<div className="blogbox">
-									<img src={process.env.PUBLIC_URL + blogValue.image.path} alt={blogValue.title} />
+									<img src={IMAGE_PATH + blogValue.image} alt={blogValue.title} />
 									<p className="italic-font">
-										{blogValue.short_description}
+										{blogValue.shortDesc}
 									</p>
 								</div>
 							</div>

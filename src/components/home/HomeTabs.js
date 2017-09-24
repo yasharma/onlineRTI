@@ -1,21 +1,9 @@
 /* global IMAGE_PATH */
 import React from 'react';
-import Http from '../../lib/Http';
 
 class HomeTabs extends React.Component {
-    constructor() {
-      super();
-      this.state = {
-        categories: []
-      }
-    }
-    componentDidMount() {
-      Http.get('list-categories')
-      .then(({data}) => this.setState({categories: data}))
-      .catch(error => console.log(error));
-    }
     render() {
-        let categories = this.state.categories;
+        let categories = this.props.categories;
         return (
             <div className="RTI-policy clearfix">
                 <ul className="clearfix">

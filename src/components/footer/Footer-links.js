@@ -3,20 +3,20 @@ import React from 'react';
 
 // The Header creates links that can be used to navigate
 // between routes.
-const FooterLinks = () => (
+const FooterLinks = (props) => (
 	<footer className="padding-40 clearfix">
       <div className="container">
           <div className="row">
             <div className="col-sm-4 col-md-4">
                 <div className="footer-head">About Us</div>
                 <p className="footer-para">
-                  The Right to Information Act, simply known as RTI, is a revolutionary Act that aims to promote transparency in government institutions in India. The Act came
+                  {props.data.summary}
                 </p>
             </div>
             <div className="col-sm-4 col-md-4 top-xs-mobile-40">
                 <div className="footer-head">Provide Services</div>
                 <ul className="services-links">
-                  <li><a>Passport Delay</a></li>
+                  {/*<li><a>Passport Delay</a></li>
                   <li><a>Marksheet Verification</a></li>
                   <li><a>IncomeTax Refund</a></li>
                   <li><a>Occupancy Certificate</a></li>
@@ -27,7 +27,14 @@ const FooterLinks = () => (
                   <li><a>MlA Fund Utilization</a></li>
                   <li><a>Home / Land Details</a></li>
                   <li><a>New RTI Query</a></li>
-                  <li><a>Exma Answer Copy</a></li>
+                  <li><a>Exma Answer Copy</a></li>*/}
+                  {props.categories.map((value, index) => {
+                      return (
+                          <li key={index}>
+                            <a href={value.slug}>{value.title}</a>
+                          </li>
+                      );
+                  })}
                 </ul>
             </div>
             <div className="col-sm-4 col-md-4 top-mobile-40">
@@ -38,7 +45,7 @@ const FooterLinks = () => (
                     </div>
                     <div className="address-box">
                         <h2>Address:</h2>
-                        <span>#L66, First Floor, 9th B Main, Sector 11, LIC Colony, HAL 3rd Stage, Jeevan Bheema Nagar, Bangalore - 560075</span>
+                        <span>{props.data.address}</span>
                     </div>
                   </li>
                   <li>
@@ -47,7 +54,7 @@ const FooterLinks = () => (
                     </div>
                     <div className="address-box">
                         <h2>Phone:</h2>
-                        <span><a>+91-9206074500</a></span>
+                        <span><a>{props.data.callus}</a></span>
                     </div>
                   </li>
                   <li>
@@ -57,7 +64,7 @@ const FooterLinks = () => (
                     </div>
                     <div className="address-box">
                         <h2>Email:</h2>
-                        <span><a>support@onlinerti.com</a></span>
+                        <span><a>{props.data.email}</a></span>
                     </div>
                   </li>
                 </ul>

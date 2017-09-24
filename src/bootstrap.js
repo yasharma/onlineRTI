@@ -3,10 +3,10 @@ import axios from 'axios';
 window.axios = axios;
 
 window.axios.defaults.headers.common = {'X-Requested-With': 'XMLHttpRequest'};
-window.axios.defaults.baseURL = 'http://www.rtiguru.com:9000/api/';
+window.axios.defaults.baseURL = 'http://rtiguru.com:9000/api/';
 
 // Global images url
-window.IMAGE_PATH = 'http://www.rtiguru.com:9000';
+window.IMAGE_PATH = 'http://rtiguru.com:9000';
 
 // Add a request interceptor
 axios.interceptors.request.use( function(config) {
