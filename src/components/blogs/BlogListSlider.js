@@ -11,7 +11,7 @@ class BlogListSlider extends React.Component {
 		}
 	}
 	componentDidMount() {
-		Http.get('get-posts?type=blog')
+		Http.get('get-posts?type=blog&innerType=blog')
 		.then(({data}) => this.setState({blogs: data}))
 		.catch(error => console.log(error));
 	}

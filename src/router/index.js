@@ -1,6 +1,9 @@
 import React from 'react';
 import Home from '../components/home/Home';
-import Abouts from '../components/Abouts/Abouts';
+import About from '../components/AboutUs/About';
+import AboutSingle from '../components/AboutUs/AboutSingle';
+import Blog from '../components/blogs/Blog';
+import BlogSingle from '../components/blogs/BlogSingle';
 import Contacts from '../components/Contact/Contact';
 import Faqs from '../components/Faq/Faq';
 import Applys from '../components/Apply/Apply';
@@ -23,7 +26,22 @@ const routes = [
 	},
 	{
 		path: '/about-us',
-		component: Abouts,
+		component: About,
+		requiredLogin: false
+	},
+	{
+		path: '/about/:slug',
+		component: AboutSingle,
+		requiredLogin: false
+	},
+	{
+		path: '/blog',
+		component: Blog,
+		requiredLogin: false
+	},
+	{
+		path: '/blog/:slug',
+		component: BlogSingle,
 		requiredLogin: false
 	},
 	{
