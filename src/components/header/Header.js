@@ -1,15 +1,14 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Navbar, Nav, NavItem, Modal, Button, Form} from "react-bootstrap";
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import FieldGroup from '../FieldGroup';
 import {FormErrors} from '../FormErrors';
 import Http from '../../lib/Http';
 import Message from '../Message';
-import Router from '../../router';
 import Auth from '../../lib/Auth';
 
-class Header extends React.Component {
+class Header extends Component {
 	constructor (props) { 
 		super(props);
 		this.state = {
@@ -186,12 +185,6 @@ class Header extends React.Component {
 	    } else {
 	      button = <NavItem onClick={() => this.open('login')} eventKey={1}>Login</NavItem>;
 	    }
-	    const childProps = {
-	      isAuthenticated: this.state.isAuthenticated,
-	      userHasAuthenticated: this.userHasAuthenticated,
-	      settings: this.props.settings,
-	      categories: this.props.categories
-	    };
 		return (
 			!this.state.isAuthenticating &&
 			<div>
@@ -329,9 +322,8 @@ class Header extends React.Component {
 				        </Modal.Body>
 				    </Modal>
 				</header>
-				<Router childProps={childProps} />
 			</div>    
 		);
 	}	
 }	
-export default withRouter(Header);
+export default Header;

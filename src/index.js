@@ -1,9 +1,9 @@
 import './bootstrap'
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import App from './components/App';
-
+import {store, history} from './store';
 
 // Vendor CSS
 import "react-spinner/react-spinner.css";
@@ -21,12 +21,12 @@ import './assets/css/fonts/fonts.css';
 import './assets/css/custom.css';
 import './assets/css/responsive.css';
 
-import registerServiceWorker from './registerServiceWorker';
+// import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
-	<Router>
-		<App />
-	</Router>, 
-	document.getElementById('root')
+  	<Provider store={store}>
+    	<App history={history} />
+  	</Provider>,
+  	document.getElementById('root')
 );
-registerServiceWorker();
+// registerServiceWorker();
