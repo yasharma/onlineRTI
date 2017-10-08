@@ -26,6 +26,7 @@ axios.interceptors.response.use( function(response) {
 },  function(error) {
 	if(!error.response){
 		alert('Network Failure! Make sure you have an active internet connection.');
+    return;
 	}
 	
   	// Do something with response error

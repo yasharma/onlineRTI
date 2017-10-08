@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
-import { FormGroup, FormControl, HelpBlock, Row, Col, ControlLabel } from "react-bootstrap";
+import { FormGroup, FormControl, HelpBlock, Col, ControlLabel } from "react-bootstrap";
 
 // Form field component
 export default class FormField extends Component {
   // render
   render() {
-    const {doValidate} = this.props;
+    const {doValidate, col} = this.props;
     if (doValidate) {
       return (
-        <Col sm={12}>{this.content()}</Col>
+        <Col sm={col}>{this.content()}</Col>
       );
     } else {
       return (
@@ -22,7 +22,7 @@ export default class FormField extends Component {
 
   // the field content
   content() {
-    const {theme, label, doValidate, meta} = this.props;
+    const {theme, label, meta} = this.props;
     if ('custom' === theme) {
       return (
         <div>
