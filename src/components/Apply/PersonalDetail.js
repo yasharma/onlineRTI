@@ -6,10 +6,6 @@ import { connect } from "react-redux";
 import { Field, reduxForm } from 'redux-form';
 
 class PersonalDetail extends React.Component {
-	constructor(props) {
-      	super(props);
-      	this.formSubmit = this.formSubmit.bind(this);      	
-    }
   	render() {
   		const { previousPage, handleSubmit, invalid, submitting} = this.props;
     	return (
@@ -17,7 +13,7 @@ class PersonalDetail extends React.Component {
 				<div className="row">
 					<div className="col-sm-12">
 						<div className="step-forms padding-top50">
-							<Form onSubmit={handleSubmit(this.formSubmit)}>
+							<Form onSubmit={handleSubmit}>
 						    	<div className="main-head-black-mid">PERSONAL DETAILS</div>
 							    <div className="row padding-top50">
 							        <Field 
@@ -95,9 +91,6 @@ class PersonalDetail extends React.Component {
 			</div>
     	);
   	}
-  	formSubmit(value) {
-		this.props.onSubmit({info:value});
-	}
 }
 
 const PersonalDetailForm = reduxForm({
@@ -142,10 +135,10 @@ const PersonalDetailForm = reduxForm({
 
 const mapStateToProps = (state) => {
 	const {rtiFormStep} = state;
-	if( !_.isEmpty(rtiFormStep.info) ) {
-		const formData = JSON.parse(rtiFormStep.info);
+	if( !_.isEmpty(rtiFormStep.data) ) {
+		const formData = JSON.parse(rtiFormStep.data);
 		return ({
-			initialValues: formData.info
+			initialValues: formData
 		});	
 	} else {
 		return ({});

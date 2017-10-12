@@ -8,10 +8,6 @@ import {Spinner} from '../common/Spinner';
 import { connect } from "react-redux";
 import {Required} from '../common/validate';
 class RTIDetail extends Component {
-	constructor() {
-		super();
-		this.formSubmit = this.formSubmit.bind(this);
-	}
 	render(){
 		const { error, handleSubmit, invalid, submitting, category} = this.props;
 		return (
@@ -20,7 +16,7 @@ class RTIDetail extends Component {
 			        <div className="col-sm-12">
 			          	<div className="step-forms padding-top50">
 			          		{!_.isEmpty(category) ? (
-				          	<Form className=" clearfix" onSubmit={handleSubmit(this.formSubmit)}>
+				          	<Form className=" clearfix" onSubmit={handleSubmit}>
 				              	<div className="main-head-black-mid">RTI DETAILS</div>
 								{!_.isEmpty(category) ? category.form.map((value, index) => (
 									<div key={index} className={index === 0 ? "row padding-top50" : "row"}>
@@ -36,27 +32,14 @@ class RTIDetail extends Component {
 								)):<Spinner/>}
 				              <FormSubmit 
 					      			error={error} invalid={invalid} 
-					      			submitting={submitting} className="btn btn-info btn-block italic-font" buttonSaveLoading="Processing..."/>
+					      			submitting={submitting} className="btn btn-info btn-block italic-font" buttonSaveLoading="Processing..." buttonSave="Next"/>
 				            </Form>)
 				            :<Spinner/>}
 			        	</div>
 			        </div>
-			        {/*<div className="col-sm-12">
-			            <ul className="pager wizard no-margin">
-			                <li className="previous disabled">
-			                    <Button type="button" className="btn btn-lg btn-default"> Previous </Button>
-			                </li>
-			                <li className="next">
-			                    <Button type="button" className="btn btn-lg txt-color-darken"> Next </Button>
-			                </li>
-			            </ul>
-			        </div>*/}
 			    </div>
 			</div>
 		);
-	}
-	formSubmit(value) {
-		this.props.onSubmit({rti:value});
 	}
 }
 
@@ -70,10 +53,10 @@ const RTIDetailForm = reduxForm({
 
 const mapStateToProps = (state) => {
 	const {rtiFormStep} = state;
-	if( !_.isEmpty(rtiFormStep.rti) ) {
-		const formData = JSON.parse(rtiFormStep.rti);
+	if( !_.isEmpty(rtiFormStep.data) ) {
+		const formData = JSON.parse(rtiFormStep.data);
 		return ({
-			initialValues: formData.rti
+			initialValues: formData
 		});	
 	} else {
 		return ({});

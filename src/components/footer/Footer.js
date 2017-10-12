@@ -25,7 +25,7 @@ class Footer extends Component {
 		if( !_.isEmpty(categories) && !_.isEmpty(settings)) {
 			return (
 				<div>
-					<FooterLinks categories={categories} data={settings.site}/>
+					<FooterLinks categories={categories} data={settings}/>
 					<Copyright data={settings.site}/>
 				</div>
 			);	

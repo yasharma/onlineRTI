@@ -1,4 +1,3 @@
-/* global _ */
 import React from 'react';
 import Steps from './Steps';
 import PersonalDetail from './PersonalDetail';
@@ -6,7 +5,7 @@ import SaveAndContinue from './SaveAndContinue';
 import RTIDetail from './RTIDetail';
 import SummaryDetail from './SummaryDetail';
 import { connect } from "react-redux";
-import {RTI_FORM_STEP_FIRST_SUCCESS, RTI_FORM_STEP_SECOND_SUCCESS} from '../../constant';
+import {RTI_FORM_STEP} from '../../constant';
 
 class ApplyByCategories extends React.Component {
 	constructor(props) {
@@ -18,20 +17,10 @@ class ApplyByCategories extends React.Component {
     	}
   	}
   	nextPage(values) {
-  		let action = {};
-  		if( _.has(values, 'rti') ) {
-  			action = {
-	        	type: RTI_FORM_STEP_FIRST_SUCCESS,
-	        	rtiFormStepFirst: values,
-	        };
-  		}
-  		if( _.has(values, 'info') ) {
-  			action = {
-	        	type: RTI_FORM_STEP_SECOND_SUCCESS,
-	        	rtiFormStepSecond: values,
-	        };
-  		}
-  		this.props.dispatch(action);
+  		this.props.dispatch({
+  			type: RTI_FORM_STEP,
+  			rtiFormSteps: values
+  		});
   		this.setState({ page: this.state.page + 1 })
   	}
 
