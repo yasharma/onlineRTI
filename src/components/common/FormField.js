@@ -6,10 +6,21 @@ import { FormGroup, FormControl, HelpBlock, Col, ControlLabel } from "react-boot
 export default class FormField extends Component {
   // render
   render() {
-    const {doValidate, col} = this.props;
+    const {doValidate, col, meta, doValidateWithStackedForm} = this.props;
     if (doValidate) {
       return (
         <Col sm={col}>{this.content()}</Col>
+      );
+    } else if (doValidateWithStackedForm) {
+      return (
+        <FormGroup 
+          validationState={!meta.touched ? null : (meta.error ? 'error' : null)}>
+          {this.content()}
+          {/*<FormControl.Feedback/>*/}
+          <HelpBlock>
+            {meta.touched && meta.error ? meta.error : null}
+          </HelpBlock>
+        </FormGroup>
       );
     } else {
       return (

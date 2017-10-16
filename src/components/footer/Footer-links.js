@@ -60,16 +60,10 @@ const FooterLinks = ({data, categories}) => (
                   <h2>Social:</h2>
                   <ul>
                     {data.socials.map((value, index) => {
-                      if( value.slug === 'facebook' ) {
-                        return (<li key={index}><a href={value.post_link} target="_blank"> &nbsp;<i className="fa fa-facebook" aria-hidden="true"></i></a></li> ) 
-                      }
-                      if( value.slug === 'twitter' ) {
-                        return(<li key={index}><a href={value.post_link} target="_blank"> &nbsp;<i className="fa fa-twitter" aria-hidden="true"></i></a></li>  )
-                      }
-                      if( value.slug === 'linkedin' ) {
-                        return(<li key={index}><a href={value.post_link} target="_blank"> &nbsp;<i className="fa fa-linkedin" aria-hidden="true"></i></a></li>  )
-                      }
-                      
+                      return (
+                        <li key={index}><a href={value.post_link} target="_blank"> &nbsp;
+                          <i className={`fa fa-${value.slug}`} aria-hidden="true"></i></a></li>
+                      )
                     })}
                   </ul>
                 </div>

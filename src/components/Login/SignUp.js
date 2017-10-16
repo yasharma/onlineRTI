@@ -5,24 +5,25 @@ import FormSubmit from "../common/FormSubmit";
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import {Notify} from '../common/Notify';
 import { push } from 'react-router-redux';
-import {AUTH_REQUEST} from '../../constant';
 
-class Login extends Component {
+class SignUp extends Component {
 	constructor() {
 		super();
 		this.formSubmit = this.formSubmit.bind(this);
 	}
-	render () {
-		const {show, hideDialog, showSignUpDialog, handleSubmit, error, submitting, invalid} = this.props;
+	formSubmit(values) {
+		console.log(values);
+	}
+	render() {
+		const {show, hideDialog, handleSubmit, error, submitting, invalid, showLoginDialog} = this.props;
 		return (
 			<Modal className="login-popup" show={show} onHide={hideDialog}>
 		    	<Modal.Header closeButton>
-		        	<Modal.Title>Login</Modal.Title>
+		        	<Modal.Title>SignUp</Modal.Title>
 		        </Modal.Header>
 		        <Form onSubmit={handleSubmit(this.formSubmit)}>
-		        	<Notify message={error} />
 			        <Modal.Body>
-			            <Field
+			        	<Field
 							type="email"
 							label="Email address"
 							name="email"
@@ -40,7 +41,15 @@ class Login extends Component {
 							theme="custom"
 							component={FormField}
 						/>
-						<a className="forgotLink">Forgot Password</a>
+						<Field
+							type="password"
+							label="Confirm Password"
+							name="confirm_password"
+							placeholder="Confirm Password"
+							doValidateWithStackedForm={true}
+							theme="custom"
+							component={FormField}
+						/>
 			        </Modal.Body>
 			        <Modal.Footer>
 			        	<FormSubmit 
@@ -48,32 +57,17 @@ class Login extends Component {
 			      			submitting={submitting} 
 			      			className="btn-info btn-block" 
 			      			buttonSaveLoading="Processing..." 
-			      			buttonSave="Login"/>
-			        	<p><a className="loginLink" onClick={showSignUpDialog}>Don't have an account?</a></p>
+			      			buttonSave="SignUp"/>
+			        	<p><a className="loginLink" onClick={showLoginDialog}>Already have an account?</a></p>
 			        </Modal.Footer>
 			    </Form>    
 		    </Modal>
-		); 
-	}	   
-	formSubmit(user) {
-		const { dispatch } = this.props;
-		return new Promise((resolve, reject) => {
-		  	dispatch({
-		    	type: AUTH_REQUEST,
-		    	user: user,
-		    	callbackError: (error) => {
-		      		reject(new SubmissionError({_error: error}));
-		    	},
-		    	callbackSuccess: () => {
-		      		dispatch(push('/'));
-		      		resolve();
-		    	}
-		  	})
-		});
+		);
 	}
 }
-const LoginForm = reduxForm({
-  	form: 'login_form',
+
+const SignUpForm = reduxForm({
+  	form: 'signup_form',
   	validate: (values) => {
   	  	const errors = {};
   	  	if(!values.email) {
@@ -81,10 +75,17 @@ const LoginForm = reduxForm({
   	  	}else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
   	      	errors.email = 'Invalid email address'
   	    }
-  	    if (!values.password) {
-  	        errors.password = 'Password is Required'
-  	    }
+  	    if(!values.password) {
+      		errors.password = 'Password is required';
+    	} else if( !/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/i.test(values.password) ) {
+    		errors.password = 'Password must be at least 8 characters long and should contain at least one digit, one lower case and one upper case character';
+    	}else if( values.confirm_password && values.password !== values.confirm_password ) {
+    		errors.password = 'Password and Confirm password should match';
+    	}
+    	if (!values.confirm_password) {
+        	errors.confirm_password = 'Confirm Password is required';
+      	}
   	  	return errors;
   	}
-})(Login);
-export default LoginForm;
+})(SignUp);
+export default SignUpForm;

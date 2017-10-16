@@ -8,11 +8,6 @@ export default class FormSubmit extends Component {
   render() {
     const {invalid, submitting, buttonSaveLoading, buttonSave, className} = this.props;
     return (
-      <div>
-        {/*error &&
-        <FormGroup validationState="error">
-          <HelpBlock>{error}</HelpBlock>
-        </FormGroup>*/}
 
         <FormGroup>
           <Button type="submit" bsStyle="primary" className={className} disabled={invalid || submitting}>
@@ -21,7 +16,6 @@ export default class FormSubmit extends Component {
               (buttonSave ? buttonSave : 'Submit')}
           </Button>
         </FormGroup>
-      </div>
     );
   }
 }

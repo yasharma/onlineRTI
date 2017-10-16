@@ -27,6 +27,7 @@
     "react-spinner": "^0.2.7",
     "redux": "^3.7.2",
     "redux-form": "^7.1.0",
+    "redux-saga": "^0.16.0",
     "slick-carousel": "^1.7.1"
   },
   "scripts": {
