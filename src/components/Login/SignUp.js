@@ -5,6 +5,7 @@ import FormSubmit from "../common/FormSubmit";
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import {Notify} from '../common/Notify';
 import { push } from 'react-router-redux';
+import Http from '../../lib/Http';
 
 class SignUp extends Component {
 	constructor() {
@@ -12,7 +13,11 @@ class SignUp extends Component {
 		this.formSubmit = this.formSubmit.bind(this);
 	}
 	formSubmit(values) {
-		console.log(values);
+		return new Promise((resolve, reject) => {
+			Http.post('register', values)
+			.then(response => console.log(resolve))
+			.catch(error => console.log(error));
+		});
 	}
 	render() {
 		const {show, hideDialog, handleSubmit, error, submitting, invalid, showLoginDialog} = this.props;
