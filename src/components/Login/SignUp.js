@@ -1,32 +1,57 @@
+/* global _ */
 import React, {Component} from 'react';
 import {Modal, Form} from "react-bootstrap";
 import FormField from "../common/FormField";
 import FormSubmit from "../common/FormSubmit";
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import {Notify} from '../common/Notify';
-import { push } from 'react-router-redux';
 import Http from '../../lib/Http';
 
 class SignUp extends Component {
 	constructor() {
 		super();
 		this.formSubmit = this.formSubmit.bind(this);
+		this.state = {
+			success: ''
+		}
 	}
 	formSubmit(values) {
+		const {hideDialog} = this.props;
 		return new Promise((resolve, reject) => {
 			Http.post('register', values)
-			.then(response => console.log(resolve))
-			.catch(error => console.log(error));
+			.then(({records}) => {
+				this.setState({success: 'You are registered successfully, kindly check your inbox/spam folder to verify your email!!'})
+				this.handleExited();
+				setTimeout(() => {
+					hideDialog();
+				},2500);
+				resolve();
+			})
+			.catch(({errors}) => {
+				let message = 'Internal Error';
+				if( _.has(errors, 'email') ){
+					message = errors.email.message;
+				} else {
+					message = errors.message;
+				}
+				reject(new SubmissionError({_error: message}))
+			});
 		});
+	}
+	handleExited() {
+		const {dispatch, reset} = this.props;
+		dispatch(reset('signup_form'));
 	}
 	render() {
 		const {show, hideDialog, handleSubmit, error, submitting, invalid, showLoginDialog} = this.props;
+		const { success } = this.state;
 		return (
-			<Modal className="login-popup" show={show} onHide={hideDialog}>
+			<Modal className="login-popup" show={show} onHide={hideDialog} onExited={() => this.handleExited()}>
 		    	<Modal.Header closeButton>
 		        	<Modal.Title>SignUp</Modal.Title>
 		        </Modal.Header>
 		        <Form onSubmit={handleSubmit(this.formSubmit)}>
+		        	<Notify message={error || success} type={error ? 'danger': 'success'}/>
 			        <Modal.Body>
 			        	<Field
 							type="email"

@@ -12,10 +12,14 @@ class Login extends Component {
 		super();
 		this.formSubmit = this.formSubmit.bind(this);
 	}
+	handleExited() {
+		const {dispatch, reset} = this.props;
+		dispatch(reset('login_form'));
+	}
 	render () {
 		const {show, hideDialog, showSignUpDialog, handleSubmit, error, submitting, invalid} = this.props;
 		return (
-			<Modal className="login-popup" show={show} onHide={hideDialog}>
+			<Modal className="login-popup" show={show} onHide={hideDialog} onExited={() => this.handleExited()}>
 		    	<Modal.Header closeButton>
 		        	<Modal.Title>Login</Modal.Title>
 		        </Modal.Header>
@@ -56,7 +60,7 @@ class Login extends Component {
 		); 
 	}	   
 	formSubmit(user) {
-		const { dispatch } = this.props;
+		const { dispatch, hideDialog } = this.props;
 		return new Promise((resolve, reject) => {
 		  	dispatch({
 		    	type: AUTH_REQUEST,
@@ -65,6 +69,7 @@ class Login extends Component {
 		      		reject(new SubmissionError({_error: error}));
 		    	},
 		    	callbackSuccess: () => {
+		    		hideDialog();
 		      		dispatch(push('/'));
 		      		resolve();
 		    	}

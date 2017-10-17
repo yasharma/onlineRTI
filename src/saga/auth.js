@@ -5,7 +5,7 @@ import {Storage} from '../lib/Storage';
 
 export function* authorize(action) {
 	try {
-	   	const { token, user } = yield call(login, 'login', action.user);
+	   	const { token, user } = yield call(login, 'login-web', action.user);
 		yield put({ type: AUTH_SUCCESS, payload: token, user });
 		Storage.set('token', token);
 		Storage.set('user', user, true);
