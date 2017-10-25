@@ -26,7 +26,7 @@ class Footer extends Component {
 			return (
 				<div>
 					<FooterLinks categories={categories} data={settings}/>
-					<Copyright data={settings.site}/>
+					<Copyright data={settings}/>
 				</div>
 			);	
 		} else{

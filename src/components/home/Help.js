@@ -27,7 +27,7 @@ class Help extends Component {
 									<h2 className="request-head">Can’t Find? Need Help Send a Request</h2>
 									<span className="request-tag">Contact Us Online or Give Us a Call</span>
 									<div className="padding-top20 clearfix">
-										<button type="button" className="btn btn-default">+91-{settings.callus}</button>
+										<button type="button" className="btn btn-default">{settings.callus}</button>
 										<button type="button" className="btn btn-info">Coffee with Us</button>
 									</div>
 								</div>

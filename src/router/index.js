@@ -6,6 +6,7 @@ import About from '../components/AboutUs/About';
 import AboutSingle from '../components/AboutUs/AboutSingle';
 import Blog from '../components/blogs/Blog';
 import BlogSingle from '../components/blogs/BlogSingle';
+import cmsDetail from '../components/blogs/cmsDetail';
 import Contacts from '../components/Contact/Contact';
 import Faqs from '../components/Faq/Faq';
 import Applys from '../components/Apply/Apply';
@@ -32,6 +33,7 @@ export const Router = props => {
 					<Route path="/about-us" component={About} />
 					<Route path="/about/:slug" component={AboutSingle} />
 					<Route path="/blog/:slug" component={BlogSingle} />
+					<Route path="/cms/:slug" component={cmsDetail} />
 					<Route path="/blog" component={Blog} />
 					<Route path="/contact-us" component={Contacts} />
 					<Route path="/faq" component={Faqs} />

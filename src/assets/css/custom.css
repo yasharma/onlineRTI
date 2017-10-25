@@ -139,7 +139,7 @@ header .navbar-default .navbar-nav > li.active > a:focus{background-color: #2ebe
 .copyRight ul li{display: inline-block;position:relative;padding-right:15px; position: relative;}
 .copyRight ul li::after {background-color: #ffffff;content: "";height: 15px;position: absolute;right: 5px;top: 3px;width: 1px;}
 .copyRight ul li:last-child::after{width:0;}
-.copyRight ul li:first-child a{cursor: none;}
+/*.copyRight ul li:first-child a{cursor: none;}*/
 .copyRight ul li a{display: block;color: #ffffff; font-size: 14px; cursor: pointer;}
 .copyRight ul li a:hover{color:#000000;}
 .copyRight span{font-size: 14px; color:#ffffff;}

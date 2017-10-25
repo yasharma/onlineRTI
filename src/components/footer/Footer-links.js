@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 
 // The Header creates links that can be used to navigate
 // between routes.
@@ -19,7 +19,7 @@ const FooterLinks = ({data, categories}) => (
                   {categories.map((value, index) => {
                       return (
                           <li key={index}>
-                            <a href={value.slug}>{value.title}</a>
+                            <Link to={`/apply/${value.slug}`}>{value.title}</Link>
                           </li>
                       );
                   })}
