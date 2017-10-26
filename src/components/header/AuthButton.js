@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import {NavItem} from 'react-bootstrap';
-import {connect} from 'react-redux';
+import { AUTH_LOGOUT_REQUEST } from '../../constant';
+import { push } from 'react-router-redux';
 class AuthButton extends Component {
 	render() {
 		const { token, showLogin } = this.props;
+		
 		return (
 			token ? (
 				<NavItem onClick={() => this.logout()} eventKey={1}>Logout</NavItem>
@@ -13,12 +15,17 @@ class AuthButton extends Component {
 		);
 	}
 	logout() {
-		//const { dispatch } = this.props;
-	  	console.log('logout');
+		const { dispatch } = this.props;
+	  	return new Promise((resolve, reject) => {
+	    	dispatch({
+	      		type: AUTH_LOGOUT_REQUEST,
+	      		callbackSuccess: () => {
+	        		dispatch(push('/'));
+	        		resolve();
+	      		}
+	    	})
+	  	});
 	}
 }
-const mapStateToProps = (state) => ({
-	token: state.auth.token
-});
 
-export default connect(mapStateToProps)(AuthButton);
+export default AuthButton;

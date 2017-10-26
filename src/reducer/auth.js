@@ -1,7 +1,8 @@
 import { AUTH_SUCCESS, AUTH_FAILURE, AUTH_LOGOUT } from '../constant';
+import {Cookie} from '../lib/Cookie';
 const initialState = {
-  	token: localStorage.getItem('rtiguru.token'),
-  	user: localStorage.getItem('rtiguru.user')
+  	token: Cookie.get('token'),
+  	user: Cookie.get('user')
 };
 
 export const authReducer = (state = initialState, { type, payload, user }) => {

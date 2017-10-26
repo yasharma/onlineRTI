@@ -5,6 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import AuthButton from './AuthButton';
 import Login from '../Login/login';
 import SignUp from '../Login/SignUp';
+import {connect} from 'react-redux';
 
 class Header extends Component {
 	constructor() {
@@ -22,6 +23,7 @@ class Header extends Component {
 		this.setState({[name]: false});
 	}
 	render() {
+		const {token, dispatch} = this.props;
 		return (
 			<div>
 				<header>
@@ -40,7 +42,11 @@ class Header extends Component {
 								<LinkContainer to="/blog">
 									<NavItem eventKey={1}>Blog</NavItem>
 								</LinkContainer>
-								<NavItem eventKey={2}>My RTis</NavItem>
+								{token &&
+								<LinkContainer to="/myrti">
+									<NavItem eventKey={2}>My RTis</NavItem>
+								</LinkContainer>	
+								}
 								<NavItem eventKey={2}>Pricing</NavItem>
 								<NavItem eventKey={2}>Teams</NavItem>
 								<LinkContainer to="/contact-us">
@@ -53,7 +59,7 @@ class Header extends Component {
 						<LinkContainer to="/apply-now">
 							<NavItem eventKey={1}>Apply Now</NavItem>
 						</LinkContainer>
-						<AuthButton showLogin={() => this.showDialog('showLoginDialog')}/>
+						<AuthButton token={token} dispatch={dispatch} showLogin={() => this.showDialog('showLoginDialog')}/>
 					</div>
 				</header>
 				<Login show={this.state.showLoginDialog} 
@@ -66,4 +72,9 @@ class Header extends Component {
 		);
 	}	
 }	
-export default Header;
+
+const mapStateToProps = (state) => ({
+	token: state.auth.token
+});
+
+export default connect(mapStateToProps)(Header);

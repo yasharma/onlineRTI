@@ -15,6 +15,8 @@ import Track from '../components/Track/Track';
 import NoMatch from '../components/NoMatch';
 import Footer from '../components/footer/Footer';
 import Header from '../components/header/Header';
+import MyRTI from '../components/MyRTI/MyRTI';
+import PrivateRoute from './PrivateRoute';
 
 /*
 We can use the<Switch> component to group <Route>s. 
@@ -40,6 +42,7 @@ export const Router = props => {
 					<Route path="/track-us" component={Track} />
 					<Route path="/apply-now" component={Applys} />
 					<Route path="/apply/:slug" component={ApplyRTI} />
+					<PrivateRoute path="/myrti" component={MyRTI} />
 					<Route path="*" component={NoMatch} />
 				</Switch>
 				<Footer/>

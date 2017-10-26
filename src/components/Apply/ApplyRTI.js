@@ -36,11 +36,14 @@ class ApplyRTI extends Component {
 	}
 	formSubmit(values) {
 		const {category} = this.state;
+		
+		const {_id} = this.props.user;
 		return new Promise((resolve, reject) => {
 			Http.post('apply-rti', {
 				category: {_id: category._id, title: category.title},
 				rti: values,
-				info: values
+				info: values,
+				userId: _id
 			})
 			.then(response => {
 				this.showSuccessDialog(response.message);
@@ -70,10 +73,13 @@ const mapStateToProps = (state) => {
 	const {rtiFormStep} = state;
 	if( !_.isEmpty(rtiFormStep.info) ) {
 		return ({
-			rtiFormStep
+			rtiFormStep,
+			user: state.auth.user
 		});	
 	} else {
-		return ({});
+		return ({
+			user: state.auth.user
+		});
 	}
 }
 
