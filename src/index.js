@@ -20,6 +20,7 @@ import './assets/bootstrap/css/bootstrap.min.css';
 import './assets/css/fonts/fonts.css';
 import './assets/css/custom.css';
 import './assets/css/responsive.css';
+import './assets/css/spinner.css';
 
 // import registerServiceWorker from './registerServiceWorker';
 

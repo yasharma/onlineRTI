@@ -2,7 +2,8 @@
 import React from 'react';
 import Http from '../../lib/Http';
 import { Link } from 'react-router-dom';
-import Spinner from 'react-spinner';
+import {Loader} from '../common/Loader';
+import ScrollToTopOnMount from '../common/ScrollToTopOnMount';
 
 class Blog extends React.Component {
 	constructor() {
@@ -17,17 +18,11 @@ class Blog extends React.Component {
 		.catch(error => console.log(error));
 	}
 	render() {
-		const contentData = this.state.blogContent,
-		style = {
-      		height: 50,
-      		width: 50,
-      		backgroundColor: 'black',
-      		position: 'relative',
-      		top: 200,
-      		left: '50%'
-    	};
+		const contentData = this.state.blogContent;
+
 		return (
 			<div>
+				<ScrollToTopOnMount/>
 				<div>
 					<div className="track-banner"><h2>RTI Blog</h2></div>
 				</div>
@@ -52,7 +47,7 @@ class Blog extends React.Component {
 	        					);
 	        				})
 			        	) : (
-			        		<div style={style}><Spinner /></div>
+			        		<Loader/>
 			        	)
 			        }
 			      </div>

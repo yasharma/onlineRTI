@@ -101,6 +101,10 @@ header .navbar-default .navbar-nav > li > a:hover, header .navbar-default .navba
 .login-popup .modal-dialog{margin:10px;width: auto;}
 }
 
+@media (min-width: 576px){
+.col-sm-6 {-ms-flex: 0 0 50%; flex: 0 0 50%; max-width: 50%; }
+}
+
 @media (max-width:479px) {
 .header-right-menu li a{padding: 16px 5px;text-transform:capitalize;}
 .RTI-policy > ul > li{width: 48.5%;}

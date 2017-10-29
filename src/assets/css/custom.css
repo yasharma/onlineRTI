@@ -593,3 +593,24 @@ body {
 .react-autosuggest__suggestion--highlighted {
   background-color: rgb(238,238,238)
 }
+/* Team Page */
+.mb-4, .my-4 {
+    margin-bottom: 1.5rem!important;
+}
+.ml-auto, .mx-auto {
+    margin-left: auto!important;
+}
+.mr-auto, .mx-auto {
+    margin-right: auto!important;
+}
+.d-block {
+    display: block!important;
+}
+
+.rounded-circle {
+    border-radius: 50%!important;
+}
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}

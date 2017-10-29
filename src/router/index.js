@@ -16,6 +16,7 @@ import NoMatch from '../components/NoMatch';
 import Footer from '../components/footer/Footer';
 import Header from '../components/header/Header';
 import MyRTI from '../components/MyRTI/MyRTI';
+import Team from '../components/Team/Team';
 import PrivateRoute from './PrivateRoute';
 
 /*
@@ -41,6 +42,7 @@ export const Router = props => {
 					<Route path="/faq" component={Faqs} />
 					<Route path="/track-us" component={Track} />
 					<Route path="/apply-now" component={Applys} />
+					<Route path="/team" component={Team} />
 					<Route path="/apply/:slug" component={ApplyRTI} />
 					<PrivateRoute path="/myrti" component={MyRTI} />
 					<Route path="*" component={NoMatch} />

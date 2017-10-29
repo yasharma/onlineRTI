@@ -50,7 +50,7 @@ class Header extends Component {
 						</Navbar.Header>
 						<Navbar.Collapse>
 							<Nav>
-								<LinkContainer to="/about-us">
+								<LinkContainer to="/cms/about-us">
 									<NavItem eventKey={1}>About</NavItem>
 								</LinkContainer>
 								<LinkContainer to="/blog">
@@ -62,7 +62,9 @@ class Header extends Component {
 								</LinkContainer>	
 								}
 								<NavItem eventKey={2}>Pricing</NavItem>
-								<NavItem eventKey={2}>Teams</NavItem>
+								<LinkContainer to="/team">
+									<NavItem eventKey={2}>Teams</NavItem>
+								</LinkContainer>	
 								<LinkContainer to="/contact-us">
 									<NavItem eventKey={2}>Contact</NavItem>
 								</LinkContainer>	
