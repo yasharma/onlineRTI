@@ -1,4 +1,5 @@
 /* global IMAGE_PATH */
+//https://blackrockdigital.github.io/startbootstrap-round-about/
 import React, { Component } from 'react';
 import Http from '../../lib/Http';
 import {Loader} from '../common/Loader';
@@ -18,7 +19,6 @@ class Team extends Component {
     }
     render() {
     	const {team} = this.state;
-    	console.log(team);
         return (
         	<div>
 	            <div>
@@ -31,6 +31,9 @@ class Team extends Component {
 								? team.map((value, index) => {
 									return (
 										<div key={index}>	
+											<div className="col-lg-12">
+												<h2 className="my-4">{value._id}</h2>
+											</div>
 											{value.members.map((val, ind) => {
 												return (
 													<div className="col-lg-4 col-sm-6 text-center mb-4" key={ind}>
