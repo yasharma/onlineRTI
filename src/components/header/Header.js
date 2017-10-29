@@ -61,7 +61,9 @@ class Header extends Component {
 									<NavItem eventKey={2}>My RTis</NavItem>
 								</LinkContainer>	
 								}
-								<NavItem eventKey={2}>Pricing</NavItem>
+								<LinkContainer to="/cms/pricing">
+									<NavItem eventKey={2}>Pricing</NavItem>
+								</LinkContainer>		
 								<LinkContainer to="/team">
 									<NavItem eventKey={2}>Teams</NavItem>
 								</LinkContainer>	
@@ -94,4 +96,4 @@ const mapStateToProps = (state) => ({
 	showLoginDialog: state.loginPopup.displayLoginPopup
 });
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, null, null, {pure: false})(Header);
