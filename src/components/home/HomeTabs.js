@@ -1,7 +1,9 @@
 /* global IMAGE_PATH, _ */
 import React from 'react';
 import Http from '../../lib/Http';
-import { LinkContainer } from 'react-router-bootstrap';
+import {connect} from 'react-redux';
+import { SHOW_LOGIN_POPUP } from '../../constant';
+import { push } from 'react-router-redux';
 
 class HomeTabs extends React.Component {
     constructor() {
@@ -15,6 +17,17 @@ class HomeTabs extends React.Component {
         .then(({data}) => this.setState({categories: data}))
         .catch(errors => console.log(errors));
     }
+    checkState(value) {
+        const {token, dispatch} = this.props;
+        if( token ) {
+            dispatch(push(`/apply/${value.slug}`));
+        } else {
+            this.props.dispatch({
+                type: SHOW_LOGIN_POPUP,
+                displayLoginPopup: true
+            });
+        }
+    }
     render() {
         let categories = this.state.categories;
         if( !_.isEmpty(categories) ){
@@ -24,12 +37,10 @@ class HomeTabs extends React.Component {
                         {categories.map((value, index) => {
                             return (
                                 <li key={index}>
-                                    <LinkContainer to={'apply/' + value.slug}>
-                                        <a>
-                                            <img src={IMAGE_PATH + value.image} alt={value.title}/>
-                                            <span>{value.title}</span>
-                                        </a>
-                                    </LinkContainer>
+                                    <a onClick={() => this.checkState(value)}>
+                                        <img src={IMAGE_PATH + value.image} alt={value.title}/>
+                                        <span>{value.title}</span>
+                                    </a>
                                 </li>
                             );
                         }) }
@@ -41,5 +52,9 @@ class HomeTabs extends React.Component {
         }    
     }
 }    
+const mapStateToProps = (state) => ({
+    token: state.auth.token,
+    showLoginDialog: state.loginPopup.displayLoginPopup
+});
 
-export default HomeTabs;
+export default connect(mapStateToProps)(HomeTabs);

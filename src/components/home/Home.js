@@ -14,7 +14,7 @@ class Home extends React.Component {
 	render() {
 		return (
 			<div>
-				<Banner {...this.props} />
+				<Banner />
 				<EmailConfirmation queryParams={this.props.location}/>
 				<HomeTabs />
 				<HomeAbout />

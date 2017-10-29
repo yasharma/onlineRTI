@@ -6,24 +6,38 @@ import AuthButton from './AuthButton';
 import Login from '../Login/login';
 import SignUp from '../Login/SignUp';
 import {connect} from 'react-redux';
+import { SHOW_LOGIN_POPUP } from '../../constant';
 
 class Header extends Component {
 	constructor() {
 		super();
 		this.state = {
-			showLoginDialog: false,
 			showSignUpDialog: false,
 		}
 	}
 	showDialog(name) {
-		let _opp = name === 'showLoginDialog' ? 'showSignUpDialog' : 'showLoginDialog';
-		this.setState({[name]: true, [_opp]: false});
+		let _state = (name === 'showLoginDialog') ? true : false,
+		_opp = name === 'showLoginDialog' ? 'showSignUpDialog' : 'showLoginDialog';
+		this.props.dispatch({
+			type: SHOW_LOGIN_POPUP,
+			displayLoginPopup: _state
+		});
+	
+		this.setState({[name]: true, [_opp]: false});		
 	}
 	hideDialog(name) {
-		this.setState({[name]: false});
+		
+		if( name === 'showLoginDialog') {
+			this.props.dispatch({
+				type: SHOW_LOGIN_POPUP,
+				displayLoginPopup: false
+			})
+		} else {
+			this.setState({[name]: false});
+		}	
 	}
 	render() {
-		const {token, dispatch} = this.props;
+		const {token, dispatch, showLoginDialog} = this.props;
 		return (
 			<div>
 				<header>
@@ -62,7 +76,7 @@ class Header extends Component {
 						<AuthButton token={token} dispatch={dispatch} showLogin={() => this.showDialog('showLoginDialog')}/>
 					</div>
 				</header>
-				<Login show={this.state.showLoginDialog} 
+				<Login show={showLoginDialog} 
 				showSignUpDialog={() => this.showDialog('showSignUpDialog')}
 				hideDialog={() => this.hideDialog('showLoginDialog')}/>
 				<SignUp show={this.state.showSignUpDialog} 
@@ -74,7 +88,8 @@ class Header extends Component {
 }	
 
 const mapStateToProps = (state) => ({
-	token: state.auth.token
+	token: state.auth.token,
+	showLoginDialog: state.loginPopup.displayLoginPopup
 });
 
 export default connect(mapStateToProps)(Header);

@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import Autosuggest from 'react-autosuggest';
 import Http from '../../lib/Http';
+import { SHOW_LOGIN_POPUP } from '../../constant';
+import { push } from 'react-router-redux';
+import {connect} from 'react-redux';
 class SearchForm extends Component {
 	constructor() {
 		super();
@@ -84,11 +87,21 @@ class SearchForm extends Component {
 	}
 	handleClick() {
 		const {slug} = this.state;
-		const {history} = this.props;
-		if( slug ) {
-			history.push(`/apply/${slug}`);
+		const { token, dispatch} = this.props;
+		if( slug && token) {
+			dispatch(push(`/apply/${slug}`));
+		} else {
+			this.props.dispatch({
+            	type: SHOW_LOGIN_POPUP,
+                displayLoginPopup: true
+            });
 		}
 	}
 }
 
-export default SearchForm;
+const mapStateToProps = (state) => ({
+    token: state.auth.token,
+    showLoginDialog: state.loginPopup.displayLoginPopup
+});
+
+export default connect(mapStateToProps)(SearchForm);

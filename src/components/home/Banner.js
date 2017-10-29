@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchForm from './SearchForm';
-const Banner = (props) => (
+const Banner = () => (
 	<div>
 		<div className="home-banner clearfix">
 	      	<div className="home-banner-wrapper"></div>
@@ -8,7 +8,7 @@ const Banner = (props) => (
 		        <div className="display-table-cell">
 		            <div className="home-banner-content">
 		              	<h2 className="banner-head">File and track RTI to any central or state government office in India</h2>
-		              	<SearchForm {...props}/>
+		              	<SearchForm/>
 		              	<div className="tag-line">
 		                	<span>Didn't find your RTI Type ? Click on <a>"New RTI Query"</a></span>
 		              	</div>

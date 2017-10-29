@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux';
 import { reducer as formReducer } from 'redux-form';
 import { authReducer } from './auth';
+import { loginPopupReducer } from './toggleLoginPopup';
 import {RTI_FORM_STEP} from '../constant';
 
 const rtiInitialState = {
@@ -23,6 +24,7 @@ const reducer = combineReducers({
 	rtiFormStep:rtiFormStepReducer,
 	auth: authReducer,
 	router: routerReducer,
+	loginPopup: loginPopupReducer,
 	form: formReducer
 });
 
