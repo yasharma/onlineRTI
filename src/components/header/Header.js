@@ -61,7 +61,7 @@ class Header extends Component {
 									<NavItem eventKey={2}>My RTis</NavItem>
 								</LinkContainer>	
 								}
-								<LinkContainer to="/cms/pricing">
+								<LinkContainer to="/pricing">
 									<NavItem eventKey={2}>Pricing</NavItem>
 								</LinkContainer>		
 								<LinkContainer to="/team">
