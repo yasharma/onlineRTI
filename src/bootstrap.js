@@ -2,6 +2,7 @@ import axios from 'axios';
 import lodash from 'lodash';
 import {Cookie} from './lib/Cookie';
 
+
 window.axios = axios;
 window._ = lodash;
 
