@@ -16,11 +16,11 @@ class Home extends React.Component {
 			<div>
 				<Banner />
 				<EmailConfirmation queryParams={this.props.location}/>
-				<HomeTabs categories={this.props.categories} />
+				<HomeTabs />
 				<HomeAbout />
 				<HelpFaqs/>
 				<Testimonials/>
-				<Help settings={this.props.settings} />
+				<Help/>
 				<BlogList/>
 			</div>
 		);

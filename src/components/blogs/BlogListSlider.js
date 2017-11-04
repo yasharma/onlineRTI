@@ -2,6 +2,7 @@
 import React from 'react';
 import Slider from 'react-slick';
 import Http from '../../lib/Http';
+import {LinkContainer} from 'react-router-bootstrap';
 
 class BlogListSlider extends React.Component {
 	constructor() {
@@ -40,6 +41,7 @@ class BlogListSlider extends React.Component {
 							<div className="item" key={index}>
 								<div className="blogbox">
 									<img src={IMAGE_PATH + blogValue.image} alt={blogValue.title} />
+									<LinkContainer to={`blog/${blogValue.slug}`}><a className="text-center">{blogValue.title}</a></LinkContainer>
 									<p className="italic-font">
 										{blogValue.shortDesc}
 									</p>

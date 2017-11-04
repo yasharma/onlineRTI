@@ -1,74 +1,24 @@
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'react-router-redux';
 import Home from '../components/home/Home';
 import About from '../components/AboutUs/About';
 import AboutSingle from '../components/AboutUs/AboutSingle';
 import Blog from '../components/blogs/Blog';
 import BlogSingle from '../components/blogs/BlogSingle';
+import cmsDetail from '../components/blogs/cmsDetail';
 import Contacts from '../components/Contact/Contact';
 import Faqs from '../components/Faq/Faq';
 import Applys from '../components/Apply/Apply';
+import ApplyRTI from '../components/Apply/ApplyRTI';
 import Track from '../components/Track/Track';
 import NoMatch from '../components/NoMatch';
-import { Switch } from 'react-router-dom';
-import UnauthenticatedRoute from "../components/UnauthenticatedRoute";
-
-const routes = [
-	{
-		path: '/',
-		exact: true,
-		component: Home,
-		requiredLogin: false
-	},
-	{
-		path: '/onlineRTI', // this route is just for gh-pages
-		component: Home,
-		requiredLogin: false
-	},
-	{
-		path: '/about-us',
-		component: About,
-		requiredLogin: false
-	},
-	{
-		path: '/about/:slug',
-		component: AboutSingle,
-		requiredLogin: false
-	},
-	{
-		path: '/blog',
-		component: Blog,
-		requiredLogin: false
-	},
-	{
-		path: '/blog/:slug',
-		component: BlogSingle,
-		requiredLogin: false
-	},
-	{
-		path: '/contact-us',
-		component: Contacts,
-		requiredLogin: false
-	},
-	{
-		path: '/faq',
-		component: Faqs,
-		requiredLogin: false
-	},
-	{
-		path: '/track-us',
-		component: Track,
-		requiredLogin: false
-	},
-	{
-		path: '/apply-now',
-		component: Applys,
-		requiredLogin: false
-	},
-	{
-		component: NoMatch,
-		requiredLogin: false
-	}
-];
+import Footer from '../components/footer/Footer';
+import Header from '../components/header/Header';
+import MyRTI from '../components/MyRTI/MyRTI';
+import Team from '../components/Team/Team';
+import Pricing from '../components/Pricing/Pricing';
+import PrivateRoute from './PrivateRoute';
 
 /*
 We can use the<Switch> component to group <Route>s. 
@@ -76,19 +26,31 @@ The <Switch> will iterate over its children elements (the routes) and
 only render the first one that matches the current pathname.
 */
 
-const Router = ({childProps}) => (
-	<Switch>
-		{routes.map((route, index) => (
-			<UnauthenticatedRoute 
-				key={index}
-				path={route.path}
-				exact
-				requiredLogin={route.requiredLogin}
-				component={route.component}
-				props={childProps}
-			/>
-		))}
-	</Switch>
-);
-
-export default Router;
+export const Router = props => {
+	const { history } = props;
+	return (
+		<ConnectedRouter history={history}>
+			<div>
+				<Header/>
+				<Switch>
+					<Route path="/" exact={true} component={Home} />
+					<Route path="/about-us" component={About} />
+					<Route path="/about/:slug" component={AboutSingle} />
+					<Route path="/blog/:slug" component={BlogSingle} />
+					<Route path="/cms/:slug" component={cmsDetail} />
+					<Route path="/blog" component={Blog} />
+					<Route path="/contact-us" component={Contacts} />
+					<Route path="/faq" component={Faqs} />
+					<Route path="/track-us" component={Track} />
+					<Route path="/apply-now" component={Applys} />
+					<Route path="/team" component={Team} />
+					<Route path="/pricing" component={Pricing} />
+					<Route path="/apply/:slug" component={ApplyRTI} />
+					<PrivateRoute path="/myrti" component={MyRTI} />
+					<Route path="*" component={NoMatch} />
+				</Switch>
+				<Footer/>
+			</div>	
+		</ConnectedRouter>
+	);
+}

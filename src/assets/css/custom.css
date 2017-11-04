@@ -139,7 +139,7 @@ header .navbar-default .navbar-nav > li.active > a:focus{background-color: #2ebe
 .copyRight ul li{display: inline-block;position:relative;padding-right:15px; position: relative;}
 .copyRight ul li::after {background-color: #ffffff;content: "";height: 15px;position: absolute;right: 5px;top: 3px;width: 1px;}
 .copyRight ul li:last-child::after{width:0;}
-.copyRight ul li:first-child a{cursor: none;}
+/*.copyRight ul li:first-child a{cursor: none;}*/
 .copyRight ul li a{display: block;color: #ffffff; font-size: 14px; cursor: pointer;}
 .copyRight ul li a:hover{color:#000000;}
 .copyRight span{font-size: 14px; color:#ffffff;}
@@ -528,4 +528,89 @@ footer{position:relative;background:url('../images/footerBg.png') no-repeat cent
     border-radius: 0;
     margin-bottom: 10px;
     padding: 4px;
+}
+body {
+  font-family: Helvetica, sans-serif;
+}
+
+.status {
+  line-height: 52px;
+}
+
+.react-autosuggest__container {
+  position: relative;
+}
+
+.react-autosuggest__input {
+  width: 240px;
+  height: 30px;
+  padding: 10px 20px;
+  font-family: Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+.react-autosuggest__input--focused {
+  outline: none;
+}
+
+.react-autosuggest__input--open {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.react-autosuggest__suggestions-container {
+  display: none;
+}
+
+.react-autosuggest__suggestions-container--open {
+  display: block;
+  position: absolute;
+  top: 40px;
+  width: 87.2%;
+  border: 1px solid #d8d2d2;
+  background-color: #fff;
+  font-family: Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  z-index: 3;
+}
+
+.react-autosuggest__suggestions-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-align: left;
+}
+
+.react-autosuggest__suggestion {
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+.react-autosuggest__suggestion--highlighted {
+  background-color: rgb(238,238,238)
+}
+/* Team Page */
+.mb-4, .my-4 {
+    margin-bottom: 1.5rem!important;
+}
+.ml-auto, .mx-auto {
+    margin-left: auto!important;
+}
+.mr-auto, .mx-auto {
+    margin-right: auto!important;
+}
+.d-block {
+    display: block!important;
+}
+
+.rounded-circle {
+    border-radius: 50%!important;
+}
+.img-fluid {
+    max-width: 100%;
+    height: auto;
 }

@@ -1,8 +1,8 @@
 import React from 'react';
 
-const ApplyBanner = () => (
+const ApplyBanner = ({categoryName}) => (
 	<div>
-		<div className="track-banner"><h2>Online Apply</h2></div>
+		<div className="track-banner"><h2>{categoryName}</h2></div>
 	</div>
 );
 
