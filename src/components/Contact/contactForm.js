@@ -88,7 +88,7 @@ class ContactForm extends Component {
 					dispatch(reset('contact_form'));
 				},3000);
 			})
-			.catch(({errors}) => reject(new SubmissionError({_error: errors.message})))
+			.catch(({errors}) => reject(new SubmissionError({_error: 'Internal Server Error!'})))
 		});
 	}
 }
