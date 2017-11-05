@@ -22,7 +22,7 @@ import './assets/css/custom.css';
 import './assets/css/responsive.css';
 import './assets/css/spinner.css';
 
-// import registerServiceWorker from './registerServiceWorker';
+import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
   	<Provider store={store}>
@@ -30,4 +30,15 @@ ReactDOM.render(
   	</Provider>,
   	document.getElementById('root')
 );
-// registerServiceWorker();
+
+if (module.hot) {
+  	module.hot.accept('./components/App', () => {
+    	ReactDOM.render(
+      		<Provider store={store}>
+        		<App history={history} />
+      		</Provider>,
+      		document.getElementById('root'),
+    	)
+  	});
+}
+registerServiceWorker();

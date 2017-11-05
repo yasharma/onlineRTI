@@ -13,6 +13,7 @@ textarea{resize: none;}
 .display-table-cell{display: table-cell;vertical-align: middle; text-align: center;}
 .padding-40{padding: 40px 0;}
 .padding-top50{padding-top:50px;}
+.padding-bottom50{padding-bottom:50px;}
 .padding-top20{padding-top:20px;}
 .padding-20{padding: 0 20px;}
 .main-head {color:#ffffff;font-size: 24px;font-weight: 600;text-align: center; position: relative;}
