@@ -21,7 +21,7 @@ class MyRTI extends Component {
 	render() {
 		const {myrti, processing} = this.state;
 		return (
-			<div className="container">
+			<div className="container padding-40">
 				<Table bordered striped responsive>
 					<thead>
 					    <tr>
