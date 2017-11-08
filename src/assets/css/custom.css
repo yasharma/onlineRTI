@@ -614,3 +614,34 @@ body {
     max-width: 100%;
     height: auto;
 }
+.has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline, .has-error.radio label, .has-error.checkbox label, .has-error.radio-inline label, .has-error.checkbox-inline label {
+    color: #f82020;
+}
+
+.my-4{
+    color: #222222;
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.teams {
+    border: 1px solid #c2abab;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px 2px #d4d0d0;
+}
+.teams img{
+    width: auto;
+    width: 100px;
+}
+.teams h3 {
+    color: #222222;
+    margin: 15px;
+    font-size: 20px;
+}
+.teams small{
+    display: block;
+    font-size: 18px;
+}
+.teams p{color: #7b7b7b;
+font-size: 14px;}

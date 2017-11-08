@@ -37,9 +37,11 @@ class Team extends Component {
 											{value.members.map((val, ind) => {
 												return (
 													<div className="col-lg-4 col-sm-6 text-center mb-4" key={ind}>
-														<img className="rounded-circle img-fluid d-block mx-auto" src={IMAGE_PATH + val.picture} alt={val.name}/>
-														<h3>{val.name} <small>{value._id}</small> </h3>
-														<p>{val.bio}</p>
+														<div className="teams">
+															<img className="rounded-circle img-fluid d-block mx-auto" src={IMAGE_PATH + val.picture} alt={val.name}/>
+															<h3>{val.name} <small>{value._id}</small> </h3>
+															<p>{val.bio}</p>
+														</div>
 													</div>
 												)
 											})}
