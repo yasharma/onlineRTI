@@ -6,6 +6,7 @@ import Http from '../../lib/Http';
 import { connect } from "react-redux";
 import {AlertDialog} from '../common/AlertDialog';
 import { push } from 'react-router-redux';
+import {Loader} from '../common/Loader';
 
 class ApplyRTI extends Component {
 	constructor(){
@@ -15,24 +16,35 @@ class ApplyRTI extends Component {
 			category:{},
 			rtiFormStep: {},
 			message:"",
-			showModal: false
+			showModal: false,
+			isLoading: false
 		}
 	}
 	componentDidMount() {
-		const {match} = this.props;
-		Http.get(`get-a-post?type=category&slug=${match.params.slug}`)
-		.then(({data}) => this.setState({category: data}))
+		this.getBySlug(this.props.match.params.slug);
+	}
+	componentWillReceiveProps(newProps){
+		this.getBySlug(newProps.match.params.slug);
+	}
+	getBySlug(slug) {
+		this.setState({isLoading: true});
+		Http.get(`get-a-post?type=category&slug=${slug}`)
+		.then(({data}) => this.setState({category: data, isLoading: false}))
 		.catch(error => console.log(error));
 	}
 	render() {
-		const {category} = this.state;
-		return(
-			<div>
-				<Banner categoryName={category.label}/>
-				<ApplyByCategories onSubmit={this.formSubmit} category={category}/>
-				<AlertDialog show={this.state.showModal} message={this.state.message} hideModal={() => this.hideSuccessDialog()}/>
-			</div>
-		);	
+		const {category, isLoading} = this.state;
+		if(isLoading) {
+			return <Loader/>
+		} else {
+			return (
+				<div>
+					<Banner categoryName={category.label}/>
+					<ApplyByCategories onSubmit={this.formSubmit} category={category}/>
+					<AlertDialog show={this.state.showModal} message={this.state.message} hideModal={() => this.hideSuccessDialog()}/>
+				</div>
+			);
+		}	
 	}
 	formSubmit(values) {
 		const {category} = this.state;
