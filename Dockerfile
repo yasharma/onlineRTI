@@ -16,7 +16,7 @@ ARG app_env
 ENV APP_ENV $app_env
 
 RUN mkdir -p /opt/onlinerti
-WORKDIR /opt/onlinerti
+WORKDIR /opt/onlinerti/src
 
 # Copies the local package.json file to the container
 # and utilities docker container cache to not needing to rebuild
@@ -35,9 +35,9 @@ CMD if [ ${APP_ENV} = production ]; \
 	npm install -g http-server && \
 	npm run build && \
 	cd build && \
-	hs -p 80; \
+	hs -p 3000; \
 	else \
 	npm run start; \
 	fi
 
-EXPOSE 80
+EXPOSE 3000
