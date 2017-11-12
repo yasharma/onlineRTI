@@ -57,7 +57,7 @@ class Header extends Component {
 									<NavItem eventKey={1}>Blog</NavItem>
 								</LinkContainer>
 								{token &&
-								<LinkContainer to="/dashboard">
+								<LinkContainer to="/myrti">
 									<NavItem eventKey={2}>My RTis</NavItem>
 								</LinkContainer>	
 								}
@@ -74,9 +74,11 @@ class Header extends Component {
 						</Navbar.Collapse>
 					</Navbar>
 					<div className="header-right-menu">
-						<LinkContainer to="/apply-now">
-							<NavItem eventKey={1}>Apply Now</NavItem>
+						{/*token &&
+						<LinkContainer to="/dashboard">
+							<NavItem eventKey={1}>Dashboard</NavItem>
 						</LinkContainer>
+						*/}
 						<AuthButton token={token} dispatch={dispatch} showLogin={() => this.showDialog('showLoginDialog')}/>
 					</div>
 				</header>

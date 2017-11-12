@@ -9,9 +9,9 @@ const Banner = () => (
 		            <div className="home-banner-content">
 		              	<h2 className="banner-head">File and track RTI to any central or state government office in India</h2>
 		              	<SearchForm/>
-		              	<div className="tag-line">
+		              	{/*<div className="tag-line">
 		                	<span>Didn't find your RTI Type ? Click on <a>"New RTI Query"</a></span>
-		              	</div>
+		              	</div>*/}
 		            </div>
 		        </div>
 	      	</div>

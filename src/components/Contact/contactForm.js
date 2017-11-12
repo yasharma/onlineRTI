@@ -49,16 +49,16 @@ class ContactForm extends Component {
 							type="email"
 							label="Email Address"
 							name="email"
-							placeholder="Enter Lastname"
+							placeholder="Enter Email Address"
 							theme="custom"
 							doValidateWithStackedForm={true}
 							component={FormField}
 							validate={[Required,Email]}
 						/>
 						<Field
-							label="Enter your Message"
+							label="Enter Your Message"
 							name="message"
-							placeholder="Enter Lastname"
+							placeholder="Enter Your Message"
 							theme="custom"
 							doValidateWithStackedForm={true}
 							component={FormField}
@@ -78,11 +78,10 @@ class ContactForm extends Component {
 	formSubmit(values) {
 		const {dispatch, reset} = this.props;
 		return new Promise((resolve, reject) => {
-			Http.post('contactus', values)
+			Http.post('/contact-rtiguru', values)
 			.then(response => {
-				console.log(response);
 				resolve();
-				this.setState({success: 'You will get an email as soon as your query will proccessed'});
+				this.setState({success: response.message});
 				setTimeout(() => {
 					this.setState({success: ''});
 					dispatch(reset('contact_form'));

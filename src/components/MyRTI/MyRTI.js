@@ -23,7 +23,7 @@ class MyRTI extends Component {
 		return (
 			<div className="container padding-40">
 				<Table bordered striped responsive>
-					<thead>
+					<thead className="bg-info">
 					    <tr>
 					        <th>#</th>
 					        <th>Category</th>

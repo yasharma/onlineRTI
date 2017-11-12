@@ -61,9 +61,9 @@ export default class FormField extends Component {
 
   // the field itself
   field() {
-    const {input, componentClass, type, placeholder, children, className} = this.props;
+    const {input, componentClass, type, placeholder, children, className, disabled} = this.props;
     return (
-      <FormControl {...input} componentClass={componentClass} type={type} placeholder={placeholder} className={className}>
+      <FormControl {...input} disabled={disabled} componentClass={componentClass} type={type} placeholder={placeholder} className={className}>
         {children}
       </FormControl>
     );

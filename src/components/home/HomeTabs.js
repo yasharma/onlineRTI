@@ -53,8 +53,7 @@ class HomeTabs extends React.Component {
     }
 }    
 const mapStateToProps = (state) => ({
-    token: state.auth.token,
-    showLoginDialog: state.loginPopup.displayLoginPopup
+    token: state.auth.token
 });
 
 export default connect(mapStateToProps)(HomeTabs);

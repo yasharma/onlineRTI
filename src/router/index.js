@@ -19,6 +19,7 @@ import MyRTI from '../components/MyRTI/MyRTI';
 import Team from '../components/Team/Team';
 import Pricing from '../components/Pricing/Pricing';
 import Dashboard from '../components/Dashboard/Dashboard';
+import Application from '../components/Application/Application';
 import PrivateRoute from './PrivateRoute';
 
 /*
@@ -48,7 +49,8 @@ export const Router = props => {
 					<Route path="/pricing" component={Pricing} />
 					<Route path="/apply/:slug" component={ApplyRTI} />
 					<PrivateRoute path="/myrti" component={MyRTI} />
-					<PrivateRoute path="/dashboard" component={Dashboard} />
+					<PrivateRoute path="/dashboard/:tab/:rtino" component={Dashboard} />
+					<PrivateRoute path="/application" component={Application} />
 					<Route path="*" component={NoMatch} />
 				</Switch>
 				<Footer/>

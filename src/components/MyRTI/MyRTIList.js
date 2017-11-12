@@ -1,5 +1,7 @@
 import React from 'react';
 import {Button} from 'react-bootstrap';
+import moment from 'moment';
+import {LinkContainer} from 'react-router-bootstrap';
 const MyRTIList = ({list, index}) => {
 	return (
 		<tr>
@@ -8,9 +10,11 @@ const MyRTIList = ({list, index}) => {
 			<td>{list.plan.rs}</td>
 			<td>{list.rtino}</td>
 			<td>{list.status}</td>
-			<td>{list.created_at}</td>
+			<td>{moment(list.created_at).format('MMM DD, YYYY')}</td>
 			<td>
-				<Button>Detail</Button>
+				<LinkContainer to={`/dashboard/app-progress/${list.rtino}`}>
+					<Button bsStyle="info" bsSize="xsmall">Detail</Button>
+				</LinkContainer>	
 			</td>
 		</tr>
 	);
