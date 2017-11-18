@@ -1,48 +1,68 @@
 import React,{Component} from 'react';
-import Http from '../../lib/Http';
 import {connect} from 'react-redux';
-import {Table} from 'react-bootstrap';
+import './MyRTI.css';
+import { AUTH_LOGOUT_REQUEST } from '../../constant';
+import { push } from 'react-router-redux';
 import MyRTIList from './MyRTIList';
+import {getUserName} from '../../lib/Helper';
+import PrivateRoute from '../../router/PrivateRoute';
+import {LinkContainer} from 'react-router-bootstrap';
+import ChangePassword from './ChangePassword';
+import { Switch } from 'react-router-dom';
+import {NavItem} from 'react-bootstrap';
 class MyRTI extends Component {
-	constructor() {
-		super();
-		this.state = {
-			myrti: [],
-			processing: false
-		}
-	}
-	componentDidMount() {
-		const {_id} = this.props.user;
-		this.setState({processing: true});
-		Http.get(`my-rtis?_id=${_id}`)
-		.then(({data}) => this.setState({myrti: data, processing: false}))
-		.catch(error => console.log(error));
+	
+	logout() {
+		const { dispatch } = this.props;
+	  	return new Promise((resolve, reject) => {
+	    	dispatch({
+	      		type: AUTH_LOGOUT_REQUEST,
+	      		callbackSuccess: () => {
+	        		dispatch(push('/'));
+	        		resolve();
+	      		}
+	    	})
+	  	});
 	}
 	render() {
-		const {myrti, processing} = this.state;
+		
+		const {user} = this.props;
+		const { firstLetter, name } = getUserName(user.email);
+		
 		return (
-			<div className="container padding-40">
-				<Table bordered striped responsive>
-					<thead className="bg-info">
-					    <tr>
-					        <th>#</th>
-					        <th>Category</th>
-					        <th>Plan</th>
-					        <th>RTI No</th>
-					        <th>Status</th>
-					        <th>Date</th>
-					        <th>Action</th>
-					    </tr>
-					</thead>
-					<tbody>
-						{myrti.length > 0
-						? 	myrti.map((list, index) => <MyRTIList list={list} index={index} key={index} />)
-						: (processing) 
-							? <tr><td colSpan="7" className="text-center">Loading ...</td></tr>
-							: <tr><td colSpan="7" className="text-center">No Records</td></tr> }
-					</tbody>
-				</Table>
-			</div>	
+			<div className="dashborad-group padding-40">
+				<div className="container">
+					<div className="main-head-black-mid">All your RTI Applications are here</div>
+					<div className="padding-top50 row">
+						<div className="col-sm-4">
+							<div className="nameGroup">
+								<div className="nameTittle">{firstLetter}</div>
+								<div className="nameTags">
+									<span>{name}</span>
+									<span>{user.email}</span>
+								</div>
+							</div>
+							<ul className="dash-list">
+						        <LinkContainer to="/myrti/dashboard">
+					            	<NavItem eventKey={1}> My RTI </NavItem>
+					            </LinkContainer>
+					            <LinkContainer to="/myrti/change-password">
+					            	<NavItem eventKey={2}> Change Password </NavItem>
+					            </LinkContainer>
+								<li><a onClick={() => this.logout()}>Logout</a></li>
+							</ul>
+						</div>
+						<div className="col-sm-8">
+							<div className="dashboard-content">
+								<Switch>
+									<PrivateRoute path="/myrti/dashboard" component={MyRTIList} />						
+									<PrivateRoute path="/myrti/change-password" component={ChangePassword} />						
+								</Switch>	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		)
 	}
 }

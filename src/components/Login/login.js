@@ -70,7 +70,7 @@ class Login extends Component {
 		    	},
 		    	callbackSuccess: () => {
 		    		hideDialog();
-		      		dispatch(push('/dashboard'));
+		      		dispatch(push('/myrti/dashboard'));
 		      		resolve();
 		    	}
 		  	})

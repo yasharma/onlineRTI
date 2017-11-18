@@ -1,6 +1,6 @@
 import React from 'react';
-export const Loader = () => (
+export const Loader = ({small}) => (
 	<div className="marginTop10">
-		<div className="loader loader-default">Loading ...</div>
+		<div className={`loader ${small ? 'loader-small' : 'loader-default'}`}>Loading ...</div>
 	</div>
 );

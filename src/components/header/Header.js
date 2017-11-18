@@ -7,6 +7,7 @@ import Login from '../Login/login';
 import SignUp from '../Login/SignUp';
 import {connect} from 'react-redux';
 import { SHOW_LOGIN_POPUP } from '../../constant';
+import {rtiSidebar} from '../../lib/Helper';
 
 class Header extends Component {
 	constructor() {
@@ -40,6 +41,7 @@ class Header extends Component {
 		const {token, dispatch, showLoginDialog} = this.props;
 		return (
 			<div>
+				<div className="alert alert-danger hidden" id="alert"> Network failure! make sure you have an active internet connection </div>
 				<header>
 					<Navbar fluid collapseOnSelect>
 						<Navbar.Header>
@@ -57,7 +59,7 @@ class Header extends Component {
 									<NavItem eventKey={1}>Blog</NavItem>
 								</LinkContainer>
 								{token &&
-								<LinkContainer to="/myrti">
+								<LinkContainer to="/myrti/dashboard" isActive={rtiSidebar}>
 									<NavItem eventKey={2}>My RTis</NavItem>
 								</LinkContainer>	
 								}

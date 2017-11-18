@@ -1,7 +1,7 @@
 import axios from 'axios';
 import lodash from 'lodash';
 import {Cookie} from './lib/Cookie';
-
+import {networkAlert} from './lib/Helper';
 
 window.axios = axios;
 window._ = lodash;
@@ -33,9 +33,8 @@ axios.interceptors.response.use( function(response) {
     
   	return response;
 },  function(error) {
-	if(!error.response){
-		alert('Network Failure! Make sure you have an active internet connection.');
-    return;
+	if(!error.response && error.message === 'Network Error'){
+		networkAlert();
 	}
 	
   	// Do something with response error
