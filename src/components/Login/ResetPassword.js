@@ -17,7 +17,6 @@ class ResetPassword extends Component {
 		}
 	}
 	componentDidMount() {
-		console.log('ResetPassword');
 		this.setState({toggleDialog: true});
 	}
 	hideDialog() {
@@ -29,14 +28,14 @@ class ResetPassword extends Component {
 	}
 	render () {
 		const {handleSubmit, error, submitting, invalid} = this.props;
-		const {toggleDialog} = this.state;
+		const {toggleDialog, success} = this.state;
 		return (
 			<Modal className="login-popup" show={toggleDialog} onHide={() => this.hideDialog()} onExited={() => this.handleExited()}>
 		    	<Modal.Header closeButton>
 		        	<Modal.Title>Reset Password</Modal.Title>
 		        </Modal.Header>
 		        <Form onSubmit={handleSubmit(this.formSubmit)}>
-		        	<Notify message={error} />
+		        	<Notify message={error || success} type={error ? 'danger': 'success'}/>
 			        <Modal.Body>
 			            <Field
 			            	type="password"
@@ -72,8 +71,8 @@ class ResetPassword extends Component {
 		); 
 	}	   
 	formSubmit(user) {
-		const { dispatch, reset, hideDialog, salt } = this.props;
-		console.log(salt);
+		const { dispatch, reset, salt } = this.props;
+		
 		const request = {
 			salt,
 			password: user.password
@@ -85,7 +84,7 @@ class ResetPassword extends Component {
 				dispatch(reset('ResetPasswordForm'));
 				setTimeout(() => {
 					this.setState({success:''});
-					hideDialog();
+					this.hideDialog();
 				}, 5000);
 			})
 			.catch(errors => reject(new SubmissionError({_error: errors.message})) )
