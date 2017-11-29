@@ -5,6 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import AuthButton from './AuthButton';
 import Login from '../Login/login';
 import SignUp from '../Login/SignUp';
+import ForgotPassword from '../Login/ForgotPassword';
 import {connect} from 'react-redux';
 import { SHOW_LOGIN_POPUP } from '../../constant';
 import {rtiSidebar} from '../../lib/Helper';
@@ -14,6 +15,7 @@ class Header extends Component {
 		super();
 		this.state = {
 			showSignUpDialog: false,
+			showForgotPasswordDialog: false
 		}
 	}
 	showDialog(name) {
@@ -23,7 +25,6 @@ class Header extends Component {
 			type: SHOW_LOGIN_POPUP,
 			displayLoginPopup: _state
 		});
-	
 		this.setState({[name]: true, [_opp]: false});		
 	}
 	hideDialog(name) {
@@ -39,6 +40,7 @@ class Header extends Component {
 	}
 	render() {
 		const {token, dispatch, showLoginDialog} = this.props;
+		const {showForgotPasswordDialog, showSignUpDialog} = this.state;
 		return (
 			<div>
 				<div className="alert alert-danger hidden" id="alert"> Network failure! make sure you have an active internet connection </div>
@@ -86,8 +88,12 @@ class Header extends Component {
 				</header>
 				<Login show={showLoginDialog} 
 				showSignUpDialog={() => this.showDialog('showSignUpDialog')}
+				showForgotPasswordDialog={() => this.showDialog('showForgotPasswordDialog')}
 				hideDialog={() => this.hideDialog('showLoginDialog')}/>
-				<SignUp show={this.state.showSignUpDialog} 
+				<ForgotPassword show={showForgotPasswordDialog} 
+				showLoginDialog={() => this.showDialog('showLoginDialog')}
+				hideDialog={() => this.hideDialog('showForgotPasswordDialog')}/>
+				<SignUp show={showSignUpDialog} 
 				showLoginDialog={() => this.showDialog('showLoginDialog')}
 				hideDialog={() => this.hideDialog('showSignUpDialog')}/>
 			</div>    

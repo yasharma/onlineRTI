@@ -22,7 +22,17 @@ class Http {
 			});
 		});
 	}
-	static put() {}
+	static put(url, data) {
+		return new Promise((resolve, reject) => {
+			axios.put(url, data)
+			.then(response => {
+				resolve(response.data);
+			})
+			.catch(error => {
+				reject((error.response) ? error.response.data : error);
+			});
+		});
+	}
 	static delete() {}
 }
 

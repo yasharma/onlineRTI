@@ -35,6 +35,7 @@ export const Router = props => {
 				<Header/>
 				<Switch>
 					<Route path="/" exact={true} component={Home} />
+					<Route path="/reset-password/:salt" component={Home} />
 					<Route path="/about-us" component={About} />
 					<Route path="/about/:slug" component={AboutSingle} />
 					<Route path="/blog/:slug" component={BlogSingle} />

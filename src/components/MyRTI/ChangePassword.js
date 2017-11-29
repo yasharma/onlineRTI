@@ -6,6 +6,7 @@ import FormSubmit from "../common/FormSubmit";
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import {Required} from '../common/validate';
 import Http from '../../lib/Http';
+import {connect} from 'react-redux';
 class ChangePassword extends Component {
 	constructor() {
 		super();
@@ -33,10 +34,10 @@ class ChangePassword extends Component {
 												</div>						
 								            	<Field
 								    				type="password"
-								    				label="Current Password"
-								    				name="password"
+								    				label="Old Password"
+								    				name="old"
 								    				formGroupClassName="padding-top50"
-								    				placeholder="Enter your current password"
+								    				placeholder="Enter your old password"
 								    				theme="custom"
 								    				doValidateWithStackedForm={true}
 								    				component={FormField}
@@ -45,7 +46,7 @@ class ChangePassword extends Component {
 								    			<Field
 								    				type="password"
 								    				label="New Password"
-								    				name="new_password"
+								    				name="password"
 								    				placeholder="Enter new password"
 								    				theme="custom"
 								    				doValidateWithStackedForm={true}
@@ -78,16 +79,20 @@ class ChangePassword extends Component {
 		)
 	}
 	formSubmit(values) {
-		console.log(values);
-		const {dispatch, reset} = this.props;
+		const {dispatch, reset, user} = this.props;
+		const request = {
+			password: values.password,
+			_id: user._id,
+			old: values.old
+		};
 		return new Promise((resolve, reject) => {
-			Http.post('change-password', values)
+			Http.put('change-password', request)
 			.then(res => {
-				this.setState({success: 'Password has been update successfully'});
+				this.setState({success: res.message});
 				dispatch(reset('change_password_form'));
 				setTimeout(() => this.setState({success:''}), 5000);
 			})
-			.catch(({errors}) => reject(new SubmissionError({_error: 'Internal Server Error!'})))
+			.catch(errors => reject(new SubmissionError({_error: errors.message})) )
 		});
 	}
 }
@@ -95,18 +100,27 @@ const _ChangePassword = reduxForm({
   	form: 'change_password_form',
   	validate: (values) => {
   	  	const errors = {};	
-    	if(!values.new_password) {
-      		errors.new_password = 'New Password is required';
-    	}else if( !/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/i.test(values.new_password) ) {
-    		errors.new_password = 'Password must be at least 8 characters long and should contain at least one digit, one lower case and one upper case character';
-    	}else if(values.new_password && values.new_password !== values.confirm_password) {
-    		errors.new_password = 'Password and confirm password must match';	
+  	  	if(!values.old) {
+      		errors.old = 'old Password is required';
+    	}
+    	if(!values.password) {
+      		errors.password = 'New Password is required';
+    	}else if( !/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/i.test(values.password) ) {
+    		errors.password = 'Password must be at least 8 characters long and should contain at least one digit, one lower case and one upper case character';
+    	}else if(values.confirm_password && values.password !== values.confirm_password) {
+    		errors.password = 'Password and confirm password must match';	
     	}
   	  	
-  	  	if(values.confirm_password && values.new_password !== values.confirm_password) {
+  	  	if(!values.confirm_password) {
   	    	errors.confirm_password = 'Password and confirm password must match';
   	    }
+
   	  	return errors;
   	}
-})(ChangePassword);  	
-export default _ChangePassword;
+})(ChangePassword);
+
+const mapStateToProps = (state) => ({
+	user: state.auth.user
+});
+
+export default connect(mapStateToProps)(_ChangePassword);

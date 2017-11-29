@@ -24,7 +24,7 @@ class SignUp extends Component {
 				this.handleExited();
 				setTimeout(() => {
 					hideDialog();
-				},2500);
+				},5000);
 				resolve();
 			})
 			.catch(({errors}) => {

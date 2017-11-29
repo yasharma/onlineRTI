@@ -4,27 +4,30 @@ import FormField from "../common/FormField";
 import FormSubmit from "../common/FormSubmit";
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import {Notify} from '../common/Notify';
-import { push } from 'react-router-redux';
-import {AUTH_REQUEST} from '../../constant';
+import Http from '../../lib/Http';
 
-class Login extends Component {
+class ForgotPassword extends Component {
 	constructor() {
 		super();
 		this.formSubmit = this.formSubmit.bind(this);
+		this.state = {
+			success:''
+		}
 	}
 	handleExited() {
 		const {dispatch, reset} = this.props;
-		dispatch(reset('login_form'));
+		dispatch(reset('ForgotPasswordForm'));
 	}
 	render () {
-		const {show, hideDialog, showSignUpDialog, handleSubmit, error, submitting, invalid, showForgotPasswordDialog} = this.props;
+		const {show, hideDialog, showLoginDialog, handleSubmit, error, submitting, invalid} = this.props;
+		const { success } = this.state;
 		return (
 			<Modal className="login-popup" show={show} onHide={hideDialog} onExited={() => this.handleExited()}>
 		    	<Modal.Header closeButton>
-		        	<Modal.Title>Login</Modal.Title>
+		        	<Modal.Title>Forgot Password</Modal.Title>
 		        </Modal.Header>
 		        <Form onSubmit={handleSubmit(this.formSubmit)}>
-		        	<Notify message={error} />
+		        	<Notify message={error || success} type={error ? 'danger': 'success'}/>
 			        <Modal.Body>
 			            <Field
 							type="email"
@@ -35,16 +38,7 @@ class Login extends Component {
 							doValidateWithStackedForm={true}
 							component={FormField}
 						/>
-						<Field
-							type="password"
-							label="Password"
-							name="password"
-							placeholder="Enter Password"
-							doValidateWithStackedForm={true}
-							theme="custom"
-							component={FormField}
-						/>
-						<a className="forgotLink" onClick={showForgotPasswordDialog}>Forgot Password</a>
+						
 			        </Modal.Body>
 			        <Modal.Footer>
 			        	<FormSubmit 
@@ -52,33 +46,31 @@ class Login extends Component {
 			      			submitting={submitting} 
 			      			className="btn-info btn-block" 
 			      			buttonSaveLoading="Processing..." 
-			      			buttonSave="Login"/>
-			        	<p><a className="loginLink" onClick={showSignUpDialog}>Don't have an account?</a></p>
+			      			buttonSave="Send me link"/>
+			        	<p><a className="loginLink" onClick={showLoginDialog}>Back to login</a></p>
 			        </Modal.Footer>
 			    </Form>    
 		    </Modal>
 		); 
 	}	   
 	formSubmit(user) {
-		const { dispatch, hideDialog } = this.props;
+		const { dispatch, reset, hideDialog } = this.props;
 		return new Promise((resolve, reject) => {
-		  	dispatch({
-		    	type: AUTH_REQUEST,
-		    	user: user,
-		    	callbackError: (error) => {
-		      		reject(new SubmissionError({_error: error}));
-		    	},
-		    	callbackSuccess: () => {
-		    		hideDialog();
-		      		dispatch(push('/myrti/dashboard'));
-		      		resolve();
-		    	}
-		  	})
+		  	Http.post('forgot-password', user)
+		  	.then(res => {
+				this.setState({success: res.message});
+				dispatch(reset('ForgotPasswordForm'));
+				setTimeout(() => {
+					this.setState({success:''});
+					hideDialog();
+				}, 5000);
+			})
+			.catch(errors => reject(new SubmissionError({_error: errors.message})) )
 		});
 	}
 }
-const LoginForm = reduxForm({
-  	form: 'login_form',
+const ForgotPasswordForm = reduxForm({
+  	form: 'ForgotPasswordForm',
   	validate: (values) => {
   	  	const errors = {};
   	  	if(!values.email) {
@@ -86,10 +78,7 @@ const LoginForm = reduxForm({
   	  	}else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
   	      	errors.email = 'Invalid email address'
   	    }
-  	    if (!values.password) {
-  	        errors.password = 'Password is Required'
-  	    }
   	  	return errors;
   	}
-})(Login);
-export default LoginForm;
+})(ForgotPassword);
+export default ForgotPasswordForm;
