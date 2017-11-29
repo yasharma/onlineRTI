@@ -65,7 +65,9 @@ class ForgotPassword extends Component {
 					hideDialog();
 				}, 5000);
 			})
-			.catch(errors => reject(new SubmissionError({_error: errors.message})) )
+			.catch(({errors}) => {
+				reject(new SubmissionError({_error: errors.message})) 
+			})
 		});
 	}
 }
