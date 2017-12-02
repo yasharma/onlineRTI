@@ -6,7 +6,10 @@ import Http from '../../lib/Http';
 import AppProgress from './AppProgress';
 import AppStatus from './AppStatus';
 import RTIApplication from './RTIApplication';
+import TrackingDetails from './TrackingDetails';
 import EditProfile from './EditProfile';
+import { Switch } from 'react-router-dom';
+import PrivateRoute from '../../router/PrivateRoute';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -24,17 +27,20 @@ class Dashboard extends Component {
     }
     render() {
     	const { rtiinfo } = this.state; 
-    	const { tab, rtino } = this.props.match.params;
+    	const {  rtino } = this.props.match.params;
         return (	
 			<div className="dashborad-group padding-40">
 				<div className="container">
 					<div className="row">
 						<Sidebar rtino={rtino}/>
 						<div className="col-sm-7">
-							{ tab === "app-progress" && <AppProgress rtiinfo={rtiinfo} /> }
-							{ tab === "app-status" && <AppStatus rtiinfo={rtiinfo} /> }
-							{ tab === "rti-application" && <RTIApplication rtiinfo={rtiinfo} /> }
-							{ tab === "edit-profile" && <EditProfile initialValues={rtiinfo.rti} rtiinfo={rtiinfo} /> }
+                            <Switch>
+                                <PrivateRoute path="/dashboard/app-progress/:any" rtiinfo={rtiinfo} component={AppProgress} />                      
+                                <PrivateRoute path="/dashboard/app-status/:any" rtiinfo={rtiinfo} component={AppStatus} />                       
+                                <PrivateRoute path="/dashboard/rti-application/:any" rtiinfo={rtiinfo} component={RTIApplication} />                       
+                                <PrivateRoute path="/dashboard/tracking-details/:any" rtiinfo={rtiinfo} component={TrackingDetails} />                       
+                                <PrivateRoute path="/dashboard/edit-profile/:any" initialValues={rtiinfo.rti} rtiinfo={rtiinfo} component={EditProfile} />                       
+                            </Switch>
 						</div>
 					</div>
 				</div>

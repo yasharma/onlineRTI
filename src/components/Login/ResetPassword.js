@@ -5,6 +5,7 @@ import FormSubmit from "../common/FormSubmit";
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import {Notify} from '../common/Notify';
 import Http from '../../lib/Http';
+import { push } from 'react-router-redux';
 import {Required} from '../common/validate';
 
 class ResetPassword extends Component {
@@ -85,6 +86,7 @@ class ResetPassword extends Component {
 				setTimeout(() => {
 					this.setState({success:''});
 					this.hideDialog();
+					dispatch(push('/'));
 				}, 5000);
 			})
 			.catch(errors => reject(new SubmissionError({_error: errors.message})) )

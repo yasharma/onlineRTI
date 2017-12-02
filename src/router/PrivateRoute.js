@@ -4,11 +4,11 @@ import { Route, Redirect } from 'react-router-dom';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
 	
-	const {token} = rest;
+	const {token, rtiinfo, initialValues} = rest;
 	return (
 	  <Route {...rest} render={props => (
 	    token ? (
-	      <Component {...props}/>
+	      <Component {...props} rtiinfo={rtiinfo} initialValues={initialValues}/>
 	    ) : (
 	      <Redirect to={{
 	        pathname: '/',
