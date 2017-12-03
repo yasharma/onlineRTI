@@ -21,7 +21,7 @@
 }
 .dash-list li a:hover,.dash-list li.active a{background-color: #003160; color: #ffffff; }
 .dash-list li a:hover::after,.dash-list li.active a::after{opacity: 1;}
-.dashboard-content{padding: 15px; border-radius: 5px; min-height:310px;}
+.dashboard-content{padding: 15px; border-radius: 5px; min-height:310px; border: 1px #d4d4d4 solid;}
 .dash-head {
     color: #222222;
     font-size: 20px;

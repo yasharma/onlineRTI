@@ -15,6 +15,31 @@ const tooltipNo = (
   <Tooltip id="tooltip1">Not Applicable</Tooltip>
 );
 
+const processingCharges = (
+  <Tooltip id="processingChargesID">Processing includes printing,covering and attaching payment fees for application using IPO/Court Fee Stamp/DD according to government requirements
+
+</Tooltip>
+);
+
+const shippingCharges = (
+  <Tooltip id="shippingChargesID"> 
+   Within 24 hours of your approval, we ship or deliver your RTI using speed post or online options to the concerned government office
+
+</Tooltip>
+);
+
+const RTIDraftingCharges = (
+  <Tooltip id="RTIDraftingChargesID"> 
+  We draft your RTI application after understanding local laws, related judgments and legal language. This makes your case strong so that you get answers to your questions
+</Tooltip>
+);
+
+const PhonefromRTIExpert = (
+  <Tooltip id="RTIDraftingChargesID"> 
+ Our RTI Expert calls you to understand your problem completely. After getting all information about your case, RTI Expert prepares a powerful RTI so that you get the information you want
+ </Tooltip>
+);
+
 
 class Pricing extends Component {
 	constructor() {
@@ -57,7 +82,7 @@ class Pricing extends Component {
         			    	<li><h5 className="blocktitle">Excellent Support is available to answer your application related questions </h5></li>
         			    </ul>
         			</div>
-                    
+
         			<div className="col-sm-6">
                        <h3 className="blocktitle pricing">Your fee breakup</h3>
                        <table className="table table-bordered pricetable">
@@ -71,7 +96,13 @@ class Pricing extends Component {
                                       </div>
                                       <div className="floatRight hidden-phone">
                                          <p className="inline"><b>₹ 49</b></p>
-                                         <div className="infoBubble inline">?</div>
+
+                                         <OverlayTrigger placement="left" overlay={processingCharges} >
+                                            <div className="infoBubble inline">?</div>
+                                        </OverlayTrigger>
+
+                                         
+
                                       </div>
                                    </div>
                                 </td>
@@ -105,7 +136,9 @@ class Pricing extends Component {
                                       </div>
                                       <div className="floatRight hidden-phone">
                                          <p className="inline"><b>₹ 100</b></p>
-                                         <div className="infoBubble inline">?</div>
+                                         <OverlayTrigger placement="left" overlay={shippingCharges} >
+                                            <div className="infoBubble inline">?</div>
+                                        </OverlayTrigger>
                                       </div>
                                    </div>
                                 </td>
@@ -140,7 +173,9 @@ class Pricing extends Component {
                                       </div>
                                       <div className="floatRight hidden-phone">
                                          <p className="inline"><b>₹ 100</b></p>
-                                         <div className="infoBubble inline">?</div>
+                                          <OverlayTrigger placement="left" overlay={RTIDraftingCharges} >
+                                            <div className="infoBubble inline">?</div>
+                                        </OverlayTrigger>
                                       </div>
                                    </div>
                                 </td>
@@ -153,8 +188,8 @@ class Pricing extends Component {
                                 </td>
                                 <td className="price1">
                                    <div className="tablerow clickno">
-                                    <OverlayTrigger placement="top" overlay={tooltipNo} >
-                                        <img src={No} className="planimg inline" alt="" />
+                                   <OverlayTrigger placement="top" overlay={tooltipYes} >
+                                        <img src={Yes} className="planimg inline" alt="yes" />
                                     </OverlayTrigger>
                                    </div>
                                 </td>
@@ -174,15 +209,19 @@ class Pricing extends Component {
                                       </div>
                                       <div className="floatRight hidden-phone">
                                          <p className="inline"><b>₹ 150</b></p>
-                                         <div className="infoBubble inline">?</div>
+                                         <OverlayTrigger placement="left" overlay={PhonefromRTIExpert} >
+                                            <div className="infoBubble inline">?</div>
+                                        </OverlayTrigger>
                                       </div>
                                    </div>
                                 </td>
                                 <td className="price0">
                                    <div className="tablerow clickzero">
+
                                     <OverlayTrigger placement="top" overlay={tooltipNo} >
                                         <img src={No} className="planimg inline" alt="" />
                                     </OverlayTrigger>
+
                                    </div>
                                 </td>
                                 <td className="price1">
