@@ -10,6 +10,7 @@ import {LinkContainer} from 'react-router-bootstrap';
 import ChangePassword from './ChangePassword';
 import { Switch } from 'react-router-dom';
 import {NavItem} from 'react-bootstrap';
+import Verify from '../MobileVerificationAlert/Verify';
 class MyRTI extends Component {
 	
 	logout() {
@@ -32,6 +33,7 @@ class MyRTI extends Component {
 		return (
 			<div className="dashborad-group padding-40">
 				<div className="container">
+					<Verify user={user}/>
 					<div className="main-head-black-mid">All your RTI Applications are here</div>
 					<div className="padding-top50 row">
 						<div className="col-sm-4">
