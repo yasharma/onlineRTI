@@ -33,7 +33,7 @@ class Dashboard extends Component {
 				<div className="container">
 					<div className="row">
 						<Sidebar rtino={rtino}/>
-						<div className="col-sm-7">
+						<div className="col-sm-9">
                             <Switch>
                                 <PrivateRoute path="/dashboard/app-progress/:any" rtiinfo={rtiinfo} component={AppProgress} />                      
                                 <PrivateRoute path="/dashboard/app-status/:any" rtiinfo={rtiinfo} component={AppStatus} />                       

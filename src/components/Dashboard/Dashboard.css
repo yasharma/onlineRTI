@@ -21,7 +21,7 @@
 }
 .dash-list li a:hover,.dash-list li.active a{background-color: #003160; color: #ffffff; }
 .dash-list li a:hover::after,.dash-list li.active a::after{opacity: 1;}
-.dashboard-content{border:2px solid #2ebed4; padding: 15px; border-radius: 5px; min-height:310px;}
+.dashboard-content{padding: 15px; border-radius: 5px; min-height:310px;}
 .dash-head {
     color: #222222;
     font-size: 20px;
@@ -47,3 +47,21 @@
     font-weight: 600;padding-left: 10px;}
     .dashborad-group .bootstrapWizard li{display: inline-block; float: none;}
     .dashborad-group .form-bootstrapWizard{text-align: center;}
+
+.box-success {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    border: 1px #b7b7b7 dashed;
+    border-radius: 5px;
+    }
+
+.table-bordered {
+        border: 1px solid #004281;
+}
+.table-bordered td {    border: 1px solid #004281;}
+.table-bordered  .bg-info 
+{
+    background-color: #004281;
+    color: white;
+}

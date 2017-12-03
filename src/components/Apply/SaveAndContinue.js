@@ -8,9 +8,11 @@ class SaveAndContinue extends Component {
 		const { previousPage, handleSubmit, invalid, submitting} = this.props;
 		return(
 			<div>
-			<Form onSubmit={handleSubmit}>
-				<h1 className="text-center text-success"><strong><i className="fa fa-check fa-lg"></i> Complete</strong></h1>
-				<h4 className="text-center">Click next to finish</h4>
+			<Form onSubmit={handleSubmit} className="box-success">
+				<h2 className="text-center text-success">
+				Your application has been completed.
+				</h2> <br/>
+				<h3 className="text-center">Click next to finish</h3>
 				<br/>
 				<br/>
 				<div className="form-actions">
@@ -18,10 +20,11 @@ class SaveAndContinue extends Component {
 						<div className="col-sm-12">
 							<ul className="pager wizard no-margin">
 								<li className="previous">
-									<Button type="button" onClick={previousPage} className="btn btn-lg btn-default"> Previous </Button>
+									<Button type="button" onClick={previousPage} className="btn btn-info btn-block italic-font btn btn-primary "> Previous </Button>
 								</li>
+								<li> &nbsp; &nbsp;</li>
 								<li className="next disabled">
-									<Button type="submit" disabled={invalid || submitting} className="btn btn-lg txt-color-darken"> Next </Button>
+									<Button type="submit" disabled={invalid || submitting} className="btn btn-info btn-block italic-font btn btn-primary"> Next </Button>
 								</li>
 							</ul>
 						</div>

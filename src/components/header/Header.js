@@ -9,6 +9,7 @@ import ForgotPassword from '../Login/ForgotPassword';
 import {connect} from 'react-redux';
 import { SHOW_LOGIN_POPUP } from '../../constant';
 import {rtiSidebar} from '../../lib/Helper';
+import logoImg from '../../assets/images/Rti-logo-01-col-01.png';
 
 class Header extends Component {
 	constructor() {
@@ -48,7 +49,7 @@ class Header extends Component {
 					<Navbar fluid collapseOnSelect>
 						<Navbar.Header>
 							<Navbar.Brand>
-								<Link to="/">online <span>RTI</span></Link>
+								<Link to="/"> <img src={logoImg} alt="logoImg" /> </Link>
 							</Navbar.Brand>
 						  	<Navbar.Toggle />
 						</Navbar.Header>

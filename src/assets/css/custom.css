@@ -32,6 +32,8 @@ header{position: fixed;top:0; z-index:600; background-color: #004281; width: 100
 header .navbar-brand{color: #ffffff !important; font-size:18px;position: relative;}
 header .navbar-brand::after {background-color: #ffffff;content: "";height:30px;position: absolute;right: 0;top:10px;width: 1px;}
 header .navbar-brand span{color: #2ebed4;font-size:23px;}
+header .navbar-brand > img{width:60px; margin-top:-5px;}
+.navbar-brand{padding: 0px 10px;}
 header .navbar-default{background-color: rgba(0, 0, 0, 0);border:0 none;}
 header .navbar{margin-bottom: 0;height: 50px;}
 header .navbar-default .navbar-nav > li > a {color: #ffffff; text-transform: uppercase;padding-bottom: 16px;
@@ -187,7 +189,7 @@ footer{position:relative;background:url('../images/footerBg.png') no-repeat cent
     position: relative;
     background: url('../images/loginBanner.jpg') no-repeat center center; background-size: cover;
 }
-.track{background-color:#f3f3f3;}
+
 .track-banner > h2 {
     color: #ffffff;
     font-size: 26px;
@@ -197,11 +199,12 @@ footer{position:relative;background:url('../images/footerBg.png') no-repeat cent
     text-transform: uppercase;
 }
 .rti-application-form {
-    background-color: #ffffff;
-    box-shadow: 0 0 10px 2px #d5d5d5;
     margin: auto;
     max-width: 600px;
     padding: 50px;
+   
+        border: 1px #cacacade dashed;
+        border-radius: 5px;
 }
 .rti-application-form .form-control {
     background-color: rgba(0, 0, 0, 0);
@@ -209,7 +212,9 @@ footer{position:relative;background:url('../images/footerBg.png') no-repeat cent
     font-style: italic;
     margin-bottom:25px;
 	}
-
+form .btn {
+    padding: 10px 15px;
+}
 .faq .panel-title{font-size: 16px;}
 .faq .panel-title a{display:block; position: relative; width:100%;padding-right: 15px; cursor: pointer;}
 .faq .panel-heading{padding: 14px;}
@@ -235,7 +240,7 @@ footer{position:relative;background:url('../images/footerBg.png') no-repeat cent
 .bootstrapWizard li {
     display: block;
     float: left;
-    width: 25%;
+    width: 33.33%;
     text-align: center;
     padding-left: 0
 }
@@ -504,14 +509,17 @@ footer{position:relative;background:url('../images/footerBg.png') no-repeat cent
     background-color: rgba(0, 0, 0, 0);
     border: 1px solid #b5b5b5;
     font-style: italic;
-    margin-bottom: 15px;
+
 }
 .login-popup .form-group label{color: #5c5c5c; font-style: italic;}
-.login-popup .modal-body{padding: 10px 10px 0;}
+.login-popup .modal-body{padding: 25px;}
 .login-popup .modal-dialog{margin: 30px auto;width: 415px;}
-.login-popup .modal-footer{text-align: center;    border-top: medium none;padding:10px 10px;}
+.login-popup .modal-footer{text-align: center;    border-top: medium none;padding:0 25px;}
 .login-popup .modal-content > form {
     border: 3px solid #003160;
+}
+.close {
+        font-size: 28.5px;
 }
 .loginLink{display: block; cursor: pointer; margin-top:15px; text-decoration: underline;}
 .forgotLink {
@@ -713,11 +721,19 @@ font-size: 14px;}
 .has-feedback label.sr-only~.form-control-feedback {
  top:0
 }
+.form-control {
+    height: 45px;
+}
+.login-popup .btn {
+    padding: 15px 12px;
+}
 .help-block {
  display:block;
- margin-top:5px;
- margin-bottom:10px;
- color:#737373
+     margin-top: 0px;
+    margin-bottom: 0px;
+ color:#737373;
+ text-align: right;
+     height: 22px;
 }
 .marginInverse47{margin-top: -47px;}
 .marginTop80{margin-top: 80px;}
@@ -725,3 +741,7 @@ font-size: 14px;}
 .noContent p.icon { font-size: 80px; }
 .noContent p { font-size: 15px; margin-top: -28px; text-align: center;}
 .balanceMargin{     margin-top: 25px; margin-bottom: -25px; }
+
+.step-forms .btn {
+   padding: 11px 12px;
+}

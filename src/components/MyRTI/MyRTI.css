@@ -26,11 +26,13 @@
     padding-bottom: 25px;
     margin-bottom: 25px;
 }
-.applicationDate{position: absolute; height: 100px; width: 100px; border:1px solid #c0bfbf;
+.applicationDate{position: absolute; height: 100px; width: 100px;border: 1px solid #5bc0de;
 top:0; left: 0;}
 .applicationDate span{background-color: #ffffff; font-size: 14px; text-align: center; color: #000000; display: block;height: 50%;line-height: 50px;font-size: 16px;}
 .applicationDate text{background-color: #5bc0de; color: #ffffff;  text-align: center;display: block;height: 50%;line-height: 50px;font-size: 16px;}
-
+.modal-header .close {
+        margin-right: 11px;
+}
 .tag_1 {
     color: #003160;
     font-size: 19px;
