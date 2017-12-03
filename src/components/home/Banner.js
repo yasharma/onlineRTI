@@ -15,7 +15,7 @@ const Banner = () => (
 		            </div>
 		        </div>
 	      	</div>
-	      	<div className="social-links">
+	      	{/*<div className="social-links">
 	        	<ul>
 	          		<li><a className="facebook">&nbsp;<i className="fa fa-facebook" aria-hidden="true"></i></a></li>
 	          		<li><a className="twitter">&nbsp;<i className="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -23,7 +23,7 @@ const Banner = () => (
 	          		<li><a className="linkedin">&nbsp;<i className="fa fa-linkedin" aria-hidden="true"></i></a></li>
 	          		<li><a className="instagram">&nbsp;<i className="fa fa-instagram" aria-hidden="true"></i></a></li>
 	        	</ul>
-	      	</div>
+	      	</div>*/}
 	    </div>
 	</div>
 );
