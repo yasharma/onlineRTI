@@ -4,6 +4,7 @@ import {Alert} from 'react-bootstrap';
 import './Verify.css';
 import MobileVerificationPopup from './MobileVerificationPopup';
 import MobileOTPPopup from './MobileOTPPopup';
+import {Storage} from '../../lib/Storage';
 
 class Verify extends Component {
 	constructor() {
@@ -14,7 +15,7 @@ class Verify extends Component {
 		this.state = {
 			show:false,
 			showMobileOTPDialog: false,
-			hideAlert: false,
+			isNumberVerified: Storage.get('isNumberVerified') ? true : false,
 			mobile:''
 		}
 	}
@@ -28,14 +29,16 @@ class Verify extends Component {
 		this.setState({mobile, showMobileOTPDialog: true})
 	}
 	hideAlert() {
-		this.setState({hideAlert: true});
+		Storage.set('isNumberVerified', true);
+		this.setState({isNumberVerified: true});
 	}
 	render() {
-		const {show, mobile, showMobileOTPDialog, hideAlert} = this.state;
+		Storage.set('isNumberVerified', true);
+		const {show, mobile, showMobileOTPDialog, isNumberVerified} = this.state;
 		const {user} = this.props;
 		return (
 			<div>
-				{_.isEmpty(user.mobile)
+				{(_.isEmpty(user.mobile) || !isNumberVerified)
 					? (	<Alert bsStyle="info" bsClass="m-b-10 alert">
 							Your mobile number is not verified, <span className="styled-link" onClick={this.handleClick}>Click here</span> to verify your mobile number to recieve rtiguru updates
 						</Alert>
