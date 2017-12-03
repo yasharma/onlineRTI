@@ -31,6 +31,7 @@ class Dashboard extends Component {
         return (	
 			<div className="dashborad-group padding-40">
 				<div className="container">
+                    
 					<div className="row">
 						<Sidebar rtino={rtino}/>
 						<div className="col-sm-7">
