@@ -17,11 +17,13 @@ class EmailConfirmation extends React.Component {
 
 		const params = new URLSearchParams(search);
 		const salt = params.get('salt');
-		Http.post('verify-email', {salt})
-		.then(({data}) => {
-			this.setState({emailVerified: data.emailVerified});
-		})
-		.catch(({errors}) => console.log(errors));
+		if(salt) {
+			Http.post('verify-email', {salt})
+			.then(({data}) => {
+				this.setState({emailVerified: data.emailVerified});
+			})
+			.catch(({errors}) => console.log(errors));
+		}	
 	}
 	close (modal) {
 		if( modal === 'confirm' ) {

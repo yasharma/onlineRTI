@@ -164,6 +164,8 @@ footer{position:relative;background:url('../images/footerBg.png') no-repeat cent
 .services-links li {display: inline-block;vertical-align: top;width: 49%;}
 .services-links li a {color: #ffffff;display: block;font-size: 12px;font-weight: 600;padding:6px 0; cursor: pointer;}
 .services-links li a:hover{color: #2ebed4;}
+.step-forms .services-links li a {color: #004280}
+.step-forms .services-links li a:hover {color: #4cbed4}
 .contact-form .form-control {background-color: rgba(0, 0, 0, 0); border:1px solid #ffffff; font-style: italic;}
 .contact-form textarea.form-control{resize:none;}
 
