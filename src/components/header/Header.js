@@ -79,11 +79,11 @@ class Header extends Component {
 						</Navbar.Collapse>
 					</Navbar>
 					<div className="header-right-menu">
-						{/*token &&
-						<LinkContainer to="/dashboard">
-							<NavItem eventKey={1}>Dashboard</NavItem>
+						
+						<LinkContainer to="/apply-now">
+							<NavItem eventKey={1}>Apply Now</NavItem>
 						</LinkContainer>
-						*/}
+						
 						<AuthButton token={token} dispatch={dispatch} showLogin={() => this.showDialog('showLoginDialog')}/>
 					</div>
 				</header>

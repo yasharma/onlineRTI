@@ -9,8 +9,9 @@ import BlogSingle from '../components/blogs/BlogSingle';
 import cmsDetail from '../components/blogs/cmsDetail';
 import Contacts from '../components/Contact/Contact';
 import Faqs from '../components/Faq/Faq';
-import Applys from '../components/Apply/Apply';
+//import Applys from '../components/Apply/Apply';
 import ApplyRTI from '../components/Apply/ApplyRTI';
+import ApplyNow from '../components/Apply/ApplyNow';
 import Track from '../components/Track/Track';
 import NoMatch from '../components/NoMatch';
 import Footer from '../components/footer/Footer';
@@ -44,10 +45,10 @@ export const Router = props => {
 					<Route path="/contact-us" component={Contacts} />
 					<Route path="/faq" component={Faqs} />
 					<Route path="/track-us" component={Track} />
-					<Route path="/apply-now" component={Applys} />
 					<Route path="/team" component={Team} />
 					<Route path="/pricing" component={Pricing} />
 					<Route path="/apply/:slug" component={ApplyRTI} />
+					<Route path="/apply-now" component={ApplyNow} />
 					<PrivateRoute path="/myrti/:any" component={MyRTI} />
 					<PrivateRoute path="/dashboard/:tab/:rtino" component={Dashboard} />
 					<Route path="*" component={NoMatch} />

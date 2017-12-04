@@ -1,27 +1,39 @@
 import React from 'react';
 import {Modal} from "react-bootstrap";
+import Http from '../../lib/Http';
 
 class EmailConfirmation extends React.Component {
 	constructor (props) { 
 		super(props);
 		this.state = {
 			showConfirmModal: true,
-			showFailedModal: true
+			showFailedModal: true,
+			emailVerified: false,
+			emailExpired: false
 		};	
 	}
+	componentDidMount() {
+		const search = this.props.location.search; // could be '?foo=bar'
+
+		const params = new URLSearchParams(search);
+		const salt = params.get('salt');
+		Http.post('verify-email', {salt})
+		.then(({data}) => {
+			this.setState({emailVerified: data.emailVerified});
+		})
+		.catch(({errors}) => console.log(errors));
+	}
 	close (modal) {
-		// window.location.history.push({search: ''});
 		if( modal === 'confirm' ) {
 			this.setState({ showConfirmModal: false });
+			this.props.history.push('/');
 		} else if(modal === 'failed') {
 			this.setState({ showFailedModal: false });
 		} 
 	}
 	render() {
-		const search = this.props.queryParams.search; // could be '?foo=bar'
-		const params = new URLSearchParams(search);
-		const emailVerified = params.get('emailVerified'); // bar
-		if( emailVerified === 'true' ){
+		const {emailVerified, emailExpired} = this.state;
+		if( emailVerified ){
 			return (
 				<Modal className="login-popup" show={this.state.showConfirmModal} onHide={() => this.close('confirm')}>
 					<Modal.Header closeButton>
@@ -32,7 +44,8 @@ class EmailConfirmation extends React.Component {
 			        </Modal.Body>
 		    	</Modal>
 			);	
-		} else if ( emailVerified === 'false' ) {
+		} 
+		if ( emailExpired ) {
 			return (
 				<Modal className="login-popup" show={this.state.showFailedModal} onHide={() => this.close('failed')}>
 					<Modal.Header closeButton>
@@ -43,9 +56,8 @@ class EmailConfirmation extends React.Component {
 			        </Modal.Body>
 		    	</Modal>
 			);
-		} else {
-			return null;
-		}
+		} 
+		return null;
 	}
 }
 

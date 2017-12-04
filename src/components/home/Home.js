@@ -18,7 +18,7 @@ class Home extends React.Component {
 		return (
 			<div>
 				<Banner />
-				<EmailConfirmation queryParams={this.props.location}/>
+				<EmailConfirmation {...this.props}/>
 				{path.includes('reset-password') && !_.isEmpty(params) && <ResetPassword salt={params.salt} />}
 				<HomeTabs />
 				<HomeAbout />
