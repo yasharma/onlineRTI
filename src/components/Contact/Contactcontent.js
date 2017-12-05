@@ -6,7 +6,7 @@ const ContactCon = () => (
 	<div className="contact-us padding-40 clearfix">
       	<div className="container">
 	        <div className="row">
-	          	<div className="col-md-12 col-sm-12 col-xs-12">
+	          	<div className="col-md-6 col-sm-6 col-xs-12">
 					<Accordion>
 						<Panel bsStyle="primary" header="1. What are the modes of payment for paying for RTI on OnlineRTI?" eventKey="1">
 							<span className="italic-font">1. Credit Cards (Visa, Mastercard, Diners Club)<br/>2. Debit Cards (Visa, Mastercard, Maestro, RuPay)<br/>3. Netbanking (we support all major banks in India)<br/>4. PayTM Wallet</span>
@@ -38,10 +38,10 @@ const ContactCon = () => (
 						<Panel bsStyle="primary" header="10. Is this a private organization?" eventKey="10">
 							<span className="italic-font">OnlineRTI.com is a product of GetupForChange services Pvt Ltd. This is a private organization and our vision is "To promote transparency and good governance by making RTI simple, accessible and effective"</span>
 						</Panel>
-						<Panel bsStyle="primary" header="11. Any other query, feel free to contact?" eventKey="11">
-							<ContactForm/>
-						</Panel>
 					</Accordion>
+	          	</div>
+	          	<div className="col-md-6 col-sm-6 col-xs-12">
+	          		<ContactForm/>
 	          	</div>
 	        </div>
       	</div>
