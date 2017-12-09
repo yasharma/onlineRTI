@@ -28,7 +28,6 @@ class ContactForm extends Component {
 							type="text"
 							label="First Name"
 							name="firstname"
-							formGroupClassName="padding-top50"
 							placeholder="Enter Firstname"
 							theme="custom"
 							doValidateWithStackedForm={true}

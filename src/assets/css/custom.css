@@ -202,9 +202,12 @@ footer{position:relative;background:url('../images/footerBg.png') no-repeat cent
 }
 .rti-application-form {
     margin: auto;
-    padding: 50px;
+    padding: 8px 50px;
     border: 1px #cacacade dashed;
     border-radius: 5px;
+}
+.rti-application-form  .form-control {
+        height: 40px;
 }
 .rti-application-form .form-control {
     background-color: rgba(0, 0, 0, 0);
