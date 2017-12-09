@@ -6,6 +6,9 @@ import { Field, reduxForm, SubmissionError } from 'redux-form';
 import {Notify} from '../common/Notify';
 import { push } from 'react-router-redux';
 import {AUTH_REQUEST} from '../../constant';
+import SocialButton from '../common/SocialButton';
+import './Social.css';
+const fbAppId = process.env.NODE_ENV === 'production' ? '378734595873730' : '1976692732357771';
 
 class Login extends Component {
 	constructor() {
@@ -15,6 +18,13 @@ class Login extends Component {
 	handleExited() {
 		const {dispatch, reset} = this.props;
 		dispatch(reset('login_form'));
+	}
+	handleSocialLogin = (user) => {
+		console.log(user)
+	}
+
+	handleSocialLoginFailure = (err) => {
+	 	console.error(err)
 	}
 	render () {
 		const {show, hideDialog, showSignUpDialog, handleSubmit, error, submitting, invalid, showForgotPasswordDialog} = this.props;
@@ -54,8 +64,31 @@ class Login extends Component {
 			      			buttonSaveLoading="Processing..." 
 			      			buttonSave="Login"/>
 			        	<p><a className="loginLink" onClick={showSignUpDialog}>Don't have an account?</a></p>
+			        	
 			        </Modal.Footer>
 			    </Form>    
+			    <div>
+			        <SocialButton
+			          provider='facebook'
+			          appId={fbAppId}
+			          className="loginBtn loginBtn--facebook"
+			          onLoginSuccess={this.handleSocialLogin}
+			          onLoginFailure={this.handleSocialLoginFailure}
+			        >
+			          Login with Facebook
+			        </SocialButton>
+			      </div>
+			      <div>
+			        <SocialButton
+			          provider='google'
+			          className="loginBtn loginBtn--google"
+			          appId='452594809515-p2lhpgslg7u38rb3tp5m52rlbq3cks7k.apps.googleusercontent.com'
+			          onLoginSuccess={this.handleSocialLogin}
+			          onLoginFailure={this.handleSocialLoginFailure}
+			        >
+			          Login with Google
+			        </SocialButton>
+			      </div>
 		    </Modal>
 		); 
 	}	   
