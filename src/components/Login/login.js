@@ -67,7 +67,7 @@ class Login extends Component {
 			        	
 			        </Modal.Footer>
 			    </Form>    
-			    <div>
+			    {/*<div>
 			        <SocialButton
 			          provider='facebook'
 			          appId={fbAppId}
@@ -77,7 +77,7 @@ class Login extends Component {
 			        >
 			          Login with Facebook
 			        </SocialButton>
-			      </div>
+			      </div>*/}
 			      <div>
 			        <SocialButton
 			          provider='google'
