@@ -67,18 +67,8 @@ class Login extends Component {
 			        	
 			        </Modal.Footer>
 			    </Form>    
-			    {/*<div>
-			        <SocialButton
-			          provider='facebook'
-			          appId={fbAppId}
-			          className="loginBtn loginBtn--facebook"
-			          onLoginSuccess={this.handleSocialLogin}
-			          onLoginFailure={this.handleSocialLoginFailure}
-			        >
-			          Login with Facebook
-			        </SocialButton>
-			      </div>*/}
-			      <div>
+			    
+			      {/*<div>
 			        <SocialButton
 			          provider='google'
 			          className="loginBtn loginBtn--google"
@@ -89,6 +79,17 @@ class Login extends Component {
 			          Login with Google
 			        </SocialButton>
 			      </div>
+			      <div>
+			        <SocialButton
+			          provider='facebook'
+			          appId={fbAppId}
+			          className="loginBtn loginBtn--facebook"
+			          onLoginSuccess={this.handleSocialLogin}
+			          onLoginFailure={this.handleSocialLoginFailure}
+			        >
+			          Login with Facebook
+			        </SocialButton>
+			      </div>*/}
 		    </Modal>
 		); 
 	}	   
