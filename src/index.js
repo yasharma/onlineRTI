@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import App from './components/App';
 import {store, history} from './store';
 
+
 // Vendor CSS
 import "react-spinner/react-spinner.css";
 import 'font-awesome/css/font-awesome.min.css';
